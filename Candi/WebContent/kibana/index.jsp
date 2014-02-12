@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!-->
@@ -33,8 +32,7 @@
 			style="padding-right: 50px">&times;</button>
 		<strong>{{alert.title}}</strong> <span
 			ng-bind-html-unsafe="alert.text"></span>
-		<div style="padding-right: 10px" class="pull-right small">{{$index
-			+ 1}} alert(s)</div>
+		<div style="padding-right: 10px" class="pull-right small">{{$index + 1}} alert(s)</div>
 	</div>
 	<div class="navbar navbar-static-top">
 		<div class="navbar-inner">
