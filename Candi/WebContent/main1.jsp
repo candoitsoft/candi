@@ -42,14 +42,6 @@
 <link rel="stylesheet" href="css/animate.min.css">
 <link rel="stylesheet" href="css/normalize.min.css">
 <!-- load the root require context -->
-<script src="vendor/require/require.js"></script>
-<script src="app/components/require.config.js"></script>
-<script>
-	require([ 'app' ], function() {
-	})
-</script>
-<style>
-</style>
 
 </head>
 
@@ -68,29 +60,7 @@
 			</ul>
 		</nav>
 		</header>
-		<section id="kibanaMain">
-		
-    <!--<link rel="stylesheet" ng-href="css/bootstrap.{{dashboard.current.style||'dark'}}.min.css">-->
-    <link rel="stylesheet" ng-href="css/bootstrap.{{dashboard.current.style||'dark'}}.min.css">
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-
-    <div ng-repeat='alert in dashAlerts.list' class="alert-{{alert.severity}} dashboard-notice" ng-show="$last">
-      <button type="button" class="close" ng-click="dashAlerts.clear(alert)" style="padding-right:50px">&times;</button>
-      <strong>{{alert.title}}</strong> <span ng-bind-html='alert.text'></span> <div style="padding-right:10px" class='pull-right small'> {{$index + 1}} alert(s) </div>
-    </div>
-    <div class="navbar navbar-static-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <span class="brand"><img src="img/small.png" bs-tooltip="'Kibana 3 milestone pre-5 ('+(kbnVersion=='@REV@'?'master':kbnVersion)+')'" data-placement="bottom"> {{dashboard.current.title}}</span>
-
-          <ul class="nav pull-right" ng-controller='dashLoader' ng-init="init()" ng-include="'app/partials/dashLoader.html'">
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div ng-view></div>
+		<section id="main">
 		
 		</section>
 
