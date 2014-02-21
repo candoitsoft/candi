@@ -21,7 +21,7 @@ function (Settings) {
      * kibana installed on. You probably want to set it to the FQDN of your
      * elasticsearch host
      */
-    elasticsearch: "http://candoitsoft.kr:9200",
+    elasticsearch: "http://candoitsoft.kr:9600",
 
     /** @scratch /configuration/config.js/5
      * ==== default_route
@@ -40,7 +40,7 @@ function (Settings) {
      * The default ES index to use for storing Kibana specific object
      * such as stored dashboards
      */
-    kibana_index: "cnd-music-kibana",
+    kibana_index: "kibana-candi",
 
     /** @scratch /configuration/config.js/5
      * ==== panel_name

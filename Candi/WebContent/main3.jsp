@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="css/timepicker.css">
 <link rel="stylesheet" href="css/animate.min.css">
 <link rel="stylesheet" href="css/normalize.min.css">
+<link rel="stylesheet" href="css/candi.css">
 <!-- load the root require context -->
 <script src="vendor/require/require.js"></script>
 <script src="app/components/require.config.js"></script>
@@ -49,25 +50,13 @@
 	})
 </script>
 <style>
+
 </style>
 
 </head>
 
 <body ng-cloak>
 	<div class="wrapper">
-		<header class="bgNav">
-			<h3>
-				<span class="candoit">Candoit</span><span class="soft">soft</span> Admin
-			</h1>
-			<nav class="bgNav">
-			<ul id="topMenu" class="nav-tabs">
-				<li><a href="main.jsp" class="tNav">로그 설정</a></li>
-				<li><a href="main1.jsp" class="tNav">계정 관리</a></li>
-				<li class="selected"><a href="main2.jsp" class="tNav">로그 모니터</a></li>
-				<li><a href="kibana/main3.jsp" class="tNav">분석 보고서</a></li>
-			</ul>
-		</nav>
-		</header>
 		<section id="kibanaMain">
 		
     <!--<link rel="stylesheet" ng-href="css/bootstrap.{{dashboard.current.style||'dark'}}.min.css">-->
@@ -77,13 +66,21 @@
 
     <div ng-repeat='alert in dashAlerts.list' class="alert-{{alert.severity}} dashboard-notice" ng-show="$last">
       <button type="button" class="close" ng-click="dashAlerts.clear(alert)" style="padding-right:50px">&times;</button>
-      <strong>{{alert.title}}</strong> <span ng-bind-html='alert.text'></span> <div style="padding-right:10px" class='pull-right small'> {{$index + 1}} alert(s) </div>
+      <strong>{{alert.title}}</strong>
+      <span ng-bind-html='alert.text'></span>
+      <div style="padding-right:10px" class='pull-right small'> {{$index + 1}} alert(s) </div>
     </div>
     <div class="navbar navbar-static-top">
       <div class="navbar-inner">
+      
         <div class="container-fluid">
-          <span class="brand"><img src="img/small.png" bs-tooltip="'Kibana 3 milestone pre-5 ('+(kbnVersion=='@REV@'?'master':kbnVersion)+')'" data-placement="bottom"> {{dashboard.current.title}}</span>
-
+          <span class="brand">Candi</span>
+				<ul id="topMenu" class="tNav pull-left">
+					<li><a href="main.jsp">로그 설정</a></li>
+					<li><a href="main1.jsp">계정 관리</a></li>
+					<li><a href="main2.jsp">로그 모니터</a></li>
+					<li><a>분석 보고서</a></li>
+				</ul>
           <ul class="nav pull-right" ng-controller='dashLoader' ng-init="init()" ng-include="'app/partials/dashLoader.html'">
           </ul>
         </div>

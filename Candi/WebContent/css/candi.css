@@ -1,0 +1,27 @@
+.tNav {
+    position: relative;
+    left: 0px;
+    display: block;
+    float: left;
+    margin: 0px 10px 0px 0px;
+}
+
+.tNav {
+    list-style: none outside none;
+}
+.tNav > li {
+    float: left;
+}
+.tNav > li > a {
+    display: block;
+}
+.navbar .tNav > li > a {
+    padding: 15px 15px 14px;
+    border-bottom: 1px solid transparent;
+}
+
+.navbar .tNav > li > a:focus, .navbar .tNav > li > a:hover {
+    background-color: #33B5E5;
+    color: #FFF;
+    text-decoration: none;
+}

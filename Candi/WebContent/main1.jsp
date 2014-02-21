@@ -41,26 +41,42 @@
 <link rel="stylesheet" href="css/timepicker.css">
 <link rel="stylesheet" href="css/animate.min.css">
 <link rel="stylesheet" href="css/normalize.min.css">
+<link rel="stylesheet" href="css/candi.css">
 <!-- load the root require context -->
+<script src="vendor/require/require.js"></script>
+<script src="app/components/require.config.js"></script>
+<script>
+	require([ 'app' ], function() {
+	})
+</script>
+<style>
+
+</style>
 
 </head>
 
 <body ng-cloak>
 	<div class="wrapper">
-		<header class="bgNav">
-			<h3>
-				<span class="candoit">Candoit</span><span class="soft">soft</span> Admin
-			</h1>
-			<nav class="bgNav">
-			<ul id="topMenu" class="nav-tabs">
-				<li><a href="main.jsp" class="tNav">로그 설정</a></li>
-				<li><a href="main1.jsp" class="tNav">계정 관리</a></li>
-				<li class="selected"><a href="main2.jsp" class="tNav">로그 모니터</a></li>
-				<li><a href="kibana/main3.jsp" class="tNav">분석 보고서</a></li>
-			</ul>
-		</nav>
-		</header>
-		<section id="main">
+		<section id="kibanaMain">
+    <link rel="stylesheet" ng-href="css/bootstrap.{{dashboard.current.style||'dark'}}.min.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+      
+        <div class="container-fluid">
+          <span class="brand">Candi</span>
+            <ul id="topMenu" class="tNav pull-left">
+					<li><a href="main.jsp">로그 설정</a></li>
+					<li><a href="main1.jsp">계정 관리</a></li>
+					<li><a href="main2.jsp">로그 모니터</a></li>
+					<li><a href="main3.jsp#/dashboard/elasticsearch/Candi" >분석 보고서</a></li>
+				</ul>
+        </div>
+      </div>
+    </div>
+
 		
 		</section>
 
