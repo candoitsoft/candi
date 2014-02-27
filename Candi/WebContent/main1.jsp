@@ -47,7 +47,7 @@
 <script src="app/components/require.config.js"></script>
 <script>
 	require([ 'app' ], function() {
-	})
+	});
 </script>
 <style>
 
@@ -71,7 +71,7 @@
 					<li><a href="main.jsp">로그 설정</a></li>
 					<li><a href="main1.jsp">계정 관리</a></li>
 					<li><a href="main2.jsp">로그 모니터</a></li>
-					<li><a href="main3.jsp#/dashboard/elasticsearch/Candi" >분석 보고서</a></li>
+					<li><a href="main3.jsp#/dashboard/elasticsearch/Neowiz" >분석 보고서</a></li>
 				</ul>
         </div>
       </div>

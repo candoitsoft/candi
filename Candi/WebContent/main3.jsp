@@ -47,7 +47,7 @@
 <script src="app/components/require.config.js"></script>
 <script>
 	require([ 'app' ], function() {
-	})
+	});
 </script>
 <style>
 
@@ -88,9 +88,7 @@
     </div>
 
     <div ng-view></div>
-		
 		</section>
-
 	</div>
 	<footer>
 		<p class="copyright">
