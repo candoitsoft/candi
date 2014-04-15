@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS Example 8.8.2
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+/*
+body {
+  padding-top: 60px;
+}
+*/
+/*
+body {
+	padding-bottom: 60px;
+}
+*/
+
+footer {
+	font: roboto, helvetica, arial, sans-serif;
+	font-size: 13px;
+	color: #eee;
+	background-color: rgb(34, 34, 34);
+	margin: 0, 0, auto, 0;
+	padding: 10px 25px;
+}
+
+.candoit {
+	font-family: "Eras ITC", "Eras Medium ITC", Arial, sans-serif;
+	src: url(../fonts/eras_bold_itc.eot);
+	src: local("Eras Bold ITC"), url(../fonts/eras_bold_itc.woff)
+		format("woff");
+	color: #ff0000;
+}
+
+.soft {
+	font-family: "Eras ITC", "Eras Medium ITC", Arial, sans-serif;
+	src: url(../fonts/eras_bold_itc.eot);
+	src: local("Eras Bold ITC"), url(../fonts/eras_bold_itc.woff)
+		format("woff");
+	color: #aaaaaa;
+	src: url(../fonts/eras_bold_itc.eot);
+	src: local("Eras Bold ITC"), url(../fonts/eras_bold_itc.woff)
+		format("woff");
+}
