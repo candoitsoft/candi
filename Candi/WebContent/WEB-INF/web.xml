@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<display-name>Candi</display-name>
+	
+	<servlet>
+		<servlet-name>Confirm</servlet-name>
+		<servlet-class>candi.auth.Confirm</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Confirm</servlet-name>
+		<url-pattern>/Confirm/*</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
