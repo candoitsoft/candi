@@ -25,11 +25,14 @@ public class Confirm extends HttpServlet {
 		
 		CandiDao dao = new CandiDao(); 
 		CandiUserObj obj = null;
-		
-		if(cmd != null && cmd.equals("insert")){
+		int result = 0;
+		if(toUrl != null && cmd != null && cmd.equals("insert")){
 			
 			obj = dao.getUserObj(req);
-			int result = dao.insertUserObj(obj);
+			if(obj != null && obj.getId() != null && !"".equals(obj.getId())){
+				result = dao.insertUserObj(obj);
+			}
+			
 			
 			if (result > 0) {
 				session.setAttribute("candiId", obj.getId());
@@ -42,10 +45,12 @@ public class Confirm extends HttpServlet {
 				out.println("	history.go(-1);");
 				out.println("</script>");
 			}
-		} else if(cmd != null && cmd.equals("update")){
+		} else if(toUrl != null && cmd != null && cmd.equals("update")){
+			// 여긴 좀 더 자세히 정비할것.
 			obj = (CandiUserObj) session.getAttribute("cdpObj");
 			obj = dao.getUserObj(req, obj);
-			int result = dao.updateUserObj(obj);
+			
+			result = dao.updateUserObj(obj);
 //			io.saveConfig(obj);
 			
 			if (result > 0) {
@@ -59,7 +64,7 @@ public class Confirm extends HttpServlet {
 				out.println("	history.go(-1);");
 				out.println("</script>");
 			}
-		} else if(cmd != null && cmd.equals("login")){
+		} else if(toUrl != null && cmd != null && cmd.equals("login")){
 			/*
 			String id = req.getParameter("id");
 			String pw = req.getParameter("pw");

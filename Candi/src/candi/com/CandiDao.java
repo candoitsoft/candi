@@ -42,8 +42,8 @@ public class CandiDao {
 	public int insertUserObj(CandiUserObj userObj){
 		int result = 0;
 		
-		Dao dao = Dao.getInstance();
 		DataEntity data = new DataEntity();
+		Dao dao = Dao.getInstance();
 		
 		data.put("id", userObj.getId());
 		data.put("passwd", userObj.getPasswd());
