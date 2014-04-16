@@ -33,7 +33,6 @@ public class Confirm extends HttpServlet {
 				result = dao.insertUserObj(obj);
 			}
 			
-			
 			if (result > 0) {
 				session.setAttribute("candiId", obj.getId());
 				session.setAttribute("candiUserObj", obj);
@@ -47,7 +46,7 @@ public class Confirm extends HttpServlet {
 			}
 		} else if(toUrl != null && cmd != null && cmd.equals("update")){
 			// 여긴 좀 더 자세히 정비할것.
-			obj = (CandiUserObj) session.getAttribute("cdpObj");
+//			obj = (CandiUserObj) session.getAttribute("cdpObj");
 			obj = dao.getUserObj(req, obj);
 			
 			result = dao.updateUserObj(obj);
@@ -65,13 +64,13 @@ public class Confirm extends HttpServlet {
 				out.println("</script>");
 			}
 		} else if(toUrl != null && cmd != null && cmd.equals("login")){
-			/*
+			
 			String id = req.getParameter("id");
-			String pw = req.getParameter("pw");
-			int check = dao.login(id, pw);
+			String passwd = req.getParameter("passwd");
+			int check = dao.login(id, passwd);
 			
 			if (check == 2) {
-				obj = dao.getClAdminObj(id);
+				obj = dao.getUserObj(id);
 				session.setAttribute("candiId", obj.getId());
 				session.setAttribute("candiUserObj", obj);
 				res.sendRedirect(toUrl);
@@ -80,13 +79,17 @@ public class Confirm extends HttpServlet {
 				out.println("	alert(\"비밀번호가 맞지 않습니다.\");");
 				out.println("	history.go(-1);");
 				out.println("</script>");
-			} else {
+			} else if (check == 0) {
 				out.println("<script>");
 				out.println("	alert(\"없는 ID입니다. 다시 확인하고 로그인 하십시오.\");");
 				out.println("	history.go(-1);");
 				out.println("</script>");
+			} else {
+				out.println("<script>");
+				out.println("	alert(\"로그인 하는 도중 오류가 발생했습니다.\");");
+				out.println("	history.go(-1);");
+				out.println("</script>");
 			}
-			*/
 		} else {
 			out.println("<script>");
 			out.println("	alert(\"잘못된 접근입니다.\");");

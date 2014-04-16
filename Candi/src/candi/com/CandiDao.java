@@ -61,8 +61,7 @@ public class CandiDao {
 	 */
 	public int updateUserObj(CandiUserObj userObj){
 		int result = 0;
-
-
+		
 		Dao dao = Dao.getInstance();
 		DataEntity setData = new DataEntity();
 		DataEntity whereData = new DataEntity();
@@ -73,7 +72,73 @@ public class CandiDao {
 		whereData.put("id", userObj.getId());
 		
 		result = dao.updateRemoteData("cdi_user", setData, whereData);
+//		result = dao.updateLocalData("cdi_user", setData, whereData);
 		
 		return result;
 	}
+	
+	/**
+	 * ID 중복 여부 확인하는 메서드.
+	 * 0:ID 없음, 1:PW오류, 2:로그인, 9:오류
+	 * @param id
+	 * @param passwd
+	 * @return
+	 */
+	public int login(String id, String passwd) {
+		Dao dao = Dao.getInstance();
+		
+		StringBuffer sql = new StringBuffer();
+		String tempPw = "";
+		
+		String[] param = {id};
+		
+		int result = 9;
+		
+		sql.append("SELECT passwd FROM cdi_user WHERE id = ?");
+		
+		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
+		
+		if(entity != null && entity.length == 1){
+			tempPw = entity[0].get("passwd");
+			if (tempPw.equals(passwd)) {
+				result = 2;
+			} else {
+				result = 1;
+			}
+		} else { 
+			result = 0;
+		}
+		return result;
+	}
+	
+	/**
+	 * id 값을 가지고 사용자 DB를 검색해서 CandiUserObj 를 리턴하는 메서드. 
+	 * @param id
+	 * @return
+	 */
+	public CandiUserObj getUserObj(String id) {
+		CandiUserObj result = new CandiUserObj();
+		
+		Dao dao = Dao.getInstance();
+		
+		StringBuffer sql = new StringBuffer();
+		
+		String[] param = {id};
+		
+		sql.append("SELECT ");
+		sql.append("id, passwd, name ");
+		sql.append("FROM cdi_user ");
+		sql.append("WHERE id = ?");
+		
+		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
+		
+		if(entity != null && entity.length == 1){
+			result.setId(entity[0].get("id"));
+			result.setPasswd(entity[0].get("passwd"));
+			result.setName(entity[0].get("name"));
+		}
+		
+		return result;
+	}
+	
 }
