@@ -11,4 +11,13 @@
 		<url-pattern>/Confirm/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>CandiAjax</servlet-name>
+		<servlet-class>candi.auth.CandiAjax</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CandiAjax</servlet-name>
+		<url-pattern>/CandiAjax/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

@@ -9,6 +9,7 @@ public class CandiUserObj implements Serializable{
 	private String id = "";
 	private String passwd = "";
 	private String name = "";
+	private String type = "";
 	
 	public String getId() {
 		return id;
@@ -18,6 +19,9 @@ public class CandiUserObj implements Serializable{
 	}
 	public String getName() {
 		return name;
+	}
+	public String getType() {
+		return type;
 	}
 	
 	
@@ -30,6 +34,8 @@ public class CandiUserObj implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 }

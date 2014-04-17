@@ -30,6 +30,8 @@ public class CandiDao {
 			obj.setPasswd(req.getParameter("passwd"));
 		if(req.getParameter("name") != null)
 			obj.setName(req.getParameter("name"));
+		if(req.getParameter("type") != null)
+			obj.setType(req.getParameter("type"));
 		
 		return obj;
 	}
@@ -48,6 +50,7 @@ public class CandiDao {
 		data.put("id", userObj.getId());
 		data.put("passwd", userObj.getPasswd());
 		data.put("name", userObj.getName());
+		data.put("type", userObj.getType());
 		
 		result = dao.inertRemoteData("cdi_user", data);
 		
@@ -67,7 +70,10 @@ public class CandiDao {
 		DataEntity whereData = new DataEntity();
 		
 		setData.put("passwd", userObj.getPasswd());
-		setData.put("name", userObj.getName());
+		if(!"".equals(userObj.getName()))
+			setData.put("name", userObj.getName());
+		if(!"".equals(userObj.getType()))
+			setData.put("type", userObj.getType());
 		
 		whereData.put("id", userObj.getId());
 		
@@ -139,6 +145,25 @@ public class CandiDao {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * ID 중복여부 확인
+	 * @param id
+	 * @return
+	 */
+	public boolean isExistId(String id) {
+		Dao dao = Dao.getInstance();
+		StringBuffer sql = new StringBuffer();
+		String[] param = {id};
+		sql.append("SELECT count(*) as cnt FROM cdi_user WHERE id = ?");
+		int cnt = dao.getRemoteCount(sql.toString(), param);
+		
+		if (cnt == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 }
