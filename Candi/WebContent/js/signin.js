@@ -55,7 +55,7 @@ function signin(frm) {
 	if(confVal.id == "Y" && confVal.pw == "Y"){
 		if(confirm("입력하신 정보로 가입하시겠습니까?")){
 			frm.cmd.value="insert";
-			frm.toUrl.value="logUpload.jsp";
+			frm.toUrl.value="main.jsp";
 			frm.action="Confirm";
 			frm.submit();
 		}

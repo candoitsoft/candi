@@ -23,24 +23,43 @@
 
 		<form class="form-signin" name="loginForm">
 			<h2 class="form-signin-heading">로그인 하십시오</h2>
-			<input type="text" class="form-control" placeholder="ID" autofocus="" />
-			<input type="password" class="form-control" placeholder="Password" />
+			<input type="text" id="id" name="id" class="form-control" placeholder="ID" />
+			<input type="password" id="passwd" name="passwd" class="form-control" placeholder="Password" />
 <!-- 
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> 자동 로그인
         </label>
  -->
-			<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+ 			<input type="hidden" name="cmd" />
+			<input type="hidden" name="toUrl" />
+			<button class="btn btn-lg btn-primary btn-block" type="button" onclick="login(this.form);">로그인</button>
 			<a class="btn btn-lg btn-success btn-block" href="signin.jsp" >회원가입</a>
 		</form>
-
 	</div>
+
+<script type="text/javascript">
+
+function login(frm) {
+	if (frm.id.value == "") {
+		alert("아이디를 입력하세요.");
+		return false;
+	}
+	if (frm.passwd.value == "") {
+		alert("비밀번호를 입력하세요.");
+		return false;
+	}
+	frm.cmd.value="login";
+	frm.toUrl.value="main.jsp";
+	frm.action="Confirm";
+	frm.submit();
+}
+
+</script>
 
 	<nav class="navbar navbar-default navbar-fixed-bottom">
 		<footer>
 			<p class="copyright">
-				&copy; <span class="candoit">Candoit</span><span class="soft">soft</span>
-				2014
+				&copy; <span class="candoit">Candoit</span><span class="soft">soft</span> 2014
 			</p>
 		</footer>
 	</nav>
