@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="candi.com.CandiUserObj, candi.com.CandiMsg"%>
+<%
+	//사용자 로그인 체크하는 로직. 모든 페이지에 반드시 포함할것.
+	String id = (String) session.getAttribute("candiId");
+	CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
+	if (id == null || id.equals("") || userObj == null) {
+		//로그인 오류시 login.jsp 페이지로 이동.
+		out.print(CandiMsg.loginError());
+	} else {
+%>
 <!DOCTYPE HTML>
 <!--
 /*
@@ -42,8 +50,38 @@
 </head>
 <body>
 
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">상단 네비게이션</span>
+			</button>
+			<a class="navbar-brand" href="#"><%=userObj.getName()%></a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li class=""><a href="main.jsp">데이터 통계</a></li>
+				<li class="active"><a href="#">데이터 입력</a></li>
+			</ul>
+			<form class="navbar-form navbar-right btn-group" role="search">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<i class="glyphicon glyphicon-cog"></i>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">사용자정보 변경</a></li>
+					<li><a href="#">대시보드 환경설정</a></li>
+					<li class="divider"></li>
+					<li><a href="#">로그아웃</a></li>
+				</ul>
+			</form>
+		</div>
+	</nav>
+
+
 	<div class="container">
-		<h1>로그 입력</h1>
+		<h1>로그데이터 입력</h1>
 		<h2 class="lead">로그파일 형식 선택</h2>
 		<blockquote>
 			입력할 로그 파일의 형식을 선택하십시오.<br/>
@@ -481,3 +519,7 @@ function clearField(){
 	
 </body>
 </html>
+
+<%
+	}
+%>

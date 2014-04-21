@@ -9,12 +9,13 @@
 
 <title>Candoit 회원 가입</title>
 
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/signin.js"></script>
+
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="js/signin.js"></script>
 		
 </head>
 <body>

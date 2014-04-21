@@ -132,7 +132,7 @@ public class CandiDao {
 		String[] param = {id};
 		
 		sql.append("SELECT ");
-		sql.append("id, passwd, name ");
+		sql.append("id, passwd, name, type ");
 		sql.append("FROM cdi_user ");
 		sql.append("WHERE id = ?");
 		
@@ -142,6 +142,7 @@ public class CandiDao {
 			result.setId(entity[0].get("id"));
 			result.setPasswd(entity[0].get("passwd"));
 			result.setName(entity[0].get("name"));
+			result.setType(entity[0].get("type"));
 		}
 		
 		return result;
