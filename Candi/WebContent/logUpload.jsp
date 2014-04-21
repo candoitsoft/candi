@@ -61,7 +61,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class=""><a href="main.jsp">데이터 통계</a></li>
+				<li class=""><a href="main.jsp">데이터 분석</a></li>
 				<li class="active"><a href="#">데이터 입력</a></li>
 			</ul>
 			<form class="navbar-form navbar-right btn-group" role="search">

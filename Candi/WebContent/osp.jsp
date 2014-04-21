@@ -36,7 +36,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">데이터 통계</a></li>
+				<li class="active"><a href="#">데이터 분석</a></li>
 				<li class=""><a href="logUpload.jsp">데이터 입력</a></li>
 			</ul>
 			<form class="navbar-form navbar-right btn-group" role="search">
@@ -57,24 +57,152 @@
 		
 <div class="">
 	<ul id="ospTab" class="nav nav-tabs">
-		<li class="active"><a href="#today" data-toggle="tab">Today</a></li>
-		<li ><a href="#past" data-toggle="tab">Last Days</a></li>
+		<li class="active"><a href="#today" data-toggle="tab">실시간 데이터 분석</a></li>
+		<li ><a href="#past" data-toggle="tab">지난 데이터 통계</a></li>
 	</ul>
-	
 	<div id="myTabContent" class="tab-content">
 	
 		<div class="tab-pane fade active in" id="today">
-			<p>대시보드</p>
+			
+<iframe id="today_frame" width="100%" scrolling=no frameborder=0 src="osp_today.jsp#/dashboard/elasticsearch/Neowiz">
+</iframe>
+<script>
+var todayFrObj = document.getElementById("today_frame");
+window.setInterval(function(){
+	todayFrObj.height = todayFrObj.contentDocument.body.offsetHeight;
+	},1000);
+</script>
+			
 		</div>
 		
 		<div class="tab-pane fade" id="past">
-			<p>지난 날짜 통계</p>
+			
+<div class="container">
+
+
+	<h3>월별 요약 통계</h3>
+<div class="row">
+	<div class="col-md-8">
+	
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>날짜</th>
+			<th>전체 Hit 수</th>
+			<th>일 평균 hit 수</th>
+			<th>전월 대비 hit 수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>2014-1</th>
+			<td>33124121</td>
+			<td>42342</td>
+			<td>+13123</td>
+		</tr>
+		<tr>
+			<th>2014-2</th>
+			<td>33211221</td>
+			<td>42542</td>
+			<td>-1323</td>
+		</tr>
+		<tr>
+			<th>2014-3</th>
+			<td>34331121</td>
+			<td>421342</td>
+			<td>+13123</td>
+		</tr>
+	</tbody>
+</table>
+
+	</div>
+</div>
+
+<br/>
+	<h3>일별 요약 통계</h3>
+<div class="row">
+	<div class="col-md-8">
+	
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>날짜</th>
+			<th>전체 Hit 수</th>
+			<th>일 평균 hit 수</th>
+			<th>전일 대비 hit 수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>2014-3-1</th>
+			<td>334121</td>
+			<td>442</td>
+			<td>+123</td>
+		</tr>
+		<tr>
+			<th>2014-3-2</th>
+			<td>332121</td>
+			<td>422</td>
+			<td>-13</td>
+		</tr>
+		<tr>
+			<th>2014-3-3</th>
+			<td>343311</td>
+			<td>4212</td>
+			<td>+123</td>
+		</tr>
+	</tbody>
+</table>
+
+	</div>
+</div>
+
+
+<br/>	
+	<h3>서비스별 요약 통계</h3>
+	
+<div class="row">
+	<div class="col-md-8">
+	
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>서비스 코드</th>
+			<th>전체 Hit 수</th>
+			<th>일 평균 hit 수</th>
+			<th>전일 대비 hit 수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>SC00001</th>
+			<td>33124121</td>
+			<td>42342</td>
+			<td>+13123</td>
+		</tr>
+		<tr>
+			<th>SC00002</th>
+			<td>33211221</td>
+			<td>42542</td>
+			<td>-1323</td>
+		</tr>
+		<tr>
+			<th>SC00003</th>
+			<td>34331121</td>
+			<td>421342</td>
+			<td>+13123</td>
+		</tr>
+	</tbody>
+</table>
+
+	
+	
+</div>
+			
 		</div>
 		
 	</div>
 </div>
-	
-<br/><br/>
 
 	<footer>
 		<p class="copyright">
