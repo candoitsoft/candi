@@ -90,6 +90,17 @@ public class Confirm extends HttpServlet {
 				out.println("	history.go(-1);");
 				out.println("</script>");
 			}
+		} else if(cmd != null && cmd.equals("logout")){
+			
+			session.removeAttribute("candiId");
+			session.removeAttribute("candiUserObj");
+			
+			if(toUrl != null && !toUrl.equals("")){
+				res.sendRedirect(toUrl);
+			} else {
+				res.sendRedirect("index.jsp");
+			}
+			
 		} else {
 			out.println("<script>");
 			out.println("	alert(\"잘못된 접근입니다.\");");

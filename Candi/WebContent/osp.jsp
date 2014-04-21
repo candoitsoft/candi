@@ -21,7 +21,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script src="js/candoit.js"></script>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
 				<li class="active"><a href="#">데이터 분석</a></li>
 				<li class=""><a href="logUpload.jsp">데이터 입력</a></li>
 			</ul>
-			<form class="navbar-form navbar-right btn-group" role="search">
+			<form id="navFrm" name="navFrm" class="navbar-form navbar-right btn-group" role="search">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					<i class="glyphicon glyphicon-cog"></i>
 					<span class="caret"></span>
@@ -48,8 +48,10 @@
 					<li><a href="#">사용자정보 변경</a></li>
 					<li><a href="#">대시보드 환경설정</a></li>
 					<li class="divider"></li>
-					<li><a href="#">로그아웃</a></li>
+					<li><a href="javascript:logout();">로그아웃</a></li>
 				</ul>
+				<input type="hidden" name="cmd" />
+				<input type="hidden" name="toUrl" />
 			</form>
 		</div>
 	</nav>
