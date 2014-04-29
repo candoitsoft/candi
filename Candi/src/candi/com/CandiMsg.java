@@ -17,4 +17,14 @@ public class CandiMsg {
 		return msg.toString();
 	}
 	
+	public static String approachError(){
+		StringBuffer msg = new StringBuffer();
+		msg.append("<script> \n");
+		msg.append("	alert(\"잘못된 접근입니다.\"); \n");
+		msg.append("	location.href = \"login.jsp\"; \n");
+		msg.append("</script> \n");
+		
+		return msg.toString();
+	}
+	
 }

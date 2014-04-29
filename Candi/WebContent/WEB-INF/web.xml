@@ -23,11 +23,6 @@
 	<servlet>
         <servlet-name>UploadServlet</servlet-name>
         <servlet-class>candi.file.UploadServlet</servlet-class>
-        <init-param>
-            <description>Define storage path for file uploads</description>
-            <param-name>upload_path</param-name>
-            <param-value>/Users/kimjmin/Desktop/file_upload</param-value>
-        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>
