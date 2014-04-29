@@ -2,11 +2,27 @@ package candi.com;
 
 import javax.servlet.http.HttpServletRequest;
 
+import jm.com.JmProperties;
 import jm.net.Dao;
 import jm.net.DataEntity;
 
 public class CandiDao {
 
+	
+	private static CandiDao instance = null;
+	private JmProperties property = null;
+	
+	private CandiDao(){
+		property = new JmProperties("/data/conf/candi.property");
+	}
+	
+	public static CandiDao getInstance() {
+		if(instance == null){
+			instance = new CandiDao();
+		}
+		return instance;
+	}
+	
 	/**
 	 *  request 로 부터 CandiUserObj 객체를 생성하는 메서드.
 	 * @param req
@@ -52,8 +68,10 @@ public class CandiDao {
 		data.put("name", userObj.getName());
 		data.put("type", userObj.getType());
 		
-		result = dao.inertRemoteData("cdi_user", data);
+//		result = dao.inertRemoteData("cdi_user", data);
+//		result = dao.inertLocalData("cdi_user", data);
 		
+		result = dao.inertData(property, "cdi_user", data);
 		return result;
 	}
 	
@@ -77,8 +95,9 @@ public class CandiDao {
 		
 		whereData.put("id", userObj.getId());
 		
-		result = dao.updateRemoteData("cdi_user", setData, whereData);
+//		result = dao.updateRemoteData("cdi_user", setData, whereData);
 //		result = dao.updateLocalData("cdi_user", setData, whereData);
+		result = dao.updateData(property, "cdi_user", setData, whereData);
 		
 		return result;
 	}
@@ -102,7 +121,9 @@ public class CandiDao {
 		
 		sql.append("SELECT passwd FROM cdi_user WHERE id = ?");
 		
-		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
+//		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
+//		DataEntity[] entity = dao.getLocalResult(sql.toString(), param);
+		DataEntity[] entity = dao.getResult(property, sql.toString(), param);
 		
 		if(entity != null && entity.length == 1){
 			tempPw = entity[0].get("passwd");
@@ -136,7 +157,9 @@ public class CandiDao {
 		sql.append("FROM cdi_user ");
 		sql.append("WHERE id = ?");
 		
-		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
+//		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
+//		DataEntity[] entity = dao.getLocalResult(sql.toString(), param);
+		DataEntity[] entity = dao.getResult(property, sql.toString(), param);
 		
 		if(entity != null && entity.length == 1){
 			result.setId(entity[0].get("id"));
@@ -158,7 +181,9 @@ public class CandiDao {
 		StringBuffer sql = new StringBuffer();
 		String[] param = {id};
 		sql.append("SELECT count(*) as cnt FROM cdi_user WHERE id = ?");
-		int cnt = dao.getRemoteCount(sql.toString(), param);
+//		int cnt = dao.getRemoteCount(sql.toString(), param);
+//		int cnt = dao.getLocalCount(sql.toString(), param);
+		int cnt = dao.getCount(property, sql.toString(), param);
 		
 		if (cnt == 0) {
 			return false;

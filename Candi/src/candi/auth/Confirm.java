@@ -23,7 +23,7 @@ public class Confirm extends HttpServlet {
 		String toUrl = req.getParameter("toUrl");
 		HttpSession session = req.getSession();
 		
-		CandiDao dao = new CandiDao(); 
+		CandiDao dao = CandiDao.getInstance(); 
 		CandiUserObj obj = null;
 		int result = 0;
 		if(toUrl != null && cmd != null && cmd.equals("insert")){

@@ -18,7 +18,8 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'http://candoitsoft.kr/php/'
+//        url: 'http://candoitsoft.kr/php2/'
+        url: 'upload'
     });
 
     // Enable iframe cross-domain access via redirect option:

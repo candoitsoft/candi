@@ -19,7 +19,7 @@ public class CandiAjax extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
-		CandiDao dao = new CandiDao();
+		CandiDao dao = CandiDao.getInstance();
 		
 		String cmd = req.getParameter("cmd");
 		
