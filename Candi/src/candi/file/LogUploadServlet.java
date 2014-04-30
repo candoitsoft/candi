@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import candi.com.CandiMsg;
 import candi.com.CandiUserObj;
 
-public class UploadServlet extends HttpServlet {
+public class LogUploadServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -3979331121443547693L;
 	private File fileUploadPath;

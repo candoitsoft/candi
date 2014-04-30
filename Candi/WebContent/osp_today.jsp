@@ -9,6 +9,7 @@
 		out.print(CandiMsg.loginError());
 	} else {
 %>
+<%-- Kibana 페이지에서 복사. osp.jsp 에 include. --%>
 
 <!DOCTYPE html>
 <html lang="ko">

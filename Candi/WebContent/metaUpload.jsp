@@ -508,7 +508,7 @@ function clearField(){
 	<!-- The File Upload user interface plugin -->
 	<script src="js/jquery.fileupload-ui.js"></script>
 	<!-- The main application script -->
-	<script src="js/log_main.js"></script>
+	<script src="js/meta_main.js"></script>
 	<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 	<!--[if (gte IE 8)&(lt IE 10)]>
 <script src="js/cors/jquery.xdr-transport.js"></script>

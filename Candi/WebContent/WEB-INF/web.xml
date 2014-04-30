@@ -21,12 +21,21 @@
 	</servlet-mapping>
 	
 	<servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>candi.file.UploadServlet</servlet-class>
+        <servlet-name>LogUploadServlet</servlet-name>
+        <servlet-class>candi.file.LogUploadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/upload</url-pattern>
+        <servlet-name>LogUploadServlet</servlet-name>
+        <url-pattern>/log_upload</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+        <servlet-name>MetaUploadServlet</servlet-name>
+        <servlet-class>candi.file.MetaUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MetaUploadServlet</servlet-name>
+        <url-pattern>/meta_upload</url-pattern>
     </servlet-mapping>
 	
 </web-app>
