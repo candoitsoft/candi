@@ -98,10 +98,9 @@ window.onload = function(){
 
 	<div class="container">
 		<h1>메타데이터 입력</h1>
-		<h2 class="lead">메타파일 형식 선택</h2>
 		<blockquote>
-			입력할 메타 파일의 형식을 선택하십시오.<br/>
-			다음 필드들은 필수로 입력되어야 합니다. 필드 정보를 보려면 필드명을 클릭하십시오.<br/>
+			입력할 메타 파일에 다음의 필드들은 필수로 존재해야 합니다.<br/>
+			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
 			<p>
 				<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
 				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
@@ -112,9 +111,14 @@ window.onload = function(){
 				<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
 				<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
 			</p>
-			필수 필드의 값이 존재하지 않는 경우에도 구분자 사이에 공백값이 존재해야 합니다.<br/>
+			붉은색으로 표시된
+			<button type="button" class="btn btn-danger btn-xs">cid</button>,
+			<button type="button" class="btn btn-danger btn-xs">title</button>
+			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
+			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
 			필수 필드 외에 사용자정의 필드 추가가 가능합니다.
 		</blockquote>
+		<h2 class="lead">메타파일 형식 선택</h2>
 		<div  class="col-lg-3">
 			<label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
 				name="srcType" id="rdCsv" value="csv" checked="checked"> CSV
@@ -134,6 +138,13 @@ window.onload = function(){
 					<div class="col-lg-3">
 						<input type="text" class="form-control" id="addData" placeholder="필드명" onkeypress="enterData(this,event);">
 					</div>
+					<div class="col-lg-2">
+						<select class="form-control">
+						  <option>문자열</option>
+						  <option>숫자</option>
+						  <option>true/false</option>
+						</select>
+					</div>
 					<div class="col-lg-4">
 					<button id="btnAddData" type="button" class="btn btn-success" onclick="insertField();">추가</button>
 					<button type="button" class="btn btn-danger" onclick="clearField();">초기화</button>
@@ -143,11 +154,13 @@ window.onload = function(){
 		</div>
 		
 			<div  id="showCSV" class="row">
-				<pre id="preCsv">
+<pre id="preCsv">
 "<span id="fieldsCsv1">uci-val-1,cid-val-1,svcod-val-1,stime-val-1,asp-val-1</span>"
 "<span id="fieldsCsv2">uci-val-2,cid-val-2,svcod-val-2,stime-val-2,asp-val-2</span>"
 </pre>
 			</div>
+			
+			
 			<div  id="showJSON" class="row">
 				<pre id="preJson">{
 <span id="fieldsJson1">	"uci" : "uci-val-1",

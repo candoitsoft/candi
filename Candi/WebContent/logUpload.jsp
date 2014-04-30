@@ -97,10 +97,10 @@ window.onload = function(){
 
 	<div class="container">
 		<h1>로그데이터 입력</h1>
-		<h2 class="lead">로그파일 형식 선택</h2>
+		
 		<blockquote>
-			입력할 로그 파일의 형식을 선택하십시오.<br/>
-			다음 필드들은 필수로 입력되어야 합니다. 필드 정보를 보려면 필드명을 클릭하십시오.<br/>
+			입력할 로그 파일에 다음의 필드들은 필수로 존재해야 합니다.<br/>
+			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
 			<p>
 				<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
 				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
@@ -108,9 +108,16 @@ window.onload = function(){
 				<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
 				<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
 			</p>
-			필수 필드의 값이 존재하지 않는 경우에도 구분자 사이에 공백값이 존재해야 합니다.<br/>
+			붉은색으로 표시된
+			<button type="button" class="btn btn-danger btn-xs">cid</button>,
+			<button type="button" class="btn btn-danger btn-xs">svcod</button>,
+			<button type="button" class="btn btn-danger btn-xs">stime</button>
+			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
+			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
 			필수 필드 외에 사용자정의 필드 추가가 가능합니다.
 		</blockquote>
+		
+		<h2 class="lead">로그파일 형식 선택</h2>
 		<div  class="col-lg-3">
 			<label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
 				name="srcType" id="rdCsv" value="csv" checked="checked"> CSV
@@ -139,13 +146,22 @@ window.onload = function(){
 		</div>
 		
 			<div  id="showCSV" class="row">
-				<pre id="preCsv">
+<h4>입력 규칙</h4>
+<pre id="preCsv">
 "<span id="fieldsCsv1">uci-val-1,cid-val-1,svcod-val-1,stime-val-1,asp-val-1</span>"
 "<span id="fieldsCsv2">uci-val-2,cid-val-2,svcod-val-2,stime-val-2,asp-val-2</span>"
 </pre>
+<h4>실제 입력 예</h4>
+<pre>
+"i500-JP13072061.1200651160-1,3481070,25026,2014-04-28T01:12:15,(주)카카오"
+"i500-US13013671.1200121916-1,10429203,25012,2014-04-28T17:27:49,"
+",80062835,25012,20140428-17:34:16,"
+</pre>
 			</div>
+			
 			<div  id="showJSON" class="row">
-				<pre id="preJson">{
+<h4>입력 규칙</h4>
+<pre id="preJson">{
 <span id="fieldsJson1">	"uci" : "uci-val-1",
 	"cid" : "cid-val-1",
 	"svcod" : "svcod-val-1",
@@ -158,10 +174,20 @@ window.onload = function(){
 	"svcod" : "svcod-val-2",
 	"stime" : "stime-val-2",
 	"asp" : "asp-val-2"</span>
-}</pre>
+}
+</pre>
+<h4>실제 입력 예</h4>
+<pre id="preJson">
+{"uci":"i500-JP13072061.1200651160-1","cid":"3481070","svcod":"25026","stime":"2014-04-28T01:12:15","asp":"(주)카카오"}
+{"uci":"i500-US13013671.1200121916-1","cid":"10429203","svcod":"25012","stime":"2014-04-28T17:27:49","asp":""}
+{"uci":"","cid":"80062835","svcod":"25012","stime":"20140428-17:34:16","asp":""}
+</pre>
 			</div>
+			
 			<div id="showXML" class="row">
-				<pre id="preXml">&lt;log&gt;<span id="fieldsXml1">
+<h4>입력 규칙</h4>			
+<pre id="preXml">
+&lt;log&gt;<span id="fieldsXml1">
 	&lt;uci&gt; uci-val-1 &lt;/uci&gt;
 	&lt;cid&gt; cid-val-1 &lt;cid&gt;
 	&lt;svcod&gt; svcod-val-1 &lt;svcode&gt;
@@ -174,39 +200,41 @@ window.onload = function(){
 	&lt;svcod&gt; svcod-val-2 &lt;svcode&gt;
 	&lt;stime&gt; stime-val-2 &lt;stime&gt;
 	&lt;asp&gt; asp-val-2 &lt;asp&gt;
-</span>&lt;/log&gt;</pre>
+</span>&lt;/log&gt;
+</pre>
 			</div>
 			
-			<div  id="showExcel" class="table-responsive">
-				<table id="fieldsExcel" class="table table-bordered">
-					<thead>
-						<tr id="xlHead" class="active">
-							<th>uci</th>
-							<th>cid</th>
-							<th>svcod</th>
-							<th>stime</th>
-							<th>asp</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr id="xlBody1">
-							<td>uci-val-1</td>
-							<td>cid-val-1</td>
-							<td>svcod-val-1</td>
-							<td>stime-val-1</td>
-							<td>asp-val-1</td>
-						</tr>
-						<tr id="xlBody2">
-							<td>uci-val-2</td>
-							<td>cid-val-2</td>
-							<td>svcod-val-2</td>
-							<td>stime-val-2</td>
-							<td>asp-val-2</td>
-						</tr>
-					</tbody>
-				</table>
+			<div id="showExcel" class="table-responsive">
+<h4>입력 규칙</h4>
+<table id="fieldsExcel" class="table table-bordered">
+	<thead>
+		<tr id="xlHead" class="active">
+			<th>uci</th>
+			<th>cid</th>
+			<th>svcod</th>
+			<th>stime</th>
+			<th>asp</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr id="xlBody1">
+			<td>uci-val-1</td>
+			<td>cid-val-1</td>
+			<td>svcod-val-1</td>
+			<td>stime-val-1</td>
+			<td>asp-val-1</td>
+		</tr>
+		<tr id="xlBody2">
+			<td>uci-val-2</td>
+			<td>cid-val-2</td>
+			<td>svcod-val-2</td>
+			<td>stime-val-2</td>
+			<td>asp-val-2</td>
+		</tr>
+	</tbody>
+</table>
 			</div>
-		
+			
 	</div>
 <script type="text/javascript">
 
@@ -219,7 +247,7 @@ var initExcel = "";
  * 첫 화면에서 숨겨야 할 오브젝트 숨김.
  */
 function olHideObj(){
-	$("#preCsv").show(); $("#preJson").hide(); $("#preXml").hide(); $("#fieldsExcel").hide();
+	$("#showCSV").show(); $("#showJSON").hide(); $("#showXML").hide(); $("#showExcel").hide();
 	initCsv = $("#preCsv").html();
 	initJson = $("#preJson").html();
 	initXml = $("#preXml").html();
@@ -234,16 +262,16 @@ function enterData(field,e){
 	    
 function checkDatatype(rdSel){
 	if($("#rdCsv").is(":checked")){
-		$("#preCsv").show(); $("#preJson").hide(); $("#preXml").hide(); $("#fieldsExcel").hide();
+		$("#showCSV").show(); $("#showJSON").hide(); $("#showXML").hide(); $("#showExcel").hide();
 	}
 	if($("#rdJson").is(":checked")){
-		$("#preCsv").hide(); $("#preJson").show(); $("#preXml").hide(); $("#fieldsExcel").hide();
+		$("#showCSV").hide(); $("#showJSON").show(); $("#showXML").hide(); $("#showExcel").hide();
 	}
 	if($("#rdXml").is(":checked")){
-		$("#preCsv").hide(); $("#preJson").hide(); $("#preXml").show(); $("#fieldsExcel").hide();
+		$("#showCSV").hide(); $("#showJSON").hide(); $("#showXML").show(); $("#showExcel").hide();
 	}
 	if($("#rdExcel").is(":checked")){
-		$("#preCsv").hide(); $("#preJson").hide(); $("#preXml").hide(); $("#fieldsExcel").show();
+		$("#showCSV").hide(); $("#showJSON").hide(); $("#showXML").hide(); $("#showExcel").show();
 	}
 }
 
@@ -298,7 +326,7 @@ function setPopover(){
 	$('#btnFldStime').popover({
 		html:true, trigger:'hover', placement:'bottom',
 		title : "Service Time (서비스 시간)",
-		content : "<h5>해당 컨텐츠가 소비된 시간<br/><code>YYYY-MM-DDThh:mi:ss.sss</code><br/>형식으로 기록 할 것 <br/><br/>예)<code>2014-04-21T17:52:43.111</code></h5>"
+		content : "<h5>해당 컨텐츠가 소비된 시간<br/><code>YYYY-MM-DDThh:mi:ss</code><br/>형식으로 기록 할 것 <br/><br/>예)<code>2014-04-21T17:52:43</code></h5>"
 	});
 	$('#btnFldAsp').popover({
 		html:true, trigger:'hover', placement:'bottom',
