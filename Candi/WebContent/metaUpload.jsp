@@ -286,36 +286,44 @@ function clearField(){
 function setPopover(){
 	$('#btnFldUci').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Universal Content Identifier',
-	    content : '<h5>컨텐츠의 UCI 코드.<br/><br/>예) <code>i500-KRA0508346.1112159303-1</code></h5>'
+		title : 'Universal Content Identifier',
+		content : '<h5>컨텐츠의 UCI 코드.<br/><br/>예) <code>i500-KRA0508346.1112159303-1</code></h5>'
 	});
 	$('#btnFldCid').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Content ID (컨텐츠 ID)',
-	    content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code></h5>'
+		title : 'Content ID (컨텐츠 ID)',
+		content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code>, <code>PA0047483001012</code></h5>'
 	});
 	$('#btnFldTitle').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Title (제목)',
-	    content : '<h5>컨텐츠의 제목.</h5>'
+		title : 'Title (제목)',
+		content : '<h5>컨텐츠의 제목.</h5>'
 	});
 	$('#btnFldAlbum').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Album (앨범명)',
-	    content : '<h5>컨텐츠가 수록된 앨범명.</h5>'
+		title : 'Album (앨범명)',
+		content : '<h5>컨텐츠가 수록된 앨범명.</h5>'
 	});
 	$('#btnFldArtist').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Artist (가수-아티스트)',
-	    content : '<h5>컨텐츠에 참여한 가수 및 아티스트.<br/>다수가 참여한 경우에는 [] 배열로 묶어서 입력.<br/><br/>예) ["<code>아이유</code>","<code>슬옹</code>"]</h5></h5>'
+		title : 'Artist (가수/아티스트)',
+		content : '<h5>컨텐츠에 참여한 가수 및 아티스트.<br/>다수가 참여한 경우에는 [ ] 배열로 묶어서 입력.<br/><br/>예) <code>["아이유","슬옹"]</code></h5>'
 	});
-
-	/*
-		<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
-		<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
-		<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
-		<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
-	*/
+	$('#btnFldGenre').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Genre (장르)',
+	    content : '<h5>컨텐츠의 장르.</h5>'
+	});
+	$('#btnFldRdate').popover({
+		html:true, trigger:'hover', placement:'bottom',
+		title : 'Release Date (발매일)',
+		content : "<h5>해당 컨텐츠가 발매된 일자.<br/><code>YYYY-MM-DD</code>형식으로 기록 할 것.<br/><br/>예)<code>2014-04-21</code></h5>"
+	});
+	$('#btnFldPtime').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Play Time (재생시간)',
+	    content : '<h5>컨텐츠의 재생 시간.<br/>시분초 를 묶어 6자리 숫자로 표현한다.<br/><br/>예) 3분 55초 : <code>000355</code></h5>'
+	});
 }
 
 

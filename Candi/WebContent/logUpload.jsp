@@ -282,28 +282,28 @@ function clearField(){
 function setPopover(){
 	$('#btnFldUci').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Universal Content Identifier',
-	    content : '<h5>컨텐츠의 UCI 코드.<br/><br/>예) <code>i500-KRA0508346.1112159303-1</code></h5>'
+		title : 'Universal Content Identifier',
+		content : '<h5>컨텐츠의 UCI 코드.<br/><br/>예) <code>i500-KRA0508346.1112159303-1</code></h5>'
 	});
 	$('#btnFldCid').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Content ID (컨텐츠 ID)',
-	    content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code></h5>'
+		title : 'Content ID (컨텐츠 ID)',
+		content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code>, <code>PA0047483001012</code></h5>'
 	});
 	$('#btnFldSvcod').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : 'Service Code (서비스 코드)',
-	    content : '<h5>해당 컨텐츠에 적용된 서비스 코드. <br/><br/>예) <code>0001</code>:다운로드, <code>0002</code>:스트리밍</h5>'
+		title : 'Service Code (서비스 코드)',
+		content : '<h5>해당 컨텐츠에 적용된 서비스 코드. <br/><br/>예) <code>0001</code>:다운로드, <code>0002</code>:스트리밍</h5>'
 	});
 	$('#btnFldStime').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : "Service Time (서비스 시간)",
-	    content : "<h5>해당 컨텐츠가 소비된 시간<br/><code>YYYY-MM-DDThh:mi:ss.sss</code><br/>형식으로 기록 할 것 <br/><br/>예)<code>2014-04-21T17:52:43.111</code></h5>"
+		title : "Service Time (서비스 시간)",
+		content : "<h5>해당 컨텐츠가 소비된 시간<br/><code>YYYY-MM-DDThh:mi:ss.sss</code><br/>형식으로 기록 할 것 <br/><br/>예)<code>2014-04-21T17:52:43.111</code></h5>"
 	});
 	$('#btnFldAsp').popover({
 		html:true, trigger:'hover', placement:'bottom',
-	    title : "Service Provider (서비스 공급자)",
-	    content : "<h5>서비스 공급자.<br/> 2차 서비스 공급자에게 컨텐츠를 제공하는 경우 해당 서비스 공급자를 명시. <br/><br/>예)<code>(주)카카오</code>, <code>(주)네이버뮤직</code></h5>"
+		title : "Service Provider (서비스 공급자)",
+		content : "<h5>서비스 공급자.<br/> 2차 서비스 공급자에게 컨텐츠를 제공하는 경우 해당 서비스 공급자를 명시. <br/><br/>예)<code>(주)카카오</code>, <code>(주)네이버뮤직</code></h5>"
 	});
 }
 
