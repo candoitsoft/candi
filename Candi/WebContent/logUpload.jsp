@@ -48,6 +48,17 @@
 	<link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css">
 </noscript>
 <script src="js/candoit.js"></script>
+<script type="text/javascript">
+
+/**
+ * 첫 화면에서 실행하는 함수 모음.
+ */
+window.onload = function(){	
+	olHideObj();
+	setPopover();
+}
+
+</script>
 </head>
 <body>
 
@@ -91,11 +102,11 @@
 			입력할 로그 파일의 형식을 선택하십시오.<br/>
 			다음 필드들은 필수로 입력되어야 합니다. 필드 정보를 보려면 필드명을 클릭하십시오.<br/>
 			<p>
-			<button type="button" class="btn btn-info btn-xs">uci</button>
-			<button type="button" class="btn btn-info btn-xs">cid</button>
-			<button type="button" class="btn btn-info btn-xs">svcod</button>
-			<button type="button" class="btn btn-info btn-xs">stime</button>
-			<button type="button" class="btn btn-info btn-xs">asp</button>
+				<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
+				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
+				<button id="btnFldSvcod" type="button" class="btn btn-danger btn-xs">svcod</button>
+				<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
+				<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
 			</p>
 			필수 필드의 값이 존재하지 않는 경우에도 구분자 사이에 공백값이 존재해야 합니다.<br/>
 			필수 필드 외에 사용자정의 필드 추가가 가능합니다.
@@ -204,7 +215,10 @@ var initJson = "";
 var initXml = "";
 var initExcel = "";
 
-window.onload = function(){
+/**
+ * 첫 화면에서 숨겨야 할 오브젝트 숨김.
+ */
+function olHideObj(){
 	$("#preCsv").show(); $("#preJson").hide(); $("#preXml").hide(); $("#fieldsExcel").hide();
 	initCsv = $("#preCsv").html();
 	initJson = $("#preJson").html();
@@ -217,7 +231,6 @@ function enterData(field,e){
         $('#btnAddData').click();
     }
 }
-
 	    
 function checkDatatype(rdSel){
 	if($("#rdCsv").is(":checked")){
@@ -261,6 +274,37 @@ function clearField(){
 	$("#preJson").html(initJson);
 	$("#preXml").html(initXml);
 	$("#fieldsExcel").html(initExcel);
+}
+
+/**
+ * 필드 버튼 팝오버 설정.
+ */
+function setPopover(){
+	$('#btnFldUci').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Universal Content Identifier',
+	    content : '<h5>컨텐츠의 UCI 코드.<br/><br/>예) <code>i500-KRA0508346.1112159303-1</code></h5>'
+	});
+	$('#btnFldCid').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Content ID (컨텐츠 ID)',
+	    content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code></h5>'
+	});
+	$('#btnFldSvcod').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Service Code (서비스 코드)',
+	    content : '<h5>해당 컨텐츠에 적용된 서비스 코드. <br/><br/>예) <code>0001</code>:다운로드, <code>0002</code>:스트리밍</h5>'
+	});
+	$('#btnFldStime').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : "Service Time (서비스 시간)",
+	    content : "<h5>해당 컨텐츠가 소비된 시간<br/><code>YYYY-MM-DDThh:mi:ss.sss</code><br/>형식으로 기록 할 것 <br/><br/>예)<code>2014-04-21T17:52:43.111</code></h5>"
+	});
+	$('#btnFldAsp').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : "Service Provider (서비스 공급자)",
+	    content : "<h5>서비스 공급자.<br/> 2차 서비스 공급자에게 컨텐츠를 제공하는 경우 해당 서비스 공급자를 명시. <br/><br/>예)<code>(주)카카오</code>, <code>(주)네이버뮤직</code></h5>"
+	});
 }
 
 </script>

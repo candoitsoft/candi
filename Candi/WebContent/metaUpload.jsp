@@ -48,6 +48,18 @@
 	<link rel="stylesheet" href="css/jquery.fileupload-ui-noscript.css">
 </noscript>
 <script src="js/candoit.js"></script>
+<script type="text/javascript">
+
+/**
+ * 첫 화면에서 실행하는 함수 모음.
+ */
+window.onload = function(){	
+	olHideObj();
+	setPopover();
+}
+
+</script>
+
 </head>
 <body>
 
@@ -85,17 +97,20 @@
 
 
 	<div class="container">
-		<h1>메티데이터 입력</h1>
+		<h1>메타데이터 입력</h1>
 		<h2 class="lead">메타파일 형식 선택</h2>
 		<blockquote>
-			입력할 로그 파일의 형식을 선택하십시오.<br/>
+			입력할 메타 파일의 형식을 선택하십시오.<br/>
 			다음 필드들은 필수로 입력되어야 합니다. 필드 정보를 보려면 필드명을 클릭하십시오.<br/>
 			<p>
-			<button type="button" class="btn btn-info btn-xs">uci</button>
-			<button type="button" class="btn btn-info btn-xs">cid</button>
-			<button type="button" class="btn btn-info btn-xs">svcod</button>
-			<button type="button" class="btn btn-info btn-xs">stime</button>
-			<button type="button" class="btn btn-info btn-xs">asp</button>
+				<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
+				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
+				<button id="btnFldTitle" type="button" class="btn btn-danger btn-xs">title</button>
+				<button id="btnFldAlbum" type="button" class="btn btn-info btn-xs">album</button>
+				<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
+				<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
+				<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
+				<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
 			</p>
 			필수 필드의 값이 존재하지 않는 경우에도 구분자 사이에 공백값이 존재해야 합니다.<br/>
 			필수 필드 외에 사용자정의 필드 추가가 가능합니다.
@@ -204,7 +219,10 @@ var initJson = "";
 var initXml = "";
 var initExcel = "";
 
-window.onload = function(){
+/**
+ * 첫 화면에서 숨겨야 할 오브젝트 숨김.
+ */
+function olHideObj(){
 	$("#preCsv").show(); $("#preJson").hide(); $("#preXml").hide(); $("#fieldsExcel").hide();
 	initCsv = $("#preCsv").html();
 	initJson = $("#preJson").html();
@@ -218,7 +236,6 @@ function enterData(field,e){
     }
 }
 
-	    
 function checkDatatype(rdSel){
 	if($("#rdCsv").is(":checked")){
 		$("#preCsv").show(); $("#preJson").hide(); $("#preXml").hide(); $("#fieldsExcel").hide();
@@ -262,6 +279,45 @@ function clearField(){
 	$("#preXml").html(initXml);
 	$("#fieldsExcel").html(initExcel);
 }
+
+/**
+ * 필드 버튼 팝오버 설정.
+ */
+function setPopover(){
+	$('#btnFldUci').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Universal Content Identifier',
+	    content : '<h5>컨텐츠의 UCI 코드.<br/><br/>예) <code>i500-KRA0508346.1112159303-1</code></h5>'
+	});
+	$('#btnFldCid').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Content ID (컨텐츠 ID)',
+	    content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code></h5>'
+	});
+	$('#btnFldTitle').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Title (제목)',
+	    content : '<h5>컨텐츠의 제목.</h5>'
+	});
+	$('#btnFldAlbum').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Album (앨범명)',
+	    content : '<h5>컨텐츠가 수록된 앨범명.</h5>'
+	});
+	$('#btnFldArtist').popover({
+		html:true, trigger:'hover', placement:'bottom',
+	    title : 'Artist (가수-아티스트)',
+	    content : '<h5>컨텐츠에 참여한 가수 및 아티스트.<br/>다수가 참여한 경우에는 [] 배열로 묶어서 입력.<br/><br/>예) ["<code>아이유</code>","<code>슬옹</code>"]</h5></h5>'
+	});
+
+	/*
+		<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
+		<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
+		<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
+		<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
+	*/
+}
+
 
 </script>
 
