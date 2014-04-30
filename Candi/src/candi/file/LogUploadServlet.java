@@ -55,6 +55,9 @@ public class LogUploadServlet extends HttpServlet {
 			writer.write(CandiMsg.approachError());
 		} else {
 			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + id );
+			if(!tempPath.exists()){
+				tempPath.mkdirs(); 
+			}
 			
 			File[] items = tempPath.listFiles();
 			res.setContentType("application/json");
@@ -66,7 +69,7 @@ public class LogUploadServlet extends HttpServlet {
 					JSONObject jsono = new JSONObject();
 					jsono.put("name", item.getName());
 					jsono.put("size", item.length());
-					jsono.put("deleteUrl", "upload?file=" + item.getName());
+					jsono.put("deleteUrl", "log_upload?file=" + item.getName());
 					jsono.put("deleteType", "DELETE");
 					json.put(jsono);
 				}
@@ -121,7 +124,7 @@ public class LogUploadServlet extends HttpServlet {
 						JSONObject jsono = new JSONObject();
 						jsono.put("name", item.getName());
 						jsono.put("size", item.getSize());
-						jsono.put("deleteUrl", "upload?file=" + item.getName());
+						jsono.put("deleteUrl", "log_upload?file=" + item.getName());
 						jsono.put("deleteType", "DELETE");
 						json.put(jsono);
 					}

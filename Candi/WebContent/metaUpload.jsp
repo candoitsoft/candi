@@ -63,7 +63,8 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li class=""><a href="main.jsp">데이터 분석</a></li>
-				<li class="active"><a href="#">로그 입력</a></li>
+				<li class=""><a href="logUpload.jsp">로그데이터 입력</a></li>
+				<li class="active"><a href="#">메타데이터 입력</a></li>
 			</ul>
 			<form id="navFrm" name="navFrm" class="navbar-form navbar-right btn-group" role="search">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -84,8 +85,8 @@
 
 
 	<div class="container">
-		<h1>로그데이터 입력</h1>
-		<h2 class="lead">로그파일 형식 선택</h2>
+		<h1>메티데이터 입력</h1>
+		<h2 class="lead">메타파일 형식 선택</h2>
 		<blockquote>
 			입력할 로그 파일의 형식을 선택하십시오.<br/>
 			다음 필드들은 필수로 입력되어야 합니다. 필드 정보를 보려면 필드명을 클릭하십시오.<br/>

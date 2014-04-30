@@ -63,7 +63,8 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li class=""><a href="main.jsp">데이터 분석</a></li>
-				<li class="active"><a href="#">로그 입력</a></li>
+				<li class="active"><a href="#">로그데이터 입력</a></li>
+				<li class=""><a href="metaUpload.jsp">메타데이터 입력</a></li>
 			</ul>
 			<form id="navFrm" name="navFrm" class="navbar-form navbar-right btn-group" role="search">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
