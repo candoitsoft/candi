@@ -57,6 +57,7 @@
 window.onload = function(){	
 	olHideObj();
 	setMetaPopover();
+	setInitField();
 }
 
 </script>
@@ -98,19 +99,21 @@ window.onload = function(){
 	
 	<div class="container">
 		<h1>메타데이터 입력</h1>
+		<p>필수 필드 : 
+		<span id="fieldBtns">
+			<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
+			<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
+			<button id="btnFldTitle" type="button" class="btn btn-danger btn-xs">title</button>
+			<button id="btnFldAlbum" type="button" class="btn btn-info btn-xs">album</button>
+			<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
+			<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
+			<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
+			<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
+		</span>
+		</p>
 		<blockquote>
-			입력할 메타 파일에 다음의 필드들은 필수로 존재해야 합니다.<br/>
+			입력할 메타 파일에 위의 필드들은 필수로 존재해야 합니다.<br/>
 			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
-			<p>
-				<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
-				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
-				<button id="btnFldTitle" type="button" class="btn btn-danger btn-xs">title</button>
-				<button id="btnFldAlbum" type="button" class="btn btn-info btn-xs">album</button>
-				<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
-				<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
-				<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
-				<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
-			</p>
 			붉은색으로 표시된
 			<button type="button" class="btn btn-danger btn-xs">cid</button>,
 			<button type="button" class="btn btn-danger btn-xs">title</button>

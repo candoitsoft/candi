@@ -46,15 +46,15 @@ public class LogUploadServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void getFileList(HttpServletRequest req, HttpServletResponse res) throws IOException{
-		PrintWriter writer = res.getWriter();
+		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		String id = (String) session.getAttribute("candiId");
+		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
-		if (id == null || id.equals("") || userObj == null) {
+		if (candiId == null || candiId.equals("") || userObj == null) {
 			//로그인 오류시 login.jsp 페이지로 이동.
-			writer.write(CandiMsg.approachError());
+			out.write(CandiMsg.approachError());
 		} else {
-			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + id );
+			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + candiId );
 			if(!tempPath.exists()){
 				tempPath.mkdirs(); 
 			}
@@ -77,8 +77,8 @@ public class LogUploadServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				writer.write(jsonf.toString());
-				writer.close();
+				out.write(jsonf.toString());
+				out.close();
 			}
 		}
 	}
@@ -92,13 +92,13 @@ public class LogUploadServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("text/html; charset=UTF-8");
-		PrintWriter writer = res.getWriter();
+		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		String id = (String) session.getAttribute("candiId");
+		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
-		if (id == null || id.equals("") || userObj == null) {
+		if (candiId == null || candiId.equals("") || userObj == null) {
 			//로그인 오류시 login.jsp 페이지로 이동.
-			writer.write(CandiMsg.approachError());
+			out.write(CandiMsg.approachError());
 		} else {
 		
 			if (!ServletFileUpload.isMultipartContent(req)) {
@@ -107,7 +107,7 @@ public class LogUploadServlet extends HttpServlet {
 			}
 
 			// filePath/<id>/ 경로에 파일 업로드.
-			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + id );
+			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + candiId );
 			if(!tempPath.exists()){
 				tempPath.mkdirs(); 
 			}
@@ -135,8 +135,8 @@ public class LogUploadServlet extends HttpServlet {
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			} finally {
-				writer.write(jsonf.toString());
-				writer.close();
+				out.write(jsonf.toString());
+				out.close();
 			}
 		}
 		
@@ -145,16 +145,16 @@ public class LogUploadServlet extends HttpServlet {
 	
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		res.setContentType("text/html; charset=UTF-8");
-		PrintWriter writer = res.getWriter();
+		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		String id = (String) session.getAttribute("candiId");
+		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
-		if (id == null || id.equals("") || userObj == null) {
+		if (candiId == null || candiId.equals("") || userObj == null) {
 			//로그인 오류시 login.jsp 페이지로 이동.
-			writer.write(CandiMsg.approachError());
+			out.write(CandiMsg.approachError());
 		} else {
 			String[] files_name = req.getParameterValues("file");
-			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + id );
+			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + candiId );
 			for(String file_name : files_name){
 				File   file      = new File( tempPath + "/" + file_name );
 				if( file.exists() ) file.delete();

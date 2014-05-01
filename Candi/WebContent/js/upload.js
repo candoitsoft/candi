@@ -2,7 +2,7 @@ var initCsv = "";
 var initJson = "";
 var initXml = "";
 var initExcel = "";
-
+var initFieldBtn = "";
 /**
  * 첫 화면에서 숨겨야 할 오브젝트 숨김.
  */
@@ -12,6 +12,7 @@ function olHideObj(){
 	initJson = $("#preJson").html();
 	initXml = $("#preXml").html();
 	initExcel = $("#fieldsExcel").html();
+	initFieldBtn = $("#fieldBtns").html();
 }
 
 function enterData(field,e){
@@ -36,7 +37,7 @@ function checkDatatype(rdSel){
 }
 
 function insertField(){
-	var filedName = $(addData).val();
+	var filedName = $("#addData").val();
 	
 	if(filedName != ""){
 		
@@ -53,15 +54,24 @@ function insertField(){
 		$("#xlBody1").append("<td>"+filedName+"-val-1</td>");
 		$("#xlBody2").append("<td>"+filedName+"-val-2</td>");
 		
-		$(addData).val("");
+		$("#addData").val("");
+		
+		$("#fieldBtns").append(" <button type=\"button\" class=\"btn btn-default btn-xs\">"+filedName+"</button>");
+		
+		$("#addFieldVals").val($("#addFieldVals").val()+","+filedName);
 	}
 }
 
 function clearField(){
+	
 	$("#preCsv").html(initCsv);
 	$("#preJson").html(initJson);
 	$("#preXml").html(initXml);
 	$("#fieldsExcel").html(initExcel);
+	$("#fieldBtns").html(initFieldBtn);
+	$("#addFieldVals").val("");
+	
+	saveField();
 }
 
 /**
@@ -109,8 +119,6 @@ function setMetaPopover(){
 		title : 'Content ID (컨텐츠 ID)',
 		content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code>, <code>PA0047483001012</code></h5>'
 	});
-	
-	
 	$('#btnFldTitle').popover({
 		html:true, trigger:'hover', placement:'bottom',
 		title : 'Title (제목)',
@@ -144,11 +152,13 @@ function setMetaPopover(){
 }
 
 /**
- * 추가된 필드 저장.
+ * 추가된 필드 저장. Ajax 호출.
  */
 function saveField(){
 	var url="UploadAjax";
 	var params = "";
+	params+="cmd=saveField";
+	params+="&";
 	params+="upFileSrc="+$("#upFileSrc").val();
 	params+="&";
 	params+="addFieldVals="+$("#addFieldVals").val();
@@ -161,7 +171,35 @@ function saveField(){
 		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
 			//{"DATA1":"1234","DATA2":"5678"}	<- 리턴되는 서블릿 JSON
 			//$("#aIP").attr("value", data.DATA1); <- 이런 형태로 사용.
-//			alert("결과 : \n"+data.id + "\n" + data.result);
+			if(data.result > 0){
+				alert("저장되었습니다.");
+			}
+		}
+	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+	    	console.log(e.responseText);
+	    }
+	});
+}
+
+function setInitField(){
+	var url="UploadAjax";
+	var params = "";
+	params = "cmd=getInintField";
+	params+="&";
+	params+="upFileSrc="+$("#upFileSrc").val();
+	
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:params
+		,dataType:"json"
+		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
+			//{"DATA1":"1234","DATA2":"5678"}	<- 리턴되는 서블릿 JSON
+			//$("#aIP").attr("value", data.DATA1); <- 이런 형태로 사용.
+			for(var i=0; i< data.fieldVals.length; i++){
+				$("#addData").val(data.fieldVals[i]);
+				insertField();
+			}
 		}
 	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
 	    	console.log(e.responseText);

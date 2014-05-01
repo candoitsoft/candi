@@ -66,23 +66,53 @@ public class UploadDao {
 		return result;
 	}
 	
-	
+	/**
+	 * 추가된 필드 저장.
+	 * @param req
+	 * @return
+	 */
 	public int saveAddFields(HttpServletRequest req){
 		int result = 0;
 		
 		HttpSession session = req.getSession();
-		String id = (String) session.getAttribute("candiId");
+		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
-		if (id == null || id.equals("") || userObj == null) {
+		if (candiId == null || candiId.equals("") || userObj == null) {
 		} else {
 			String key = req.getParameter("upFileSrc");
 			String value = req.getParameter("addFieldVals");
 			
 			//delete & insert
-			delCdiVals(id, key);
-			result = saveCdiVals(id, key, value, "");
+			delCdiVals(candiId, key);
+			result = saveCdiVals(candiId, key, value, "");
 		}
 		
 		return result;
 	}
+	
+	public DataEntity[] getAddFields(HttpServletRequest req){
+		DataEntity[] result = null;
+		
+		HttpSession session = req.getSession();
+		String candiId = (String) session.getAttribute("candiId");
+		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
+		if (candiId == null || candiId.equals("") || userObj == null) {
+		} else {
+			String upFileSrc = req.getParameter("upFileSrc");
+			Dao dao = Dao.getInstance();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select * \n");
+			sql.append("from cdi_user_vals \n");
+			sql.append("where \n");
+			sql.append("id = ? \n");
+			sql.append("and pkey = ? \n");
+			String[] params = {candiId, upFileSrc};
+			
+			result = dao.getResult(property, sql.toString(), params);
+		}
+		
+		return result;
+	}
+	
+	
 }

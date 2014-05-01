@@ -98,17 +98,18 @@ window.onload = function(){
 
 	<div class="container">
 		<h1>로그데이터 입력</h1>
-		
+		<p>필수 필드 : 
+		<span id="fieldBtns">
+			<button id="btnFldUci" type="button" class="btn btn-info btn-xs">uci</button>
+			<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
+			<button id="btnFldSvcod" type="button" class="btn btn-danger btn-xs">svcod</button>
+			<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
+			<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
+		</span>
+		</p>
 		<blockquote>
 			입력할 로그 파일에 다음의 필드들은 필수로 존재해야 합니다.<br/>
 			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
-			<p>
-				<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
-				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
-				<button id="btnFldSvcod" type="button" class="btn btn-danger btn-xs">svcod</button>
-				<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
-				<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
-			</p>
 			붉은색으로 표시된
 			<button type="button" class="btn btn-danger btn-xs">cid</button>,
 			<button type="button" class="btn btn-danger btn-xs">svcod</button>,
