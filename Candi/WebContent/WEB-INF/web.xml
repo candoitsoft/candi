@@ -38,4 +38,13 @@
         <url-pattern>/meta_upload</url-pattern>
     </servlet-mapping>
 	
+	<servlet>
+        <servlet-name>UploadAjax</servlet-name>
+        <servlet-class>candi.file.UploadAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadAjax</servlet-name>
+        <url-pattern>/UploadAjax/*</url-pattern>
+    </servlet-mapping>
+	
 </web-app>

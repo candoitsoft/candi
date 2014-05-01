@@ -7,7 +7,6 @@ import jm.net.Dao;
 import jm.net.DataEntity;
 
 public class CandiDao {
-
 	
 	private static CandiDao instance = null;
 	private JmProperties property = null;
@@ -68,9 +67,6 @@ public class CandiDao {
 		data.put("name", userObj.getName());
 		data.put("type", userObj.getType());
 		
-//		result = dao.inertRemoteData("cdi_user", data);
-//		result = dao.inertLocalData("cdi_user", data);
-		
 		result = dao.inertData(property, "cdi_user", data);
 		return result;
 	}
@@ -95,8 +91,6 @@ public class CandiDao {
 		
 		whereData.put("id", userObj.getId());
 		
-//		result = dao.updateRemoteData("cdi_user", setData, whereData);
-//		result = dao.updateLocalData("cdi_user", setData, whereData);
 		result = dao.updateData(property, "cdi_user", setData, whereData);
 		
 		return result;
@@ -121,8 +115,6 @@ public class CandiDao {
 		
 		sql.append("SELECT passwd FROM cdi_user WHERE id = ?");
 		
-//		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
-//		DataEntity[] entity = dao.getLocalResult(sql.toString(), param);
 		DataEntity[] entity = dao.getResult(property, sql.toString(), param);
 		
 		if(entity != null && entity.length == 1){
@@ -157,8 +149,6 @@ public class CandiDao {
 		sql.append("FROM cdi_user ");
 		sql.append("WHERE id = ?");
 		
-//		DataEntity[] entity = dao.getRemoteResult(sql.toString(), param);
-//		DataEntity[] entity = dao.getLocalResult(sql.toString(), param);
 		DataEntity[] entity = dao.getResult(property, sql.toString(), param);
 		
 		if(entity != null && entity.length == 1){
@@ -181,8 +171,6 @@ public class CandiDao {
 		StringBuffer sql = new StringBuffer();
 		String[] param = {id};
 		sql.append("SELECT count(*) as cnt FROM cdi_user WHERE id = ?");
-//		int cnt = dao.getRemoteCount(sql.toString(), param);
-//		int cnt = dao.getLocalCount(sql.toString(), param);
 		int cnt = dao.getCount(property, sql.toString(), param);
 		
 		if (cnt == 0) {
