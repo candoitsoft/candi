@@ -149,8 +149,6 @@ window.onload = function(){
 		<blockquote>
 			입력 가능한 로그의 형식은 CSV, JSON, XML, Excel 입니다.<br/>
 			각 탭을 선택하면 해당 형식에 대한 설명을 볼 수 있습니다.<br/>
-			저장될 로그 파일의 형식은 .csv .json .xml .xls 만 가능합니다.<br/>
-			.csv .json .xml 파일의 인코딩 포맷은 UTF-8 입니다.
 		</blockquote>
 		
 		<!-- 로그파일 형식 탭 시작 -->
@@ -384,35 +382,36 @@ window.onload = function(){
 	
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane fade active in" id="fileSelf">
-			<p>
-				<blockquote>로그 파일을 직접 업로드 합니다.</blockquote>
+			<p></p>
+			<blockquote>
+				로그 파일을 직접 업로드 합니다.<br/>
+				<code>.csv</code> <code>.json</code> <code>.xml</code> <code>.xls</code> <code>.zip</code> 형식의 파일만 업로드가 가능합니다.<br/>
+				<code>.csv</code> <code>.json</code> <code>.xml</code> 파일의 인코딩 포맷은 UTF-8 입니다.<br/>
+				<code>.zip</code> 파일로 압축해서 업로드하는 경우 파일이 디렉토리 안에 포함되지 않도록 압축하십시오.
+			</blockquote>
 		
 <!-- The file upload form used as target for the file upload widget -->
-		<form id="fileupload" action="//jquery-file-upload.appspot.com/"
-			method="POST" enctype="multipart/form-data">
+		<form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
 			<!-- Redirect browsers with JavaScript disabled to the origin page -->
 			<noscript>
-				<input type="hidden" name="redirect"
-					value="http://blueimp.github.io/jQuery-File-Upload/">
+				<input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/">
 			</noscript>
 			<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 			<div class="row fileupload-buttonbar">
 				<div class="col-lg-7">
 					<!-- The fileinput-button span is used to style the file input field as button -->
-					<span class="btn btn-success fileinput-button"> <i
-						class="glyphicon glyphicon-plus"></i> <span>Add files...</span> <input
-						type="file" name="files[]" multiple>
+					<span class="btn btn-success fileinput-button">
+						<i class="glyphicon glyphicon-plus"></i> <span>파일 추가</span>
+						<input type="file" name="files[]" multiple>
 					</span>
 					<button type="submit" class="btn btn-primary start">
-						<i class="glyphicon glyphicon-upload"></i> <span>Start
-							upload</span>
+						<i class="glyphicon glyphicon-upload"></i> <span>업로드 시작</span>
 					</button>
 					<button type="reset" class="btn btn-warning cancel">
-						<i class="glyphicon glyphicon-ban-circle"></i> <span>Cancel
-							upload</span>
+						<i class="glyphicon glyphicon-ban-circle"></i> <span>취소</span>
 					</button>
 					<button type="button" class="btn btn-danger delete">
-						<i class="glyphicon glyphicon-trash"></i> <span>Delete</span>
+						<i class="glyphicon glyphicon-trash"></i> <span>삭제</span>
 					</button>
 					<input type="checkbox" class="toggle">
 					<!-- The global file processing state -->
@@ -421,8 +420,7 @@ window.onload = function(){
 				<!-- The global progress state -->
 				<div class="col-lg-5 fileupload-progress fade">
 					<!-- The global progress bar -->
-					<div class="progress progress-striped active" role="progressbar"
-						aria-valuemin="0" aria-valuemax="100">
+					<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
 						<div class="progress-bar progress-bar-success" style="width: 0%;"></div>
 					</div>
 					<!-- The extended global progress state -->
@@ -436,29 +434,26 @@ window.onload = function(){
 		</form>
 
 		<!-- The blueimp Gallery widget -->
-		<div id="blueimp-gallery"
-			class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+		<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
 			<div class="slides"></div>
 			<h3 class="title"></h3>
-			<a class="prev">‹</a> <a class="next">›</a> <a class="close">×</a> <a
-				class="play-pause"></a>
+			<a class="prev">‹</a> <a class="next">›</a> <a class="close">×</a>
+			<a class="play-pause"></a>
 			<ol class="indicator"></ol>
 		</div>
 	
-	<button type="button" class="btn btn-primary start">로그 입력 시작</button>
-	
-			</p>
+	<button type="button" class="btn btn-primary start">로그정보 입력</button>
+	<p></p>
 		</div>
 		
 		<div class="tab-pane fade" id="fileAgent">
-			<p>
-				<blockquote>
+			<p></p>
+			<blockquote>
 				로그가 생성되는 시스템에 클라이언트 프로그램을 설치합니다.<br/>
 				지정된 경로에 로그 파일을 저장하면 클라이언트 프로그램이 주기적으로 로그 파일을 서버로 전송합니다.<br/>
 				클라이언트를 실행하기 위해서는 Java 6.0 이상이 설치되어 있어야 하며 XXXX 포트를 사용합니다.<br/>
 				XXXX 포트는 다른 프로세서가 사용하지 않아야 하고 외부 네트워크에서 접근 가능하도록 방화벽 설정이 필요합니다.<br/>
-				</blockquote>
-			</p>
+			</blockquote>
 			<button type="button" class="btn btn-primary">클라이언트 프로그램 다운로드</button>
 			
 <!-- Button trigger modal -->
@@ -507,6 +502,11 @@ window.onload = function(){
 	<!-- The template to display files available for upload -->
 	<script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
+{%
+	var fsplit = file.name.split(".");
+	var ext = fsplit[fsplit.length-1];
+	if(ext=="csv"||ext=="CSV"||ext=="json"||ext=="JSON"||ext=="xml"||ext=="XML"||ext=="xls"||ext=="XLS"||ext=="zip"||ext=="ZIP"){
+%}
     <tr class="template-upload fade">
         <td>
             <span class="preview"></span>
@@ -523,17 +523,22 @@ window.onload = function(){
             {% if (!i && !o.options.autoUpload) { %}
                 <button class="btn btn-primary start" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start</span>
+                    <span>업로드 시작</span>
                 </button>
             {% } %}
             {% if (!i) { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
+                    <span>취소</span>
                 </button>
             {% } %}
         </td>
     </tr>
+{%
+	} else { 
+		alert("업로드 가능한 형식의 파일이 아닙니다.\n\n사용 가능한 파일의 확장자는\n\n.csv .json .xml .xls .zip 입니다.");
+	}
+%}
 {% } %}
 </script>
 	<!-- The template to display files available for download -->
@@ -542,9 +547,6 @@ window.onload = function(){
     <tr class="template-download fade">
         <td>
             <span class="preview">
-                {% if (file.thumbnailUrl) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                {% } %}
             </span>
         </td>
         <td>
@@ -566,38 +568,32 @@ window.onload = function(){
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
+                    <span>삭제</span>
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
+                    <span>취소</span>
                 </button>
             {% } %}
         </td>
     </tr>
 {% } %}
 </script>
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 	<script src="js/vendor/jquery.ui.widget.js"></script>
 	<!-- The Templates plugin is included to render the upload/download listings -->
-	<script
-		src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+	<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
 	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-	<script
-		src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
+	<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
 	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-	<script
-		src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+	<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
 	<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-	<script
-		src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<!-- blueimp Gallery script -->
-	<script
-		src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+	<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 	<script src="js/jquery.iframe-transport.js"></script>
 	<!-- The basic File Upload plugin -->

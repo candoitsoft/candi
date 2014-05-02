@@ -70,6 +70,8 @@
 <iframe id="today_frame" width="100%" scrolling=no frameborder=0 src="osp_today.jsp#/dashboard/elasticsearch/Neowiz">
 </iframe>
 <script>
+
+//kibana iframe 화면 크기 계산해서 1초마다 다시 그려주는 메서드.. 
 var todayFrObj = document.getElementById("today_frame");
 window.setInterval(function(){
 	todayFrObj.height = todayFrObj.contentDocument.body.offsetHeight;
