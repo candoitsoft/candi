@@ -55,7 +55,7 @@
  * 첫 화면에서 실행하는 함수 모음.
  */
 window.onload = function(){	
-	olHideObj();
+	olSaveHtml();
 	setMetaPopover();
 	setInitField();
 }
@@ -99,52 +99,48 @@ window.onload = function(){
 	
 	<div class="container">
 		<h1>메타데이터 입력</h1>
-		<p>필수 필드 : 
-		<span id="fieldBtns">
-			<button id="btnFldUci" type="button" class="btn btn-info btn-xs"">uci</button>
-			<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
-			<button id="btnFldTitle" type="button" class="btn btn-danger btn-xs">title</button>
-			<button id="btnFldAlbum" type="button" class="btn btn-info btn-xs">album</button>
-			<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
-			<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
-			<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
-			<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
-		</span>
+		<h3>데이터 필드</h3>
+		<p>
+			<label class="">필드 목록 : </label> 
+			<span id="fieldBtns">
+				<button id="btnFldUci" type="button" class="btn btn-info btn-xs">uci</button>
+				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
+				<button id="btnFldTitle" type="button" class="btn btn-danger btn-xs">title</button>
+				<button id="btnFldAlbum" type="button" class="btn btn-info btn-xs">album</button>
+				<button id="btnFldArtist" type="button" class="btn btn-info btn-xs">artist</button>
+				<button id="btnFldGenre" type="button" class="btn btn-info btn-xs">genre</button>
+				<button id="btnFldRdate" type="button" class="btn btn-info btn-xs">rdate</button>
+				<button id="btnFldPtime" type="button" class="btn btn-info btn-xs">ptime</button>
+			</span>
 		</p>
 		<blockquote>
-			입력할 메타 파일에 위의 필드들은 필수로 존재해야 합니다.<br/>
+			입력할 메타 파일에 위의
+			<button type="button" class="btn btn-info btn-xs">공백허용</button>
+			<button type="button" class="btn btn-danger btn-xs">공백불가</button> 
+			필드들은 필수로 입력해야 합니다.<br/>
 			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
+			반드시 설명을 읽고 올바른 형식 대로 입력 하십시오.<br/>
 			붉은색으로 표시된
 			<button type="button" class="btn btn-danger btn-xs">cid</button>,
 			<button type="button" class="btn btn-danger btn-xs">title</button>
 			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
 			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
-			필수 필드 외에 사용자정의 필드 추가가 가능합니다.
+			필수 필드 외에
+			<button type="button" class="btn btn-default btn-xs">사용자정의</button>
+			필드 추가가 가능합니다.
 		</blockquote>
-		<h2 class="lead">메타파일 형식 선택</h2>
-		<div  class="col-lg-3">
-			<label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdCsv" value="csv" checked="checked"> CSV
-			</label> <label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdJson" value="json"> JSON
-			</label> <label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdXml" value="xml"> XML
-			</label> <label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdExcel" value="excel"> Excel
-			</label> 
-		</div>
 		
-		<div  class="col-lg-9">
+		<div  class="row">
 			<form class="form-horizontal" role="form">
 				<div class="form-group">
-					<label for="addData" class="col-lg-2 control-label">필드 추가</label>
+					<label for="addData" class="col-lg-1 control-label">필드 추가</label>
 					<div class="col-lg-3">
 						<input type="text" class="form-control" id="addData" placeholder="필드명" onkeypress="enterData(this,event);">
 					</div>
 					<div class="col-lg-4">
-					<button id="btnAddData" type="button" class="btn btn-success" onclick="insertField();">추가</button>
-					<button type="button" class="btn btn-danger" onclick="clearField();">초기화</button>
-					<button type="button" class="btn btn-primary" onclick="saveField();">저장</button>
+					<button type="button" class="btn btn-success" onclick="insertField();"><i class="glyphicon glyphicon-plus"></i> <span>추가</span></button>
+					<button type="button" class="btn btn-primary" onclick="saveField();"><i class="glyphicon glyphicon-save"></i> <span>저장</span></button>
+					<button type="button" class="btn btn-danger" onclick="clearField();"><i class="glyphicon glyphicon-remove"></i> <span>초기화</span></button>
 					</div>
 				</div>
 				<input type="hidden" id="upFileSrc" name="upFileSrc" value="metaAddField"/>
@@ -152,77 +148,284 @@ window.onload = function(){
 			</form>
 		</div>
 		
-			<div  id="showCSV" class="container row">
+		<h3>메타파일 형식</h3>
+		
+		<blockquote>
+			입력 가능한 메타의 형식은 CSV, JSON, XML, Excel 입니다.<br/>
+			각 탭을 선택하면 해당 형식에 대한 설명을 볼 수 있습니다.<br/>
+			저장될 메타 파일의 형식은 .csv .json .xml .xls 만 가능합니다.<br/>
+			.csv .json .xml 파일의 인코딩 포맷은 UTF-8 입니다.
+		</blockquote>
+		
+		<!-- 메타파일 형식 탭 시작 -->
+		<div class="bs-example bs-example-tabs">
+			<ul id="fldFmtTab" class="nav nav-tabs">
+				<li class="active"><a href="#tabCsv" data-toggle="tab">CSV</a></li>
+				<li ><a href="#tabJson" data-toggle="tab">JSON</a></li>
+				<li ><a href="#tabXml" data-toggle="tab">XML</a></li>
+				<li ><a href="#tabExcel" data-toggle="tab">Excel</a></li>
+			</ul>
+			
+			<div id="fldFmtTabContent" class="tab-content">
+
+<!-- CSV 형식 시작 -->
+<div class="tab-pane fade active in" id="tabCsv">
+	
+	<h4>CSV 입력 규칙</h4>
+	<blockquote>
+		각 열(column)들은 따옴표(") 로 감싸서 입력하고 구분자는 쉼표(,) 입니다.<br/>
+		값이 비어있는 열 에도 빈 따옴표("")를 입력해서 자리를 맞춥니다.<br/>
+		한 필드에 2개 이상의 값이 있을때는 쉼표(,)로 구분합니다.<br/>
+		하나의 행(row)은 한 줄에 입력되고 새로운 행은 줄바꿈해야 합니다.<br/>
+		메타 데이터 외에 헤더, 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
 <pre id="preCsv">
-<span id="fieldsCsv1">"uci-val-1","cid-val-1","title-val-1","album-val-1","artist-val-1","genre-val-1","rdate-val-1","ptime-val-1"</span>
-<span id="fieldsCsv2">"uci-val-2","cid-val-2","title-val-2","album-val-2","artist-val-2","genre-val-2","rdate-val-2","ptime-val-2"</span>
+<span id="fieldsCsv1">"uci-1","cid-1","title-1","album-1","artist-1","genre-1","rdate-1","ptime-1"</span>
+<span id="fieldsCsv2">"uci-2","cid-2","title-2","album-2","artist-2","genre-2","rdate-2","ptime-2"</span>
 </pre>
-			</div>
-			
-			
-			<div  id="showJSON" class="container row">
-				<pre id="preJson">{
-<span id="fieldsJson1">	"uci" : "uci-val-1",
-	"cid" : "cid-val-1",
-	"svcod" : "svcod-val-1",
-	"stime" : "stime-val-1",
-	"asp" : "asp-val-1"</span>
-}
+	
+	<h4>실제 입력 예</h4>
+<pre>
+"i500-USA3017721.1200166076-1","10429203","Let It Go","프로즌 (Frozen) OST","Idina Menzel(이디나 멘젤)","OST","2013-12-05","000344"
+"i500-KRA0104042.0009298925-1","6121428","잔소리 (With 2AM 슬옹)","잔소리","아이유(IU),임슬옹","2010-06-03",""
+"","5921418","벚꽃 엔딩","","버스커 버스커","","",""
+</pre>
+
+</div>
+<!-- CSV 형식 끝 -->
+
+<!-- JSON 형식 시작 -->
+<div class="tab-pane fade" id="tabJson">
+
+	<h4>JSON 입력 규칙</h4>
+	<blockquote>
+		각 열(column)의 값 들은 key : value 형식으로 표시합니다.<br/>
+		key와 value 는 모두 따옴표(") 로 감싸서 입력하고 열 간 구분자는 쉼표(,) 입니다.<br/>
+		값이 비어있는 열 에도 key는 존재해야 합니다. 값은 빈 따옴표 ("") 로 입력합니다.<br/>
+		한 필드에 2개 이상의 값이 있을때는 대괄호([ ]) 안에 배열로 입력합니다.<br/>
+		하나의 행(row)는 중괄호{} 로 묶고 행 간 구분자는 쉼표(,) 입니다.<br/>
+		하나의 행(row)은 한 줄에 입력되고 새로운 행은 줄바꿈해야 합니다.<br/>
+		메타 데이터 외에 헤더, 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
+
+<pre id="preJson">{
+<span id="fieldsJson1">	"uci" : "uci-1",
+	"cid" : "cid-1",
+	"title" : "title-1",
+	"album" : "album-1",
+	"artist" : "artist-1",
+	"genre" : "genre-1",
+	"rdate" : "rdate-1",
+	"ptime" : "ptime-1"</span>
+},
 {
-<span id="fieldsJson2">	"uci" : "uci-val-2",
-	"cid" : "cid-val-2",
-	"svcod" : "svcod-val-2",
-	"stime" : "stime-val-2",
-	"asp" : "asp-val-2"</span>
-}</pre>
-			</div>
-			<div id="showXML" class="container row">
-				<pre id="preXml">&lt;log&gt;<span id="fieldsXml1">
-	&lt;uci&gt; uci-val-1 &lt;/uci&gt;
-	&lt;cid&gt; cid-val-1 &lt;cid&gt;
-	&lt;svcod&gt; svcod-val-1 &lt;svcode&gt;
-	&lt;stime&gt; stime-val-1 &lt;stime&gt;
-	&lt;asp&gt; asp-val-1 &lt;asp&gt;
-</span>&lt;/log&gt;
-&lt;log&gt;<span id="fieldsXml2">
-	&lt;uci&gt; uci-val-2 &lt;/uci&gt;
-	&lt;cid&gt; cid-val-2 &lt;cid&gt;
-	&lt;svcod&gt; svcod-val-2 &lt;svcode&gt;
-	&lt;stime&gt; stime-val-2 &lt;stime&gt;
-	&lt;asp&gt; asp-val-2 &lt;asp&gt;
-</span>&lt;/log&gt;</pre>
-			</div>
-			
-			<div  id="showExcel" class="container row">
-<h4>입력 규칙</h4>
+<span id="fieldsJson2">	"uci" : "uci-2",
+	"cid" : "cid-2",
+	"title" : "title-2",
+	"album" : "album-2",
+	"artist" : ["artist-2-1","artist-2-2"],
+	"genre" : "genre-2",
+	"rdate" : "rdate-2",
+	"ptime" : "ptime-2"</span>
+}
+</pre>
+	
+	<h4>실제 입력 예</h4>
+<pre>
+{"uci":"i500-USA3017721.1200166076-1","cid":"10429203","title":"Let It Go","album":"프로즌 (Frozen) OST","artist":"Idina Menzel(이디나 멘젤)","genre":"OST","rdate":"2013-12-05","ptime":"000344"},
+{"uci":"i500-KRA0104042.0009298925-1","cid":"6121428","title":"잔소리 (With 2AM 슬옹)","album":"잔소리","artist":["아이유(IU)","임슬옹"],"genre":"","rdate":"2010-06-03","ptime":""},
+{"uci":"","cid":"5921418","title":"벚꽃 엔딩","album":"","artist":"버스커 버스커","genre":"","rdate":"","ptime":""}
+</pre>
+
+</div>
+<!-- JSON 형식 끝 -->
+
+<!-- XML 형식 시작 -->
+<div class="tab-pane fade" id="tabXml">
+
+	<h4>XML 입력 규칙</h4>
+	<blockquote>
+		각 열(column)의 값 들은 <code>&lt;필드명&gt;</code> <code>&lt;/필드명&gt;</code> 태그로 묶습니다.<br/>
+		값이 비어있는 열 에도 필드명의 태그는 존재해야 합니다.<br/>
+		한 필드에 2개 이상의 값이 있을때는 <code>&lt;item&gt;</code> <code>&lt;/item&gt;</code> 태그로 분리하여 표시합니다.<br/>
+		하나의 행(row)는 <code>&lt;row&gt;</code> <code>&lt;/row&gt;</code> 태그로 묶습니다.<br/>
+		가독성을 위해 행(row)이 바뀌면 줄바꿈 하도록 합니다.<br/>
+		상단에 <code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code> 헤더를 입력합니다.<br/>
+		그 외에 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
+<pre id="preXml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;row&gt;<span id="fieldsXml1">
+	&lt;uci&gt;uci-1&lt;/uci&gt;
+	&lt;cid&gt;cid-1&lt;cid&gt;
+	&lt;title&gt;title-1&lt;title&gt;
+	&lt;album&gt;album-1&lt;album&gt;
+	&lt;artist&gt;artist-1&lt;artist&gt;
+	&lt;genre&gt;genre-1&lt;genre&gt;
+	&lt;rdate&gt;rdate-1&lt;rdate&gt;
+	&lt;ptime&gt;ptime-2&lt;ptime&gt;
+</span>&lt;/row&gt;
+&lt;row&gt;<span id="fieldsXml2">
+	&lt;uci&gt;uci-2&lt;/uci&gt;
+	&lt;cid&gt;cid-2&lt;cid&gt;
+	&lt;title&gt;title-2&lt;title&gt;
+	&lt;album&gt;album-2&lt;album&gt;
+	&lt;artist&gt;
+		&lt;item&gt;artist-2-1&lt;/item&gt;
+		&lt;item&gt;artist-2-2&lt;/item&gt;
+	&lt;artist&gt;
+	&lt;genre&gt;genre-2&lt;genre&gt;
+	&lt;rdate&gt;rdate-2&lt;rdate&gt;
+	&lt;ptime&gt;ptime-2&lt;ptime&gt;
+</span>&lt;/row&gt;
+</pre>
+
+	<h4>실제 입력 예</h4>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;row&gt;
+	&lt;uci&gt;i500-USA3017721.1200166076-1&lt;/uci&gt;
+	&lt;cid&gt;10429203&lt;cid&gt;
+	&lt;title&gt;Let It Go&lt;title&gt;
+	&lt;album&gt;프로즌 (Frozen) OST&lt;album&gt;
+	&lt;artist&gt;Idina Menzel(이디나 멘젤)&lt;artist&gt;
+	&lt;genre&gt;OST&lt;genre&gt;
+	&lt;rdate&gt;2013-12-05&lt;rdate&gt;
+	&lt;ptime&gt;000344&lt;ptime&gt;
+&lt;/row&gt;
+&lt;row&gt;
+	&lt;uci&gt;i500-KRA0104042.0009298925-1&lt;/uci&gt;
+	&lt;cid&gt;6121428&lt;cid&gt;
+	&lt;title&gt;잔소리 (With 2AM 슬옹)&lt;title&gt;
+	&lt;album&gt;잔소리&lt;album&gt;
+	&lt;artist&gt;
+		&lt;item&gt;아이유(IU)&lt;/item&gt;
+		&lt;item&gt;임슬옹&lt;/item&gt;
+	&lt;artist&gt;
+	&lt;genre&gt;&lt;genre&gt;
+	&lt;rdate&gt;2010-06-03&lt;rdate&gt;
+	&lt;ptime&gt;&lt;ptime&gt;
+&lt;/row&gt;
+&lt;row&gt;
+	&lt;uci&gt;&lt;/uci&gt;
+	&lt;cid&gt;5921418&lt;cid&gt;
+	&lt;title&gt;벚꽃 엔딩&lt;title&gt;
+	&lt;album&gt;&lt;album&gt;
+	&lt;artist&gt;버스커 버스커&lt;artist&gt;
+	&lt;genre&gt;&lt;genre&gt;
+	&lt;rdate&gt;&lt;rdate&gt;
+	&lt;ptime&gt;&lt;ptime&gt;
+&lt;/row&gt;
+</pre>	
+	
+	
+</div>
+<!-- XML 형식 끝 -->
+
+<!-- Excel 형식 시작 -->
+<div class="tab-pane fade" id="tabExcel">
+
+	<h4>Excel 입력 규칙</h4>
+	<blockquote>
+		모든 셀의 형식은 "텍스트" 로 되어 있어야 합니다.(자동,숫자,날짜 등 X)<br/>
+		데이터는 엑셀 파일의 첫번째 시트(Sheet)에 있어야 합니다.<br/>
+		데이터가 많아 한 시트에 입력이 불가능한 경우 다음 시트에 연속해서 입력합니다.<br/>
+		첫 행(row) 에는 각 열의 이름이 들어갑니다. 시트가 2개 이상인 경우 모든 시트에 동일하게 적용됩니다.<br/>
+		맨 마지막 행이 끝날 때 까지 중간에 비어있는 행이 없어야 합니다.<br/>
+		한 필드에 2개 이상의 값이 있을때는 쉼표(,)로 구분합니다.<br/>
+		그 외에 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
+
 <table id="fieldsExcel" class="table table-bordered">
 	<thead>
 		<tr id="xlHead" class="active">
 			<th>uci</th>
 			<th>cid</th>
-			<th>svcod</th>
-			<th>stime</th>
-			<th>asp</th>
+			<th>title</th>
+			<th>album</th>
+			<th>artist</th>
+			<th>genre</th>
+			<th>rdate</th>
+			<th>ptime</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr id="xlBody1">
-			<td>uci-val-1</td>
-			<td>cid-val-1</td>
-			<td>svcod-val-1</td>
-			<td>stime-val-1</td>
-			<td>asp-val-1</td>
+			<td>uci-1</td>
+			<td>cid-1</td>
+			<td>title-1</td>
+			<td>album-1</td>
+			<td>artist-1</td>
+			<td>genre-1</td>
+			<td>rdate-1</td>
+			<td>ptime-1</td>
 		</tr>
 		<tr id="xlBody2">
-			<td>uci-val-2</td>
-			<td>cid-val-2</td>
-			<td>svcod-val-2</td>
-			<td>stime-val-2</td>
-			<td>asp-val-2</td>
+			<td>uci-2</td>
+			<td>cid-2</td>
+			<td>title-2</td>
+			<td>album-2</td>
+			<td>artist-2-1,artist-2-2</td>
+			<td>genre-2</td>
+			<td>rdate-2</td>
+			<td>ptime-2</td>
 		</tr>
 	</tbody>
 </table>
+
+	<h4>실제 입력 예</h4>
+<table class="table table-bordered">
+	<thead>
+		<tr class="active">
+			<th>uci</th>
+			<th>cid</th>
+			<th>title</th>
+			<th>album</th>
+			<th>artist</th>
+			<th>genre</th>
+			<th>rdate</th>
+			<th>ptime</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>i500-USA3017721.1200166076-1</td>
+			<td>10429203</td>
+			<td>Let It Go</td>
+			<td>프로즌 (Frozen) OST</td>
+			<td>Idina Menzel(이디나 멘젤)</td>
+			<td>OST</td>
+			<td>2013-12-05</td>
+			<td>000344</td>
+		</tr>
+		<tr>
+			<td>i500-KRA0104042.0009298925-1</td>
+			<td>6121428</td>
+			<td>잔소리 (With 2AM 슬옹)</td>
+			<td>잔소리</td>
+			<td>아이유(IU),임슬옹</td>
+			<td></td>
+			<td>2010-06-03</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>5921418</td>
+			<td>벚꽃 엔딩</td>
+			<td></td>
+			<td>버스커 버스커</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<!-- Excel 형식 끝 -->
+				
 			</div>
+		</div>
+		<!-- 메타파일 형식 탭 끝 -->
 		
 	</div>
 
@@ -240,7 +443,7 @@ window.onload = function(){
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane fade active in" id="fileSelf">
 			<p>
-				<blockquote>로그 파일을 직접 업로드 합니다.</blockquote>
+				<blockquote>메타 파일을 직접 업로드 합니다.</blockquote>
 			</p>
 			<p>
 <!-- The file upload form used as target for the file upload widget -->
@@ -309,8 +512,8 @@ window.onload = function(){
 		<div class="tab-pane fade" id="fileAgent">
 			<p>
 				<blockquote>
-				로그가 생성되는 시스템에 클라이언트 프로그램을 설치합니다.<br/>
-				지정된 경로에 로그 파일을 저장하면 클라이언트 프로그램이 주기적으로 로그 파일을 서버로 전송합니다.<br/>
+				메타가 생성되는 시스템에 클라이언트 프로그램을 설치합니다.<br/>
+				지정된 경로에 메타 파일을 저장하면 클라이언트 프로그램이 주기적으로 메타 파일을 서버로 전송합니다.<br/>
 				클라이언트를 실행하기 위해서는 Java 6.0 이상이 설치되어 있어야 하며 XXXX 포트를 사용합니다.<br/>
 				XXXX 포트는 다른 프로세서가 사용하지 않아야 하고 외부 네트워크에서 접근 가능하도록 방화벽 설정이 필요합니다.<br/>
 				</blockquote>
@@ -333,7 +536,7 @@ window.onload = function(){
 			
 <ol>
 	<li>프로그램을 다운로드 한다.</li>
-	<li>로그 파일이 저장되는 시스템에 저장하고 압축을 푼다.</li>
+	<li>메타 파일이 저장되는 시스템에 저장하고 압축을 푼다.</li>
 	<li>유닉스의 경우 start.sh / 윈도우 서버는 start.bat 를 실행한다.</li>
 </ol>
 			
@@ -351,7 +554,7 @@ window.onload = function(){
 		<div class="tab-pane fade" id="fileFtp">
 			<p>
 				<blockquote>
-				지정된 FTP 경로로 파일을 업로드 하면 시스템이 주기적으로 파일을 검색하여 로그시스템에 반영합니다.
+				지정된 FTP 경로로 파일을 업로드 하면 시스템이 주기적으로 파일을 검색하여 메타시스템에 반영합니다.
 				</blockquote>
 			</p>
 			<p>

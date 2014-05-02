@@ -55,8 +55,9 @@
  * 첫 화면에서 실행하는 함수 모음.
  */
 window.onload = function(){	
-	olHideObj();
-	setLogPopover();
+	olSaveHtml();
+	setLogPopover();	
+	setInitField();		//사용자 저장 필드 불러오기.
 }
 
 </script>
@@ -94,128 +95,210 @@ window.onload = function(){
 			</form>
 		</div>
 	</nav>
-
-
+	
 	<div class="container">
 		<h1>로그데이터 입력</h1>
-		<p>필수 필드 : 
-		<span id="fieldBtns">
-			<button id="btnFldUci" type="button" class="btn btn-info btn-xs">uci</button>
-			<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
-			<button id="btnFldSvcod" type="button" class="btn btn-danger btn-xs">svcod</button>
-			<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
-			<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
-		</span>
+		<h3>데이터 필드</h3>
+		<p>
+			<label class="">필드 목록 : </label> 
+			<span id="fieldBtns">
+				<button id="btnFldUci" type="button" class="btn btn-info btn-xs">uci</button>
+				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
+				<button id="btnFldSvcod" type="button" class="btn btn-danger btn-xs">svcod</button>
+				<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
+				<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
+			</span>
 		</p>
 		<blockquote>
-			입력할 로그 파일에 다음의 필드들은 필수로 존재해야 합니다.<br/>
+			입력할 로그 파일에 위의
+			<button type="button" class="btn btn-info btn-xs">공백허용</button>
+			<button type="button" class="btn btn-danger btn-xs">공백불가</button> 
+			필드들은 필수로 입력해야 합니다.<br/>
 			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
+			반드시 설명을 읽고 올바른 형식 대로 입력 하십시오.<br/>
 			붉은색으로 표시된
 			<button type="button" class="btn btn-danger btn-xs">cid</button>,
 			<button type="button" class="btn btn-danger btn-xs">svcod</button>,
 			<button type="button" class="btn btn-danger btn-xs">stime</button>
 			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
 			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
-			필수 필드 외에 사용자정의 필드 추가가 가능합니다.
+			필수 필드 외에
+			<button type="button" class="btn btn-default btn-xs">사용자정의</button>
+			필드 추가가 가능합니다.
 		</blockquote>
 		
-		<h3>로그파일 형식 선택</h3>
-		<div  class="col-lg-3">
-			<label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdCsv" value="csv" checked="checked"> CSV
-			</label> <label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdJson" value="json"> JSON
-			</label> <label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdXml" value="xml"> XML
-			</label> <label class="radio-inline"> <input type="radio" onclick="checkDatatype()"
-				name="srcType" id="rdExcel" value="excel"> Excel
-			</label> 
-		</div>
-		
-		<div  class="col-lg-9">
+		<div  class="row">
 			<form class="form-horizontal" role="form">
 				<div class="form-group">
-					<label for="addData" class="col-lg-2 control-label">필드 추가</label>
+					<label for="addData" class="col-lg-1 control-label">필드 추가</label>
 					<div class="col-lg-3">
 						<input type="text" class="form-control" id="addData" placeholder="필드명" onkeypress="enterData(this,event);">
 					</div>
 					<div class="col-lg-4">
-					<button id="btnAddData" type="button" class="btn btn-success" onclick="insertField();">추가</button>
-					<button type="button" class="btn btn-danger" onclick="clearField();">초기화</button>
+					<button type="button" class="btn btn-success" onclick="insertField();"><i class="glyphicon glyphicon-plus"></i> <span>추가</span></button>
+					<button type="button" class="btn btn-primary" onclick="saveField();"><i class="glyphicon glyphicon-save"></i> <span>저장</span></button>
+					<button type="button" class="btn btn-danger" onclick="clearField();"><i class="glyphicon glyphicon-remove"></i> <span>초기화</span></button>
 					</div>
 				</div>
+				<input type="hidden" id="upFileSrc" name="upFileSrc" value="logAddField"/>
+				<input type="hidden" id="addFieldVals" name="addFieldVals" value=""/>
 			</form>
 		</div>
 		
-			<div  id="showCSV" class="container row">
-<h4>CSV 입력 규칙</h4>
-<blockquote>
-	각 열(column)들은 따옴표(") 로 감싸서 입력하고 구분자는 쉼표(,) 입니다.<br/>
-	값이 비어있는 열도 빈 따옴표 ("") 로 입력해서 자리를 맞춥니다.<br/>
-	하나의 행(row)은 한 줄에 입력되고 새로운 행은 줄바꿈해야 합니다.<br/>
-	입력될 데이터 이외에 제목 등의 기타 정보는 일체 없어야 합니다.
-</blockquote>
+		<h3>로그파일 형식</h3>
+		<blockquote>
+			입력 가능한 로그의 형식은 CSV, JSON, XML, Excel 입니다.<br/>
+			각 탭을 선택하면 해당 형식에 대한 설명을 볼 수 있습니다.<br/>
+			저장될 로그 파일의 형식은 .csv .json .xml .xls 만 가능합니다.<br/>
+			.csv .json .xml 파일의 인코딩 포맷은 UTF-8 입니다.
+		</blockquote>
+		
+		<!-- 로그파일 형식 탭 시작 -->
+		<div class="bs-example bs-example-tabs">
+			<ul id="fldFmtTab" class="nav nav-tabs">
+				<li class="active"><a href="#tabCsv" data-toggle="tab">CSV</a></li>
+				<li ><a href="#tabJson" data-toggle="tab">JSON</a></li>
+				<li ><a href="#tabXml" data-toggle="tab">XML</a></li>
+				<li ><a href="#tabExcel" data-toggle="tab">Excel</a></li>
+			</ul>
+			
+			<div id="fldFmtTabContent" class="tab-content">
+
+<!-- CSV 형식 시작 -->
+<div class="tab-pane fade active in" id="tabCsv">
+	
+	<h4>CSV 입력 규칙</h4>
+	<blockquote>
+		각 열(column)들은 따옴표(") 로 감싸서 입력하고 구분자는 쉼표(,) 입니다.<br/>
+		값이 비어있는 열 에도 빈 따옴표("")를 입력해서 자리를 맞춥니다.<br/>
+		하나의 행(row)은 한 줄에 입력되고 새로운 행은 줄바꿈해야 합니다.<br/>
+		로그 데이터 외에 헤더, 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
 <pre id="preCsv">
-<span id="fieldsCsv1">"uci-val-1","cid-val-1","svcod-val-1","stime-val-1","asp-val-1"</span>
-<span id="fieldsCsv2">"uci-val-2","cid-val-2","svcod-val-2","stime-val-2","asp-val-2"</span>
+<span id="fieldsCsv1">"uci-1","cid-1","svcod-1","stime-1","asp-1"</span>
+<span id="fieldsCsv2">"uci-2","cid-2","svcod-2","stime-2","asp-2"</span>
 </pre>
-<h4>실제 입력 예</h4>
+	
+	<h4>실제 입력 예</h4>
 <pre>
 "i500-JP13072061.1200651160-1","3481070","25026","2014-04-28T01:12:15","(주)카카오"
 "i500-US13013671.1200121916-1","10429203","25012","2014-04-28T17:27:49",""
-"","80062835","25012","20140428-17:34:16",""
+"","80062835","25012","2014-04-28T17:34:16",""
 </pre>
-			</div>
-			
-			<div  id="showJSON" class="container row">
-<h4>입력 규칙</h4>
+
+</div>
+<!-- CSV 형식 끝 -->
+
+<!-- JSON 형식 시작 -->
+<div class="tab-pane fade" id="tabJson">
+
+	<h4>JSON 입력 규칙</h4>
+	<blockquote>
+		각 열(column)의 값 들은 key : value 형식으로 표시합니다.<br/>
+		key와 value 는 모두 따옴표(") 로 감싸서 입력하고 열 간 구분자는 쉼표(,) 입니다.<br/>
+		값이 비어있는 열 에도 key는 존재해야 합니다. 값은 빈 따옴표 ("") 로 입력합니다.<br/>
+		하나의 행(row)는 중괄호{} 로 묶고 행 간 구분자는 쉼표(,) 입니다.<br/>
+		하나의 행(row)은 한 줄에 입력되고 새로운 행은 줄바꿈해야 합니다.<br/>
+		로그 데이터 외에 헤더, 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
 <pre id="preJson">{
-<span id="fieldsJson1">	"uci" : "uci-val-1",
-	"cid" : "cid-val-1",
-	"svcod" : "svcod-val-1",
-	"stime" : "stime-val-1",
-	"asp" : "asp-val-1"</span>
-}
+<span id="fieldsJson1">	"uci" : "uci-1",
+	"cid" : "cid-1",
+	"svcod" : "svcod-1",
+	"stime" : "stime-1",
+	"asp" : "asp-1"</span>
+},
 {
-<span id="fieldsJson2">	"uci" : "uci-val-2",
-	"cid" : "cid-val-2",
-	"svcod" : "svcod-val-2",
-	"stime" : "stime-val-2",
-	"asp" : "asp-val-2"</span>
+<span id="fieldsJson2">	"uci" : "uci-2",
+	"cid" : "cid-2",
+	"svcod" : "svcod-2",
+	"stime" : "stime-2",
+	"asp" : "asp-2"</span>
 }
 </pre>
-<h4>실제 입력 예</h4>
-<pre id="preJson">
-[
+	
+	<h4>실제 입력 예</h4>
+<pre>
 {"uci":"i500-JP13072061.1200651160-1","cid":"3481070","svcod":"25026","stime":"2014-04-28T01:12:15","asp":"(주)카카오"},
 {"uci":"i500-US13013671.1200121916-1","cid":"10429203","svcod":"25012","stime":"2014-04-28T17:27:49","asp":""},
-{"uci":"","cid":"80062835","svcod":"25012","stime":"20140428-17:34:16","asp":""}
-]
+{"uci":"","cid":"80062835","svcod":"25012","stime":"2014-04-28T17:34:16","asp":""}
 </pre>
-			</div>
-			
-			<div id="showXML" class="container row">
-<h4>입력 규칙</h4>			
+
+</div>
+<!-- JSON 형식 끝 -->
+
+<!-- XML 형식 시작 -->
+<div class="tab-pane fade" id="tabXml">
+
+	<h4>XML 입력 규칙</h4>
+	<blockquote>
+		각 열(column)의 값 들은 <code>&lt;필드명&gt;</code> <code>&lt;/필드명&gt;</code> 태그로 묶습니다.<br/>
+		값이 비어있는 열에도 필드명의 태그는 존재해야 합니다.<br/>
+		하나의 행(row)는 <code>&lt;row&gt;</code> <code>&lt;/row&gt;</code> 태그로 묶습니다.<br/>
+		가독성을 위해 행(row)이 바뀌면 줄바꿈 하도록 합니다.<br/>
+		상단에 <code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code> 헤더를 입력합니다.<br/>
+		그 외에 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
 <pre id="preXml">
-&lt;log&gt;<span id="fieldsXml1">
-	&lt;uci&gt; uci-val-1 &lt;/uci&gt;
-	&lt;cid&gt; cid-val-1 &lt;cid&gt;
-	&lt;svcod&gt; svcod-val-1 &lt;svcode&gt;
-	&lt;stime&gt; stime-val-1 &lt;stime&gt;
-	&lt;asp&gt; asp-val-1 &lt;asp&gt;
-</span>&lt;/log&gt;
-&lt;log&gt;<span id="fieldsXml2">
-	&lt;uci&gt; uci-val-2 &lt;/uci&gt;
-	&lt;cid&gt; cid-val-2 &lt;cid&gt;
-	&lt;svcod&gt; svcod-val-2 &lt;svcode&gt;
-	&lt;stime&gt; stime-val-2 &lt;stime&gt;
-	&lt;asp&gt; asp-val-2 &lt;asp&gt;
-</span>&lt;/log&gt;
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;row&gt;<span id="fieldsXml1">
+	&lt;uci&gt;uci-1&lt;/uci&gt;
+	&lt;cid&gt;cid-1&lt;cid&gt;
+	&lt;svcod&gt;svcod-1&lt;svcode&gt;
+	&lt;stime&gt;stime-1&lt;stime&gt;
+	&lt;asp&gt;asp-1&lt;asp&gt;
+</span>&lt;/row&gt;
+&lt;row&gt;<span id="fieldsXml2">
+	&lt;uci&gt;uci-2&lt;/uci&gt;
+	&lt;cid&gt;cid-2&lt;cid&gt;
+	&lt;svcod&gt;svcod-2&lt;svcode&gt;
+	&lt;stime&gt;stime-2&lt;stime&gt;
+	&lt;asp&gt;asp-2&lt;asp&gt;
+</span>&lt;/row&gt;
 </pre>
-			</div>
-			
-			<div id="showExcel" class="container row">
-<h4>입력 규칙</h4>
+
+	<h4>실제 입력 예</h4>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;row&gt;
+	&lt;uci&gt;i500-JP13072061.1200651160-1&lt;/uci&gt;
+	&lt;cid&gt;3481070&lt;cid&gt;
+	&lt;svcod&gt;25026&lt;svcode&gt;
+	&lt;stime&gt;2014-04-28T01:12:15&lt;stime&gt;
+	&lt;asp&gt;(주)카카오&lt;asp&gt;
+&lt;/row&gt;
+&lt;row&gt;
+	&lt;uci&gt;i500-US13013671.1200121916-1&lt;/uci&gt;
+	&lt;cid&gt;10429203&lt;cid&gt;
+	&lt;svcod&gt;25012&lt;svcode&gt;
+	&lt;stime&gt;2014-04-28T17:27:49&lt;stime&gt;
+	&lt;asp&gt;&lt;asp&gt;
+&lt;/row&gt;
+&lt;row&gt;
+	&lt;uci&gt;&lt;/uci&gt;
+	&lt;cid&gt;80062835&lt;cid&gt;
+	&lt;svcod&gt;25012&lt;svcode&gt;
+	&lt;stime&gt;2014-04-28T17:34:16&lt;stime&gt;
+	&lt;asp&gt;&lt;asp&gt;
+&lt;/row&gt;
+</pre>	
+	
+	
+</div>
+<!-- XML 형식 끝 -->
+
+<!-- Excel 형식 시작 -->
+<div class="tab-pane fade" id="tabExcel">
+
+	<h4>Excel 입력 규칙</h4>
+	<blockquote>
+		모든 셀의 형식은 "텍스트" 로 되어 있어야 합니다.(자동,숫자,날짜 등 X)<br/>
+		데이터는 엑셀 파일의 첫번째 시트(Sheet)에 있어야 합니다.<br/>
+		데이터가 많아 한 시트에 입력이 불가능한 경우 다음 시트에 연속해서 입력합니다.<br/>
+		첫 행(row) 에는 각 열의 이름이 들어갑니다. 시트가 2개 이상인 경우 모든 시트에 동일하게 적용됩니다.<br/>
+		맨 마지막 행이 끝날 때 까지 중간에 비어있는 행이 없어야 합니다.<br/>
+		그 외에 주석 등의 불필요한 값은 입력하지 않도록 합니다.
+	</blockquote>
 <table id="fieldsExcel" class="table table-bordered">
 	<thead>
 		<tr id="xlHead" class="active">
@@ -228,23 +311,64 @@ window.onload = function(){
 	</thead>
 	<tbody>
 		<tr id="xlBody1">
-			<td>uci-val-1</td>
-			<td>cid-val-1</td>
-			<td>svcod-val-1</td>
-			<td>stime-val-1</td>
-			<td>asp-val-1</td>
+			<td>uci-1</td>
+			<td>cid-1</td>
+			<td>svcod-1</td>
+			<td>stime-1</td>
+			<td>asp-1</td>
 		</tr>
 		<tr id="xlBody2">
-			<td>uci-val-2</td>
-			<td>cid-val-2</td>
-			<td>svcod-val-2</td>
-			<td>stime-val-2</td>
-			<td>asp-val-2</td>
+			<td>uci-2</td>
+			<td>cid-2</td>
+			<td>svcod-2</td>
+			<td>stime-2</td>
+			<td>asp-2</td>
 		</tr>
 	</tbody>
 </table>
+
+	<h4>실제 입력 예</h4>
+<table class="table table-bordered">
+	<thead>
+		<tr class="active">
+			<th>uci</th>
+			<th>cid</th>
+			<th>svcod</th>
+			<th>stime</th>
+			<th>asp</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>i500-JP13072061.1200651160-1</td>
+			<td>3481070</td>
+			<td>25026</td>
+			<td>2014-04-28T01:12:15</td>
+			<td>(주)카카오</td>
+		</tr>
+		<tr>
+			<td>i500-US13013671.1200121916-1</td>
+			<td>10429203</td>
+			<td>25012</td>
+			<td>2014-04-28T17:27:49</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>80062835</td>
+			<td>25012</td>
+			<td>2014-04-28T17:34:16</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<!-- Excel 형식 끝 -->
+				
 			</div>
-			
+		</div>
+		<!-- 로그파일 형식 탭 끝 -->
+		
 	</div>
 
 <div class="container">
