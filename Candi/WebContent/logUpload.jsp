@@ -29,7 +29,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <![endif]-->
 <meta charset="utf-8">
-<title>파일 업로드</title>
+<title>로그데이터 입력</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -117,8 +117,8 @@ window.onload = function(){
 			마우스를 필드명에 가져다 대면 자세한 설명이 나타납니다.<br/>
 			반드시 설명을 읽고 올바른 형식 대로 입력 하십시오.<br/>
 			붉은색으로 표시된
-			<button type="button" class="btn btn-danger btn-xs">cid</button>,
-			<button type="button" class="btn btn-danger btn-xs">svcod</button>,
+			<button type="button" class="btn btn-danger btn-xs">cid</button>
+			<button type="button" class="btn btn-danger btn-xs">svcod</button>
 			<button type="button" class="btn btn-danger btn-xs">stime</button>
 			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
 			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>

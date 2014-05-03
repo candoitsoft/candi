@@ -193,3 +193,24 @@ function setInitField(){
 	    }
 	});
 }
+
+function runMeta(){
+	var url="meta_run";
+	var params = "";
+	params = "cmd=runMeta";
+	params+="&";
+	
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:params
+		,dataType:"json"
+		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
+			//{"DATA1":"1234","DATA2":"5678"}	<- 리턴되는 서블릿 JSON
+			//$("#aIP").attr("value", data.DATA1); <- 이런 형태로 사용.
+		}
+	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+	    	console.log(e.responseText);
+	    }
+	});
+}

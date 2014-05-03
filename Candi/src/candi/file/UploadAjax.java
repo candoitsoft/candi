@@ -36,7 +36,7 @@ public class UploadAjax extends HttpServlet{
 			out.write(CandiMsg.approachError());
 		} else {
 			UploadDao dao = UploadDao.getInstance();
-			JSONObject resultJson = new JSONObject();
+			JSONObject resultJson = new JSONObject();	//리턴할 결과값을 담는 JSON
 			
 			try {
 				String cmd = req.getParameter("cmd");
@@ -58,7 +58,7 @@ public class UploadAjax extends HttpServlet{
 						}
 					}
 					resultJson.put("fieldVals", jsona);
-				} 
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} finally {

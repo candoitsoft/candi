@@ -36,7 +36,6 @@ public class MetaUploadServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		res.setContentType("text/html; charset=UTF-8");
 		getFileList(req, res);
 	}
 
@@ -51,16 +50,17 @@ public class MetaUploadServlet extends HttpServlet {
 		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
 		if (candiId == null || candiId.equals("") || userObj == null) {
+			res.setContentType("text/html; charset=UTF-8");
 			//로그인 오류시 login.jsp 페이지로 이동.
 			out.write(CandiMsg.approachError());
 		} else {
+			res.setContentType("application/json");
 			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + candiId );
 			if(!tempPath.exists()){
 				tempPath.mkdirs(); 
 			}
 			
 			File[] items = tempPath.listFiles();
-			res.setContentType("application/json");
 			JSONObject jsonf = new JSONObject();
 			JSONArray json = new JSONArray();
 			try {
@@ -91,16 +91,16 @@ public class MetaUploadServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
 		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
 		if (candiId == null || candiId.equals("") || userObj == null) {
+			res.setContentType("text/html; charset=UTF-8");
 			//로그인 오류시 login.jsp 페이지로 이동.
 			out.write(CandiMsg.approachError());
 		} else {
-		
+			res.setContentType("application/json");
 			if (!ServletFileUpload.isMultipartContent(req)) {
 				throw new IllegalArgumentException(
 						"Request is not multipart, please 'multipart/form-data' enctype for your form.");
@@ -112,7 +112,6 @@ public class MetaUploadServlet extends HttpServlet {
 				tempPath.mkdirs(); 
 			}
 			ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
-			res.setContentType("application/json");
 			JSONObject jsonf = new JSONObject();
 			JSONArray json = new JSONArray();
 			try {
@@ -144,15 +143,16 @@ public class MetaUploadServlet extends HttpServlet {
 	}
 	
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws IOException{
-		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
 		String candiId = (String) session.getAttribute("candiId");
 		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
 		if (candiId == null || candiId.equals("") || userObj == null) {
+			res.setContentType("text/html; charset=UTF-8");
 			//로그인 오류시 login.jsp 페이지로 이동.
 			out.write(CandiMsg.approachError());
 		} else {
+			res.setContentType("application/json");
 			String[] files_name = req.getParameterValues("file");
 			File tempPath = new File( (fileUploadPath + "/").replaceAll("//","/") + candiId );
 			for(String file_name : files_name){

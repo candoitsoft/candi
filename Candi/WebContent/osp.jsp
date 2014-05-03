@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=userObj.getName()%> Dashboard</title>
+<title><%=userObj.getName()%> 대시보드</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
