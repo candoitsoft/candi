@@ -1,8 +1,10 @@
 package candi.file;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,6 +22,7 @@ import org.json.JSONObject;
 
 import candi.com.CandiMsg;
 import candi.com.CandiUserObj;
+import candi.es.IndexIO;
 
 public class MetaRunServlet extends HttpServlet {
 	
@@ -33,7 +36,7 @@ public class MetaRunServlet extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		System.out.println("1");
+		
 	}
 	
 	/**
@@ -50,54 +53,25 @@ public class MetaRunServlet extends HttpServlet {
 			out.write(CandiMsg.approachError());
 		} else {
 			res.setContentType("application/json");
-			System.out.println("==> 1");
+			JSONObject resultJson = new JSONObject();
 			try {
 				String tempPath = (fileUploadPath + "/").replaceAll("//","/") + candiId;
 				File tempFile = new File (tempPath);
-				System.out.println("tempPath ==> " + tempFile);
 				if(tempFile.exists()){
 					String[] runFiles = tempFile.list();
+					IndexIO iio = IndexIO.getInstance();
+					
 					for(String runFileName : runFiles){
-						System.out.println("runFileName ==> " + runFileName);
 						File runFile = new File(tempPath + "/" + runFileName);
-						FileReader fr = new FileReader(runFile);
-						BufferedReader br = new BufferedReader(fr);
-						String rLine = null;
-						
 						String[] fnToken = runFileName.split("\\.");
 						String ext = "";
-						System.out.println("fnToken.length ==> " + fnToken.length);
 						if(fnToken.length > 1){
 							ext = fnToken[fnToken.length-1];
 						}
-						System.out.println("ext ==> " + ext);
 						
 						if("csv".equals(ext) || "CSV".equals(ext)){
-							while((rLine = br.readLine())!=null){
-								System.out.println("rLine ==> " + rLine);
-								
-								String[] items = rLine.split(",");
-								if(items.length > 7){
-									JSONObject json = new JSONObject();
-									
-									json.put("cid", items[1].replaceAll("\\\"", ""));
-									json.put("title", items[2].replaceAll("\\\"", ""));
-									json.put("album", items[3].replaceAll("\\\"", ""));
-									
-									String[] artists = items[4].replaceAll("\\\"", "").split(",");
-									JSONArray jsona = new JSONArray();
-									for(String artist : artists){
-										jsona.put(artist);
-									}
-									json.put("artist", jsona);
-									
-									json.put("genre", items[5].replaceAll("\\\"", ""));
-									json.put("rdate", items[6].replaceAll("\\\"", ""));
-									json.put("ptime", items[7].replaceAll("\\\"", ""));
-									
-									System.out.println(json.toString());
-								}
-							}
+							iio.saveCsv(runFile, candiId);
+							
 						} else if("json".equals(ext) || "JSON".equals(ext)){
 							
 						} else if("xml".equals(ext) || "XML".equals(ext)){
@@ -107,10 +81,11 @@ public class MetaRunServlet extends HttpServlet {
 						} else if("zip".equals(ext) || "ZIP".equals(ext)){
 							
 						} 
-						
-						br.close();
 					}
 				}
+				
+				out.print(resultJson.toString());
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

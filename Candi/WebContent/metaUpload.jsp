@@ -500,7 +500,14 @@ window.onload = function(){
 			<ol class="indicator"></ol>
 		</div>
 	
-	<button type="button" class="btn btn-primary start" onclick="runMeta()">메타정보 입력</button>
+	<div class="row container">
+		<div class="col-lg-2">
+			<button type="button" class="btn btn-primary start" onclick="runMeta()">메타정보 입력</button>
+		</div>
+		<div class="col-lg-10">
+			상태 <spqn id="runMetaStat">상태</spqn>
+		</div>
+	</div>
 	<p></p>
 	
 		</div>
