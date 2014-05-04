@@ -19,7 +19,7 @@ import candi.com.CandiMsg;
 import candi.com.CandiUserObj;
 import candi.es.IndexIO;
 
-public class MetaRunServlet extends HttpServlet {
+public class LogRunServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -4196140532427639819L;
 	private File fileUploadPath;
@@ -27,7 +27,7 @@ public class MetaRunServlet extends HttpServlet {
 	public void init(ServletConfig config) {
 //		fileUploadPath = new File(config.getInitParameter("upload_path"));
 		JmProperties property = new JmProperties("/data/conf/candi.property");
-		fileUploadPath = new File(property.get("candiMetaPath"));
+		fileUploadPath = new File(property.get("candiLogPath"));
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -65,7 +65,7 @@ public class MetaRunServlet extends HttpServlet {
 						}
 						
 						if("csv".equals(ext) || "CSV".equals(ext)){
-							iio.saveMetaCsv(tempPath, runFileName, candiId);
+							iio.saveLogCsv(tempPath, runFileName, candiId);
 							
 						} else if("json".equals(ext) || "JSON".equals(ext)){
 							

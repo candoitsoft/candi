@@ -46,6 +46,15 @@
         <servlet-name>MetaRunServlet</servlet-name>
         <url-pattern>/meta_run</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LogRunServlet</servlet-name>
+        <servlet-class>candi.file.LogRunServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogRunServlet</servlet-name>
+        <url-pattern>/log_run</url-pattern>
+    </servlet-mapping>
 	
 	<servlet>
         <servlet-name>UploadAjax</servlet-name>

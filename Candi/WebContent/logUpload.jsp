@@ -442,7 +442,8 @@ window.onload = function(){
 			<ol class="indicator"></ol>
 		</div>
 	
-	<button type="button" class="btn btn-primary start">로그정보 입력</button>
+	<button type="button" class="btn btn-primary start" onclick="runLog()">로그정보 입력</button>
+	
 	<p></p>
 		</div>
 		

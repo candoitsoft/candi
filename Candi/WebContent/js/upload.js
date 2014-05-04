@@ -214,3 +214,23 @@ function runMeta(){
 	    }
 	});
 }
+
+function runLog(){
+	var url="log_run";
+	var params = "";
+	params = "cmd=runLog";
+	params+="&";
+	
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:params
+		,dataType:"json"
+		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
+			
+		}
+	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+	    	console.log(e.responseText);
+	    }
+	});
+}
