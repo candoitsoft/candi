@@ -16,18 +16,19 @@ import jm.com.JmProperties;
 import org.json.JSONObject;
 
 import candi.com.CandiMsg;
+import candi.com.CandiParam;
 import candi.com.CandiUserObj;
 import candi.es.IndexIO;
 
 public class LogRunServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -4196140532427639819L;
+	private JmProperties property = null;
 	private File fileUploadPath;
 	
 	public void init(ServletConfig config) {
-//		fileUploadPath = new File(config.getInitParameter("upload_path"));
-		JmProperties property = new JmProperties("/data/conf/candi.property");
-		fileUploadPath = new File(property.get("candiLogPath"));
+		property = new JmProperties(CandiParam.property);
+		fileUploadPath = new File(property.get("candiUpLogPath"));
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -57,7 +58,6 @@ public class LogRunServlet extends HttpServlet {
 					IndexIO iio = IndexIO.getInstance();
 					
 					for(String runFileName : runFiles){
-						File runFile = new File(tempPath + "/" + runFileName);
 						String[] fnToken = runFileName.split("\\.");
 						String ext = "";
 						if(fnToken.length > 1){

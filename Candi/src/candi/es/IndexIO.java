@@ -6,16 +6,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import candi.com.CandiParam;
 import jm.com.JmProperties;
 
 public class IndexIO {
@@ -26,7 +24,7 @@ public class IndexIO {
 	private String metaIndex = "meta_music"; 
 	
 	private IndexIO(){
-		property = new JmProperties("/data/conf/candi.property");
+		property = new JmProperties(CandiParam.property);
 		indexPath = new File(property.get("candiIndexPath"));
 	}
 	
@@ -53,7 +51,8 @@ public class IndexIO {
 			
 			if(!indexPath.exists()){ indexPath.mkdirs(); }
 			
-			fw = new FileWriter(indexPath+"/"+runFileName+".log");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREA);
+			fw = new FileWriter(indexPath+"/"+formatter.format(new Date())+"_"+candiId+"_"+runFileName+".log");
 			bw = new BufferedWriter(fw);
 			
 			String rLine = null;
@@ -125,7 +124,7 @@ public class IndexIO {
 			while((rLine = br.readLine())!=null){
 				String[] items = rLine.split(",");
 				if(items.length > 4){
-//					JSONObject json = new JSONObject();
+					
 					String uci = items[0].replaceAll("\\\"", "");
 					String cid = items[1].replaceAll("\\\"", "");
 					String svcod = items[2].replaceAll("\\\"", "");

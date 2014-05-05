@@ -22,17 +22,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import candi.com.CandiMsg;
+import candi.com.CandiParam;
 import candi.com.CandiUserObj;
 
 public class MetaUploadServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -3979331121443547693L;
+	private JmProperties property = null;
 	private File fileUploadPath;
 	
 	public void init(ServletConfig config) {
-//		fileUploadPath = new File(config.getInitParameter("upload_path"));
-		JmProperties property = new JmProperties("/data/conf/candi.property");
-		fileUploadPath = new File(property.get("candiMetaPath"));
+		property = new JmProperties(CandiParam.property);
+		fileUploadPath = new File(property.get("candiUpMetaPath"));
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {

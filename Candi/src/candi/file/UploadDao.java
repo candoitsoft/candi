@@ -3,6 +3,7 @@ package candi.file;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import candi.com.CandiParam;
 import candi.com.CandiUserObj;
 import jm.com.JmProperties;
 import jm.net.Dao;
@@ -14,7 +15,7 @@ public class UploadDao {
 	private JmProperties property = null;
 	
 	private UploadDao(){
-		property = new JmProperties("/data/conf/candi.property");
+		property = new JmProperties(CandiParam.property);
 	}
 	
 	public static UploadDao getInstance() {

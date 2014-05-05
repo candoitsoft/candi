@@ -12,7 +12,7 @@ public class CandiDao {
 	private JmProperties property = null;
 	
 	private CandiDao(){
-		property = new JmProperties("/data/conf/candi.property");
+		property = new JmProperties(CandiParam.property);
 	}
 	
 	public static CandiDao getInstance() {
