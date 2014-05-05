@@ -1,9 +1,16 @@
 package candi.file;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Vector;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -73,6 +80,7 @@ public class MetaUploadServlet extends HttpServlet {
 					jsono.put("deleteUrl", "meta_upload?file=" + item.getName());
 					jsono.put("deleteType", "DELETE");
 					json.put(jsono);
+					
 				}
 				jsonf.put("files", json);
 			} catch (Exception e) {
@@ -81,6 +89,7 @@ public class MetaUploadServlet extends HttpServlet {
 				out.write(jsonf.toString());
 				out.close();
 			}
+			
 		}
 	}
 	

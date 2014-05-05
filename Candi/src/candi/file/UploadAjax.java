@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import candi.com.CandiMsg;
 import candi.com.CandiUserObj;
+import candi.es.EsDao;
 
 public class UploadAjax extends HttpServlet{
 	
@@ -45,6 +46,7 @@ public class UploadAjax extends HttpServlet{
 					//추가된 필드 저장.
 					int result = dao.saveAddFields(req);
 					resultJson.put("result", result);
+					
 				} else if(cmd != null && "getInintField".equals(cmd)){
 					//필드 불러오기
 					DataEntity[] result = dao.getAddFields(req);
@@ -58,6 +60,29 @@ public class UploadAjax extends HttpServlet{
 						}
 					}
 					resultJson.put("fieldVals", jsona);
+					
+				} else if(cmd != null && "getRunStatus".equals(cmd)){
+					String uptype = req.getParameter("uptype");
+					EsDao esDao = EsDao.getInstance();
+					
+					DataEntity[] upStatDatas = esDao.getStatus(candiId, uptype);
+					if(upStatDatas != null){
+						JSONArray jsona = new JSONArray();
+						for(DataEntity upStatData : upStatDatas){
+							JSONObject jsond = new JSONObject();
+							jsond.put("filename", upStatData.get("filename"));
+							jsond.put("cnt", upStatData.get("cnt"));
+							jsond.put("stat", upStatData.get("stat"));
+							jsond.put("totlines", upStatData.get("totlines"));
+							
+							int cnt = Integer.parseInt(upStatData.get("cnt"));
+							int totLines = Integer.parseInt(upStatData.get("totlines"));
+							int percent = (cnt / totLines) * 100;
+							jsond.put("persent", percent);
+							jsona.put(jsond);
+						}
+						resultJson.put("runStats", jsona);
+					}
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

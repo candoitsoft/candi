@@ -56,6 +56,17 @@ public class IndexIO {
 			bw = new BufferedWriter(fw);
 			
 			String rLine = null;
+			EsDao esDao = EsDao.getInstance();
+			esDao.deleteStatus(candiId, "meta", runFileName);
+//			esDao.createStatus(candiId, "meta", runFileName);
+			
+			//전체 라인 수 입력. 7천만 라인인 경우 13초 정도 소요.
+			BufferedReader reader = new BufferedReader(new FileReader(metaPath + "/" + runFileName));
+			int totlines = 0;
+			while (reader.readLine() != null) totlines++;
+			reader.close();
+			esDao.createStatus(candiId, "meta", runFileName, totlines);
+			
 			while((rLine = br.readLine())!=null){
 				rLine = rLine.replaceAll(",,", ",\"\",");
 				String[] items = rLine.split("\",\"");
@@ -86,8 +97,8 @@ public class IndexIO {
 					
 				    bw.write(json.toString());
 				    bw.newLine();
-				    
 				}
+				esDao.plusStatus(candiId, "meta", runFileName);
 			}
 			
 		} catch (Exception e) {
@@ -182,9 +193,9 @@ public class IndexIO {
 	}
 	
 	private JSONObject appendMeta(String cid, String candiId){
-		EsDao esDao = EsDao.getInstance();
+		EsConnIO esConnIo = EsConnIO.getInstance();
 		String url = "http://localhost:9200/"+metaIndex+"/"+candiId+"/"+cid+"/_source";
-		JSONObject metaJson = esDao.getJson(url);
+		JSONObject metaJson = esConnIo.getJson(url);
 		
 		try {
 			if(metaJson == null || metaJson.length() == 0){

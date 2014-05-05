@@ -152,8 +152,6 @@ function saveField(opt){
 		,data:params
 		,dataType:"json"
 		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
-			//{"DATA1":"1234","DATA2":"5678"}	<- 리턴되는 서블릿 JSON
-			//$("#aIP").attr("value", data.DATA1); <- 이런 형태로 사용.
 			if(data.result > 0){
 				if(opt=="clear"){
 					alert("초기화 되었습니다.");
@@ -168,6 +166,9 @@ function saveField(opt){
 	});
 }
 
+/**
+ * 추가된 필드 불러오는 메서드
+ */
 function setInitField(){
 	var url="UploadAjax";
 	var params = "";
@@ -181,8 +182,6 @@ function setInitField(){
 		,data:params
 		,dataType:"json"
 		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
-			//{"DATA1":"1234","DATA2":"5678"}	<- 리턴되는 서블릿 JSON
-			//$("#aIP").attr("value", data.DATA1); <- 이런 형태로 사용.
 			for(var i=0; i< data.fieldVals.length; i++){
 				$("#addData").val(data.fieldVals[i]);
 				insertField();
@@ -194,32 +193,65 @@ function setInitField(){
 	});
 }
 
+/**
+ * 업로드한 메타 파일 인덱싱
+ */
 function runMeta(){
-	var url="meta_run";
-	var params = "";
-	params = "cmd=runMeta";
-	params+="&";
-	
-	$.ajax({
-		type:"POST"
-		,url:url
-		,data:params
-		,dataType:"json"
-		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
-			//{"DATA1":"1234","DATA2":"5678"}	<- 리턴되는 서블릿 JSON
-			//$("#aIP").attr("value", data.DATA1); <- 이런 형태로 사용.
-		}
-	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
-	    	console.log(e.responseText);
-	    }
-	});
+	if(confirm("업로드한 메타 파일의 색인을 시작하시겠습니까?")){
+		var url="meta_run";
+		var params = "";
+		params = "cmd=runMeta";
+		params+="&";
+		
+		$.ajax({
+			type:"POST"
+			,url:url
+			,data:params
+			,dataType:"json"
+			,success:function(data){
+				
+			}
+		    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+		    	console.log(e.responseText);
+		    }
+		});
+		getRunStatus("meta");
+	}
 }
 
+/**
+ * 업로드한 로그 파일 인덱싱
+ */
 function runLog(){
-	var url="log_run";
+	if(confirm("업로드한 로그 파일의 색인을 시작하시겠습니까?")){
+		var url="log_run";
+		var params = "";
+		params = "cmd=runLog";
+		params+="&";
+		
+		$.ajax({
+			type:"POST"
+			,url:url
+			,data:params
+			,dataType:"json"
+			,success:function(data){
+				
+			}
+		    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+		    	console.log(e.responseText);
+		    }
+		});
+		getRunStatus("log");
+	}
+}
+
+
+function getRunStatus(opt){
+	var url="UploadAjax";
 	var params = "";
-	params = "cmd=runLog";
+	params = "cmd=getRunStatus";
 	params+="&";
+	params+="uptype="+opt;
 	
 	$.ajax({
 		type:"POST"
@@ -227,7 +259,7 @@ function runLog(){
 		,data:params
 		,dataType:"json"
 		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
-			
+			getRunStatus(opt);
 		}
 	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
 	    	console.log(e.responseText);

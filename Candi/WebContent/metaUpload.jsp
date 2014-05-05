@@ -501,11 +501,18 @@ window.onload = function(){
 		</div>
 	
 	<div class="row container">
-		<div class="col-lg-2">
+		<div class="row">
 			<button type="button" class="btn btn-primary start" onclick="runMeta()">메타정보 입력</button>
 		</div>
-		<div class="col-lg-10">
-			상태 <spqn id="runMetaStat">상태</spqn>
+		<div class="row container">
+			<label for="runStat" class="col-lg-1 control-label">파일 </label>
+			<div class="col-lg-10">
+			<div class="progress" id="runStat">
+				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+					<spqn id="runStatPer"></spqn>
+				</div>
+			</div>
+			</div>
 		</div>
 	</div>
 	<p></p>

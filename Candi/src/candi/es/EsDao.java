@@ -1,17 +1,17 @@
 package candi.es;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.json.JSONObject;
+import candi.com.CandiParam;
+import jm.com.JmProperties;
+import jm.net.Dao;
+import jm.net.DataEntity;
 
 public class EsDao {
 	
 	private static EsDao instance = null;
+	private JmProperties property = null;
 	
 	private EsDao(){
+		property = new JmProperties(CandiParam.property);
 	}
 	
 	public static EsDao getInstance() {
@@ -21,42 +21,110 @@ public class EsDao {
 		return instance;
 	}
 	
-	public JSONObject getJson(String url){
-		JSONObject json = null;
+	/**
+	 * 파일 업로드 상태 데이터 생성.
+	 * @param id
+	 * @param uptype
+	 * @param filename
+	 * @return
+	 */
+	public int createStatus(String id, String uptype, String filename, int totlines	){
+		int result = 0;
+		DataEntity data = new DataEntity();
+		Dao dao = Dao.getInstance();
 		
-		try {
-			URL esUrl = new URL(url);
-	        HttpURLConnection conn = (HttpURLConnection) esUrl.openConnection();
-	        conn.setRequestMethod("GET");
-	        conn.setRequestProperty("Content-length", "0");
-	        conn.setUseCaches(false);
-	        conn.setAllowUserInteraction(false);
-	        conn.setConnectTimeout(10000);
-	        conn.setReadTimeout(10000);
-	        conn.connect();
-	        int status = conn.getResponseCode();
-            StringBuilder sb = new StringBuilder();
-            
-	        switch (status) {
-	            case 200:
-	            case 201:
-	                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	                String line;
-	                while ((line = br.readLine()) != null) {
-	                    sb.append(line+"\n");
-	                }
-	                br.close();
-	        }
-			String jsonStr = sb.toString();
-			if("".equals(jsonStr.trim())){
-				// 메타가 없는 경우 집계할지 안할지 결정.
-				json = new JSONObject();
-			} else {
-				json = new JSONObject(jsonStr);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return json;
+		data.put("id", id);
+		data.put("uptype", uptype);
+		data.put("filename", filename);
+		data.put("totlines", totlines+"");
+		result = dao.inertData(property, "cdi_index_temp", data);
+		
+		return result;
 	}
+	
+	/**
+	 * 파일 업로드 카운트 +1
+	 * @param id
+	 * @param uptype
+	 * @param filename
+	 * @return
+	 */
+	public int plusStatus(String id, String uptype, String filename){
+		int result = 0;
+		Dao dao = Dao.getInstance();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("update cdi_index_temp \n");
+		sql.append("set cnt=(cnt+1) \n");
+		sql.append("where id = ? \n");
+		sql.append("and uptype = ? \n");
+		sql.append("and filename = ? \n");
+		String[] params = {id, uptype, filename};
+		result = dao.updateSql(property, sql.toString(), params);
+		
+		return result;
+	}
+	
+	/**
+	 * 파일 업로드 카운트 삭제
+	 * @param id
+	 * @param uptype
+	 * @param filename
+	 * @return
+	 */
+	public int deleteStatus(String id, String uptype, String filename){
+		int result = 0;
+		DataEntity data = new DataEntity();
+		Dao dao = Dao.getInstance();
+		
+		data.put("id", id);
+		data.put("uptype", uptype);
+		data.put("filename", filename);
+		result = dao.deleteData(property, "cdi_index_temp", data);
+		
+		return result;
+	}
+	
+	/**
+	 * 파일 업로드 카운트와 상태값 가져오는 메서드.
+	 * @return
+	 */
+	public DataEntity[] getStatus(String id, String uptype){
+		DataEntity[] result = null;
+		Dao dao = Dao.getInstance();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("select filename, cnt, stat, totlines \n");
+		sql.append("from cdi_index_temp \n");
+		sql.append("where id = ? \n");
+		sql.append("and uptype = ? \n");
+		String[] params = {id, uptype};
+		result = dao.getResult(property, sql.toString(), params);
+		
+		return result;
+	}
+	
+	/**
+	 * 파일 업로드 카운트값이 있는지 체크.
+	 * @param id
+	 * @param uptype
+	 * @param filename
+	 * @return
+	 */
+	public int isStatExist(String id, String uptype, String filename){
+		int result = 0;
+		Dao dao = Dao.getInstance();
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("select count(*) cnt \n");
+		sql.append("from cdi_index_temp \n");
+		sql.append("where id = ? \n");
+		sql.append("and uptype = ? \n");
+		sql.append("and filename = ? \n");
+		String[] params = {id, uptype, filename};
+		result = dao.getCount(property, sql.toString(), params);
+		
+		return result;
+	}
+	
 }
