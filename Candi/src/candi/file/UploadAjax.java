@@ -74,11 +74,7 @@ public class UploadAjax extends HttpServlet{
 							jsond.put("cnt", upStatData.get("cnt"));
 							jsond.put("stat", upStatData.get("stat"));
 							jsond.put("totlines", upStatData.get("totlines"));
-							
-							int cnt = Integer.parseInt(upStatData.get("cnt"));
-							int totLines = Integer.parseInt(upStatData.get("totlines"));
-							int percent = (cnt / totLines) * 100;
-							jsond.put("persent", percent);
+							jsond.put("percent", upStatData.get("percent"));
 							jsona.put(jsond);
 						}
 						resultJson.put("runStats", jsona);

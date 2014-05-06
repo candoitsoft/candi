@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import candi.com.CandiDao;
 import candi.com.CandiUserObj;
+import candi.es.EsConnIO;
 
 public class Confirm extends HttpServlet {
 	
@@ -36,6 +37,10 @@ public class Confirm extends HttpServlet {
 			if (result > 0) {
 				session.setAttribute("candiId", obj.getId());
 				session.setAttribute("candiUserObj", obj);
+				
+				//키바나 대쉬보드 생성.
+				EsConnIO esConn = EsConnIO.getInstance();
+				esConn.setKibana(obj.getId());
 				
 				res.sendRedirect(toUrl);
 			} else {

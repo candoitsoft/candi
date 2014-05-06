@@ -22,27 +22,22 @@ public class CandiAjax extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		res.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = res.getWriter();
-		HttpSession session = req.getSession();
-		String candiId = (String) session.getAttribute("candiId");
-		CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
-		if (candiId == null || candiId.equals("") || userObj == null) {
-			//로그인 오류시 login.jsp 페이지로 이동.
-			out.write(CandiMsg.approachError());
-		} else {
-			CandiDao dao = CandiDao.getInstance();
-			String cmd = req.getParameter("cmd");
-			
-			if(cmd != null){
-				/**
-				 * 중복 ID 체크.
-				 */
-				if(cmd.equals("checkId")){
-					String id = req.getParameter("id");
-					if(!dao.isExistId(id)){
-						out.print("OK");
-					} else {
-						out.print("EXIST");
-					}
+		
+		CandiDao dao = CandiDao.getInstance();
+		String cmd = req.getParameter("cmd");
+		System.out.println("cmd : "+cmd);
+		if(cmd != null){
+			/**
+			 * 중복 ID 체크.
+			 */
+			if(cmd.equals("checkId")){
+				String id = req.getParameter("id");
+				if(!dao.isExistId(id)){
+					System.out.println("OK");
+					out.print("OK");
+				} else {
+					System.out.println("EXIST");
+					out.print("EXIST");
 				}
 			}
 		}

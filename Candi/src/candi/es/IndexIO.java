@@ -58,7 +58,6 @@ public class IndexIO {
 			String rLine = null;
 			EsDao esDao = EsDao.getInstance();
 			esDao.deleteStatus(candiId, "meta", runFileName);
-//			esDao.createStatus(candiId, "meta", runFileName);
 			
 			//전체 라인 수 입력. 7천만 라인인 경우 13초 정도 소요.
 			BufferedReader reader = new BufferedReader(new FileReader(metaPath + "/" + runFileName));
@@ -67,6 +66,9 @@ public class IndexIO {
 			reader.close();
 			esDao.createStatus(candiId, "meta", runFileName, totlines);
 			
+			int runLines = 0;
+			int totPers = totlines / 100;
+			int percent = 0;
 			while((rLine = br.readLine())!=null){
 				rLine = rLine.replaceAll(",,", ",\"\",");
 				String[] items = rLine.split("\",\"");
@@ -98,8 +100,12 @@ public class IndexIO {
 				    bw.write(json.toString());
 				    bw.newLine();
 				}
-				esDao.plusStatus(candiId, "meta", runFileName);
+				runLines++;
+				if(runLines % totPers == 0){
+					esDao.setStatus(candiId, "meta", runFileName, runLines, "run", percent++);
+				}
 			}
+			esDao.setStatus(candiId, "meta", runFileName, runLines, "done", percent);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,6 +138,20 @@ public class IndexIO {
 			bw = new BufferedWriter(fw);
 			
 			String rLine = null;
+			EsDao esDao = EsDao.getInstance();
+			esDao.deleteStatus(candiId, "meta", runFileName);
+			
+			//전체 라인 수 입력. 7천만 라인인 경우 13초 정도 소요.
+			BufferedReader reader = new BufferedReader(new FileReader(metaPath + "/" + runFileName));
+			int totlines = 0;
+			while (reader.readLine() != null) totlines++;
+			reader.close();
+			esDao.createStatus(candiId, "log", runFileName, totlines);
+			
+			int runLines = 0;
+			int totPers = totlines / 100;
+			int percent = 0;
+			
 			while((rLine = br.readLine())!=null){
 				String[] items = rLine.split(",");
 				if(items.length > 4){
@@ -176,9 +196,13 @@ public class IndexIO {
 					
 				    bw.write(json.toString());
 				    bw.newLine();
-				    
+				}
+				runLines++;
+				if(runLines % totPers == 0){
+					esDao.setStatus(candiId, "log", runFileName, runLines, "run", percent++);
 				}
 			}
+			esDao.setStatus(candiId, "log", runFileName, runLines, "done", percent);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

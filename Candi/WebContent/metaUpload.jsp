@@ -58,6 +58,7 @@ window.onload = function(){
 	olSaveHtml();
 	setMetaPopover();
 	setInitField();
+	getRunStatus("meta");
 }
 
 </script>
@@ -504,16 +505,11 @@ window.onload = function(){
 		<div class="row">
 			<button type="button" class="btn btn-primary start" onclick="runMeta()">메타정보 입력</button>
 		</div>
-		<div class="row container">
-			<label for="runStat" class="col-lg-1 control-label">파일 </label>
-			<div class="col-lg-10">
-			<div class="progress" id="runStat">
-				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-					<spqn id="runStatPer"></spqn>
-				</div>
-			</div>
-			</div>
+		<p></p>
+		
+		<div class="container" id="runFileStat">
 		</div>
+		
 	</div>
 	<p></p>
 	
@@ -628,7 +624,7 @@ window.onload = function(){
             </span>
         </td>
         <td>
-            <p class="name">
+            <p class="name" name="upFileName">
                 {% if (file.url) { %}
                     <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
                 {% } else { %}

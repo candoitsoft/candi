@@ -40,7 +40,7 @@ function (Settings) {
      * The default ES index to use for storing Kibana specific object
      * such as stored dashboards
      */
-    kibana_index: "kibana-candoit",
+    kibana_index: "candi-osp",
 
     /** @scratch /configuration/config.js/5
      * ==== panel_name

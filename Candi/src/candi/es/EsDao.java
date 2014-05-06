@@ -66,6 +66,32 @@ public class EsDao {
 	}
 	
 	/**
+	 * 파일 카운트 업데이트.
+	 * @param id
+	 * @param uptype
+	 * @param filename
+	 * @param cnt
+	 * @return
+	 */
+	public int setStatus(String id, String uptype, String filename, int cnt, String stat, int percent){
+		int result = 0;
+		DataEntity setData = new DataEntity();
+		DataEntity whereData = new DataEntity();
+		Dao dao = Dao.getInstance();
+		
+		setData.put("cnt", cnt+"");
+		setData.put("stat", stat);
+		setData.put("percent", percent+"");
+		
+		whereData.put("id", id);
+		whereData.put("uptype", uptype);
+		whereData.put("filename", filename);
+		result = dao.updateData(property, "cdi_index_temp", setData, whereData);
+		
+		return result;
+	}
+	
+	/**
 	 * 파일 업로드 카운트 삭제
 	 * @param id
 	 * @param uptype
@@ -94,7 +120,7 @@ public class EsDao {
 		Dao dao = Dao.getInstance();
 		
 		StringBuffer sql = new StringBuffer();
-		sql.append("select filename, cnt, stat, totlines \n");
+		sql.append("select filename, cnt, stat, totlines, percent \n");
 		sql.append("from cdi_index_temp \n");
 		sql.append("where id = ? \n");
 		sql.append("and uptype = ? \n");

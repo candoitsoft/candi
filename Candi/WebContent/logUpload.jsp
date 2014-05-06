@@ -58,6 +58,7 @@ window.onload = function(){
 	olSaveHtml();
 	setLogPopover();	
 	setInitField();		//사용자 저장 필드 불러오기.
+	getRunStatus("log");
 }
 
 </script>
@@ -442,7 +443,16 @@ window.onload = function(){
 			<ol class="indicator"></ol>
 		</div>
 	
-	<button type="button" class="btn btn-primary start" onclick="runLog()">로그정보 입력</button>
+	<div class="row container">
+		<div class="row">
+			<button type="button" class="btn btn-primary start" onclick="runLog()">로그정보 입력</button>
+		</div>
+		<p></p>
+		
+		<div class="container" id="runFileStat">
+		</div>
+		
+	</div>
 	
 	<p></p>
 		</div>
@@ -551,7 +561,7 @@ window.onload = function(){
             </span>
         </td>
         <td>
-            <p class="name">
+            <p class="name" name="upFileName">
                 {% if (file.url) { %}
                     <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
                 {% } else { %}
