@@ -34,10 +34,10 @@ public class CandiAjax extends HttpServlet{
 				String id = req.getParameter("id");
 				if(!dao.isExistId(id)){
 					System.out.println("OK");
-					out.print("OK");
+					out.print("{\"result\":\"OK\"}");
 				} else {
 					System.out.println("EXIST");
-					out.print("EXIST");
+					out.print("{\"result\":\"EXIST\"}");
 				}
 			}
 		}

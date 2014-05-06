@@ -21,7 +21,7 @@ function (Settings) {
      * kibana installed on. You probably want to set it to the FQDN of your
      * elasticsearch host
      */
-    elasticsearch: "http://candoitsoft.kr:9200",
+    elasticsearch: "http://localhost:9200",
 
     /** @scratch /configuration/config.js/5
      * ==== default_route

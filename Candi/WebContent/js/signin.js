@@ -1,6 +1,6 @@
 
 var confVal = {
-	"id" : "Y",
+	"id" : "N",
 	"pw" : "N",
 };
 
@@ -21,9 +21,10 @@ function checkId() {
 		type : "GET",
 		data : "cmd=checkId&id=" + tId,
 		url : "CandiAjax",
+		dataType:"json",
 		success : function(data) {
 			console.log(data);
-			if (data == "OK") {
+			if (data.result == "OK") {
 				alert("사용 가능한 아이디 입니다.");
 				confVal.id = "Y";
 			} else {

@@ -67,7 +67,7 @@
 	
 		<div class="tab-pane fade active in" id="today">
 			
-<iframe id="today_frame" width="100%" scrolling=no frameborder=0 src="osp_today.jsp#/dashboard/localhost/<%=id%>">
+<iframe id="today_frame" width="100%" scrolling=no frameborder=0 src="osp_today.jsp#/dashboard/elasticsearch/<%=id%>">
 </iframe>
 <script>
 

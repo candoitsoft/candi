@@ -42,6 +42,10 @@ public class Confirm extends HttpServlet {
 				EsConnIO esConn = EsConnIO.getInstance();
 				esConn.setKibana(obj.getId());
 				
+				try {Thread.sleep(2000);
+				} catch (InterruptedException e) { }
+
+				
 				res.sendRedirect(toUrl);
 			} else {
 				out.println("<script>");

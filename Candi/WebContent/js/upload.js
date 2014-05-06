@@ -304,8 +304,10 @@ function getRunStatus(opt){
 				}
 				*/
 			} else {
-				sleep(500);
-				getRunStatus(opt);
+				if(fileCnt > 0){
+					sleep(500);
+					getRunStatus(opt);
+				}
 			}
 			
 		}
