@@ -39,9 +39,10 @@ public class Confirm extends HttpServlet {
 				session.setAttribute("candiUserObj", obj);
 				
 				//키바나 대쉬보드 생성.
-				EsConnIO esConn = EsConnIO.getInstance();
+				EsConnIO esConn = new EsConnIO();
 				esConn.setKibana(obj.getId());
-				
+				esConn.setMapping(obj.getId());
+
 				try {Thread.sleep(2000);
 				} catch (InterruptedException e) { }
 

@@ -71,7 +71,7 @@ function setLogPopover(){
 		title : 'Content ID (컨텐츠 ID)',
 		content : '<h5>업체에서 관리하는 컨텐츠의 고유 일련번호.<br/><br/>예) <code>3454147</code>, <code>PA0047483001012</code></h5>'
 	});
-	$('#btnFldSvcod').popover({
+	$('#btnFldSvcode').popover({
 		html:true, trigger:'hover', placement:'bottom',
 		title : 'Service Code (서비스 코드)',
 		content : '<h5>해당 컨텐츠에 적용된 서비스 코드. <br/><br/>예) <code>0001</code>:다운로드, <code>0002</code>:스트리밍</h5>'

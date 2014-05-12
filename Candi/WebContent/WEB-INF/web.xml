@@ -64,5 +64,14 @@
         <servlet-name>UploadAjax</servlet-name>
         <url-pattern>/UploadAjax/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ConfigJS</servlet-name>
+        <servlet-class>candi.es.ConfigJS</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigJS</servlet-name>
+        <url-pattern>/config.js</url-pattern>
+    </servlet-mapping>
 	
 </web-app>

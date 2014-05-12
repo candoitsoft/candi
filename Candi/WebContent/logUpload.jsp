@@ -105,7 +105,7 @@ window.onload = function(){
 			<span id="fieldBtns">
 				<button id="btnFldUci" type="button" class="btn btn-info btn-xs">uci</button>
 				<button id="btnFldCid" type="button" class="btn btn-danger btn-xs">cid</button>
-				<button id="btnFldSvcod" type="button" class="btn btn-danger btn-xs">svcod</button>
+				<button id="btnFldSvcode" type="button" class="btn btn-danger btn-xs">svcode</button>
 				<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
 				<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
 			</span>
@@ -119,7 +119,7 @@ window.onload = function(){
 			반드시 설명을 읽고 올바른 형식 대로 입력 하십시오.<br/>
 			붉은색으로 표시된
 			<button type="button" class="btn btn-danger btn-xs">cid</button>
-			<button type="button" class="btn btn-danger btn-xs">svcod</button>
+			<button type="button" class="btn btn-danger btn-xs">svcode</button>
 			<button type="button" class="btn btn-danger btn-xs">stime</button>
 			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
 			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
@@ -174,8 +174,8 @@ window.onload = function(){
 		로그 데이터 외에 헤더, 주석 등의 불필요한 값은 입력하지 않도록 합니다.
 	</blockquote>
 <pre id="preCsv">
-<span id="fieldsCsv1">"uci-1","cid-1","svcod-1","stime-1","asp-1"</span>
-<span id="fieldsCsv2">"uci-2","cid-2","svcod-2","stime-2","asp-2"</span>
+<span id="fieldsCsv1">"uci-1","cid-1","svcode-1","stime-1","asp-1"</span>
+<span id="fieldsCsv2">"uci-2","cid-2","svcode-2","stime-2","asp-2"</span>
 </pre>
 	
 	<h4>실제 입력 예</h4>
@@ -203,14 +203,14 @@ window.onload = function(){
 <pre id="preJson">{
 <span id="fieldsJson1">	"uci" : "uci-1",
 	"cid" : "cid-1",
-	"svcod" : "svcod-1",
+	"svcode" : "svcode-1",
 	"stime" : "stime-1",
 	"asp" : "asp-1"</span>
 },
 {
 <span id="fieldsJson2">	"uci" : "uci-2",
 	"cid" : "cid-2",
-	"svcod" : "svcod-2",
+	"svcode" : "svcode-2",
 	"stime" : "stime-2",
 	"asp" : "asp-2"</span>
 }
@@ -218,9 +218,9 @@ window.onload = function(){
 	
 	<h4>실제 입력 예</h4>
 <pre>
-{"uci":"i500-JP13072061.1200651160-1","cid":"3481070","svcod":"25026","stime":"2014-04-28T01:12:15","asp":"(주)카카오"},
-{"uci":"i500-US13013671.1200121916-1","cid":"10429203","svcod":"25012","stime":"2014-04-28T17:27:49","asp":""},
-{"uci":"","cid":"80062835","svcod":"25012","stime":"2014-04-28T17:34:16","asp":""}
+{"uci":"i500-JP13072061.1200651160-1","cid":"3481070","svcode":"25026","stime":"2014-04-28T01:12:15","asp":"(주)카카오"},
+{"uci":"i500-US13013671.1200121916-1","cid":"10429203","svcode":"25012","stime":"2014-04-28T17:27:49","asp":""},
+{"uci":"","cid":"80062835","svcode":"25012","stime":"2014-04-28T17:34:16","asp":""}
 </pre>
 
 </div>
@@ -243,14 +243,14 @@ window.onload = function(){
 &lt;row&gt;<span id="fieldsXml1">
 	&lt;uci&gt;uci-1&lt;/uci&gt;
 	&lt;cid&gt;cid-1&lt;cid&gt;
-	&lt;svcod&gt;svcod-1&lt;svcode&gt;
+	&lt;svcode&gt;svcode-1&lt;svcodee&gt;
 	&lt;stime&gt;stime-1&lt;stime&gt;
 	&lt;asp&gt;asp-1&lt;asp&gt;
 </span>&lt;/row&gt;
 &lt;row&gt;<span id="fieldsXml2">
 	&lt;uci&gt;uci-2&lt;/uci&gt;
 	&lt;cid&gt;cid-2&lt;cid&gt;
-	&lt;svcod&gt;svcod-2&lt;svcode&gt;
+	&lt;svcode&gt;svcode-2&lt;svcodee&gt;
 	&lt;stime&gt;stime-2&lt;stime&gt;
 	&lt;asp&gt;asp-2&lt;asp&gt;
 </span>&lt;/row&gt;
@@ -262,21 +262,21 @@ window.onload = function(){
 &lt;row&gt;
 	&lt;uci&gt;i500-JP13072061.1200651160-1&lt;/uci&gt;
 	&lt;cid&gt;3481070&lt;cid&gt;
-	&lt;svcod&gt;25026&lt;svcode&gt;
+	&lt;svcode&gt;25026&lt;svcodee&gt;
 	&lt;stime&gt;2014-04-28T01:12:15&lt;stime&gt;
 	&lt;asp&gt;(주)카카오&lt;asp&gt;
 &lt;/row&gt;
 &lt;row&gt;
 	&lt;uci&gt;i500-US13013671.1200121916-1&lt;/uci&gt;
 	&lt;cid&gt;10429203&lt;cid&gt;
-	&lt;svcod&gt;25012&lt;svcode&gt;
+	&lt;svcode&gt;25012&lt;svcodee&gt;
 	&lt;stime&gt;2014-04-28T17:27:49&lt;stime&gt;
 	&lt;asp&gt;&lt;asp&gt;
 &lt;/row&gt;
 &lt;row&gt;
 	&lt;uci&gt;&lt;/uci&gt;
 	&lt;cid&gt;80062835&lt;cid&gt;
-	&lt;svcod&gt;25012&lt;svcode&gt;
+	&lt;svcode&gt;25012&lt;svcodee&gt;
 	&lt;stime&gt;2014-04-28T17:34:16&lt;stime&gt;
 	&lt;asp&gt;&lt;asp&gt;
 &lt;/row&gt;
@@ -303,7 +303,7 @@ window.onload = function(){
 		<tr id="xlHead" class="active">
 			<th>uci</th>
 			<th>cid</th>
-			<th>svcod</th>
+			<th>svcode</th>
 			<th>stime</th>
 			<th>asp</th>
 		</tr>
@@ -312,14 +312,14 @@ window.onload = function(){
 		<tr id="xlBody1">
 			<td>uci-1</td>
 			<td>cid-1</td>
-			<td>svcod-1</td>
+			<td>svcode-1</td>
 			<td>stime-1</td>
 			<td>asp-1</td>
 		</tr>
 		<tr id="xlBody2">
 			<td>uci-2</td>
 			<td>cid-2</td>
-			<td>svcod-2</td>
+			<td>svcode-2</td>
 			<td>stime-2</td>
 			<td>asp-2</td>
 		</tr>
@@ -332,7 +332,7 @@ window.onload = function(){
 		<tr class="active">
 			<th>uci</th>
 			<th>cid</th>
-			<th>svcod</th>
+			<th>svcode</th>
 			<th>stime</th>
 			<th>asp</th>
 		</tr>

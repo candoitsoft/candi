@@ -134,12 +134,13 @@ public class IndexIO {
 			br = new BufferedReader(fr);
 			
 			if(!indexPath.exists()){ indexPath.mkdirs(); }
-			fw = new FileWriter(indexPath+"/"+runFileName+".log");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREA);
+			fw = new FileWriter(indexPath+"/"+formatter.format(new Date())+"_"+candiId+"_"+runFileName+".log");
 			bw = new BufferedWriter(fw);
 			
 			String rLine = null;
 			EsDao esDao = EsDao.getInstance();
-			esDao.deleteStatus(candiId, "meta", runFileName);
+			esDao.deleteStatus(candiId, "log", runFileName);
 			
 			//전체 라인 수 입력. 7천만 라인인 경우 13초 정도 소요.
 			BufferedReader reader = new BufferedReader(new FileReader(metaPath + "/" + runFileName));
@@ -158,7 +159,7 @@ public class IndexIO {
 					
 					String uci = items[0].replaceAll("\\\"", "");
 					String cid = items[1].replaceAll("\\\"", "");
-					String svcod = items[2].replaceAll("\\\"", "");
+					String svcode = items[2].replaceAll("\\\"", "");
 					String stime = items[3].replaceAll("\\\"", "");
 					String asp = items[4].replaceAll("\\\"", "");
 					
@@ -166,7 +167,7 @@ public class IndexIO {
 					
 //					json.put("uci", uci);
 //					json.put("cid", cid);
-					json.put("svcod", svcod);
+					json.put("svcode", svcode);
 					
 					stime = stime.replace(":", "");
 					stime = stime.replace("/", "");
@@ -217,22 +218,22 @@ public class IndexIO {
 	}
 	
 	private JSONObject appendMeta(String cid, String candiId){
-		EsConnIO esConnIo = EsConnIO.getInstance();
+		EsConnIO esConnIo = new EsConnIO();
 		String url = "http://localhost:9200/"+metaIndex+"/"+candiId+"/"+cid+"/_source";
 		JSONObject metaJson = esConnIo.getJson(url);
 		
 		try {
 			if(metaJson == null || metaJson.length() == 0){
 				metaJson = new JSONObject();
-
+				
 				metaJson.put("uci", "");
 				metaJson.put("cid", cid);
-				metaJson.put("title", "");
-				metaJson.put("album", "");
-				metaJson.put("artist", "");
-				metaJson.put("genre", "");
-				metaJson.put("rdate", "");
-				metaJson.put("ptime", "");
+//				metaJson.put("title", "");
+//				metaJson.put("album", "");
+//				metaJson.put("artist", "");
+//				metaJson.put("genre", "");
+//				metaJson.put("rdate", "");
+//				metaJson.put("ptime", "");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
