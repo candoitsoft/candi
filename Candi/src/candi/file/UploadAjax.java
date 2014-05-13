@@ -64,7 +64,11 @@ public class UploadAjax extends HttpServlet{
 				} else if(cmd != null && "getRunStatus".equals(cmd)){
 					String uptype = req.getParameter("uptype");
 					EsDao esDao = EsDao.getInstance();
-					
+					if("log".equals(uptype)){
+						Thread.sleep(3000);
+					} else {
+						Thread.sleep(1000);
+					}
 					DataEntity[] upStatDatas = esDao.getStatus(candiId, uptype);
 					if(upStatDatas != null){
 						JSONArray jsona = new JSONArray();
@@ -80,7 +84,7 @@ public class UploadAjax extends HttpServlet{
 						resultJson.put("runStats", jsona);
 					}
 				}
-			} catch (JSONException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				System.out.println(resultJson.toString());

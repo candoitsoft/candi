@@ -214,13 +214,10 @@ function runMeta(){
 		    	console.log(e.responseText);
 		    }
 		});
-		getRunStatus("meta");
+		getRunInit("meta");
 	}
 }
 
-/**
- * 업로드한 로그 파일 인덱싱
- */
 function runLog(){
 	if(confirm("업로드한 로그 파일의 색인을 시작하시겠습니까?")){
 		var url="log_run";
@@ -239,28 +236,37 @@ function runLog(){
 		    	console.log(e.responseText);
 		    }
 		});
-		getRunStatus("log");
+		getRunInit("log");
 	}
 }
 
-
-function sleep(milliseconds) {
-	var start = new Date().getTime();
-	for (var i = 0; i < 1e7; i++) {
-		if ((new Date().getTime() - start) > milliseconds){
-			break;
-		}
+function getRunInit(opt){
+	var upFileNames = document.getElementsByName("upFileName");
+	var fileCnt = upFileNames.length;
+	var fileStatHtml = "";
+	for(var fc=0; fc < fileCnt; fc++){
+		fileStatHtml+='<div class="row" name="runStatDiv">';
+		fileStatHtml+='	<label for="runStat" class="col-lg-3 control-label text-right">'+$("#upFileName"+fc).html()+'</label>';
+		fileStatHtml+='	<div class="col-lg-6">';
+		fileStatHtml+='		<div id="fcBarMain'+fc+'" class="progress active">';
+		fileStatHtml+='			<div id="fcBar'+fc+'" class="progress-bar" role="progressbar"></div>';
+		fileStatHtml+='		</div>';
+		fileStatHtml+='	</div>';
+		fileStatHtml+='	<div class="col-lg-2">';
+		fileStatHtml+='		<span id="runStatTxt'+fc+'">파일이 적용되지 않았습니다.</span>';
+		fileStatHtml+='	</div>';
+		fileStatHtml+='</div>';
 	}
+	$("#runFileStat").html(fileStatHtml);
+	getRunStatus(opt,fileCnt);
 }
 
-function getRunStatus(opt){
+function getRunStatus(opt,fileCnt){
 	var url="UploadAjax";
 	var params = "";
 	params = "cmd=getRunStatus";
 	params+="&";
 	params+="uptype="+opt;
-	var upFileNames = document.getElementsByName("upFileName");
-	var fileCnt = upFileNames.length;
 	
 	$.ajax({
 		type:"POST"
@@ -268,54 +274,36 @@ function getRunStatus(opt){
 		,data:params
 		,dataType:"json"
 		,success:function(data){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
-//			myVar=setTimeout(getRunStatus(opt),10000);
-//			clearTimeout(myVar);
-			var stat = 0;
+			var doneCnt = 0;
 			if(data != null && data.runStats != null && data.runStats.length > 0){
-				var fileStatHtml = "";
 				for(var fc=0; fc < data.runStats.length; fc++){
-					fileStatHtml+='<div class="row">';
-					fileStatHtml+='<label for="runStat" class="col-lg-3 control-label text-right">'+data.runStats[fc].filename+'</label>';
-					fileStatHtml+='<div class="col-lg-7">';
-					fileStatHtml+='<div class="progress">';
-					fileStatHtml+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'+data.runStats[fc].percent+'" aria-valuemin="0" aria-valuemax="100" style="width: '+data.runStats[fc].percent+'%">';
-					fileStatHtml+='<spqn id="runStatPer">'+data.runStats[fc].percent+' %</spqn>';
-					fileStatHtml+='</div>';
-					fileStatHtml+='</div>';
-					fileStatHtml+='</div>';
-					fileStatHtml+='<div class="col-lg-2">';
+					var $bar = $("#fcBar"+fc);
+					$bar.text(data.runStats[fc].percent + "%");
+					$bar.css('width', data.runStats[fc].percent + "%");
 					if(data.runStats[fc].stat == "done"){
-						fileStatHtml+='<span>완료되었습니다.</span>';
-						stat++;
+						$("#runStatTxt"+fc).html("완료되었습니다.");
+						doneCnt++;
 					} else {
-						fileStatHtml+='<span>파일 적용 중...</span>';
+						$("#runStatTxt"+fc).html("적용중입니다.");
 					}
-					fileStatHtml+='</div>';
-					fileStatHtml+='</div>';
 				}
-				$("#runFileStat").html(fileStatHtml);
 			}
-			if(fileCnt === stat){
-				/*
-				if(confirm("메타정보 입력이 모두 완료되었습니다.\n업로드한 파일을 삭제하시겠습니까?")){
-					for(var fd=0; fd < fileCnt; fd++){
-						delUpFiles(opt,data.runStats[fd].filename);
-					}
-				}
-				*/
+			if(fileCnt == 0){
+				getRunInit(opt);
 			} else {
-				if(fileCnt > 0){
-					sleep(500);
-					getRunStatus(opt);
+				if(doneCnt < fileCnt){
+					if(data.runStats.length > 0){
+						getRunStatus(opt,fileCnt);
+					}
 				}
 			}
-			
 		}
 	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
 	    	console.log(e.responseText);
 	    }
 	});
 }
+
 
 function delUpFiles(opt, filename){
 	var url=opt+"_upload";

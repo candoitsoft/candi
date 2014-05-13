@@ -58,7 +58,7 @@ window.onload = function(){
 	olSaveHtml();
 	setMetaPopover();
 	setInitField();
-	getRunStatus("meta");
+	getRunInit("meta");
 }
 
 </script>
@@ -507,8 +507,7 @@ window.onload = function(){
 		</div>
 		<p></p>
 		
-		<div class="container" id="runFileStat">
-		</div>
+		<div class="container" id="runFileStat"></div>
 		
 	</div>
 	<p></p>
@@ -628,7 +627,7 @@ window.onload = function(){
                 {% if (file.url) { %}
                     <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
                 {% } else { %}
-                    <span>{%=file.name%}</span>
+                    <span id="upFileName{%=i%}">{%=file.name%}</span>
                 {% } %}
             </p>
             {% if (file.error) { %}
