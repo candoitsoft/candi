@@ -42,6 +42,7 @@ public class Confirm extends HttpServlet {
 				EsConnIO esConn = new EsConnIO();
 				esConn.setKibana(obj.getId());
 				esConn.setMapping(obj.getId());
+				esConn.setMetaMapping(obj.getId());
 
 				try {Thread.sleep(2000);
 				} catch (InterruptedException e) { }

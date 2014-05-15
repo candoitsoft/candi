@@ -8,6 +8,7 @@
 		//로그인 오류시 login.jsp 페이지로 이동.
 		out.print(CandiMsg.loginError());
 	} else {
+		
 %>
 <!DOCTYPE html>
 <html>
