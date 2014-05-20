@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import jm.net.DataEntity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import candi.com.CandiMsg;

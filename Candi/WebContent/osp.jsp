@@ -1,3 +1,4 @@
+<%@page import="candi.es.EsConnIO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="candi.com.CandiUserObj, candi.com.CandiMsg"%>
 <%
@@ -8,7 +9,6 @@
 		//로그인 오류시 login.jsp 페이지로 이동.
 		out.print(CandiMsg.loginError());
 	} else {
-		
 %>
 <!DOCTYPE html>
 <html>

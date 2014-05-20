@@ -73,5 +73,5 @@
         <servlet-name>ConfigJS</servlet-name>
         <url-pattern>/config.js</url-pattern>
     </servlet-mapping>
-	
+    
 </web-app>

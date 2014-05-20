@@ -6,11 +6,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import candi.com.CandiDao;
-import candi.com.CandiMsg;
-import candi.com.CandiUserObj;
 
 public class CandiAjax extends HttpServlet{
 	

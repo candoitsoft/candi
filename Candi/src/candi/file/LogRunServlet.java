@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import candi.com.CandiMsg;
 import candi.com.CandiParam;
 import candi.com.CandiUserObj;
+import candi.es.EsConnIO;
 import candi.es.IndexIO;
 
 public class LogRunServlet extends HttpServlet {
@@ -53,6 +54,10 @@ public class LogRunServlet extends HttpServlet {
 			try {
 				String tempPath = (fileUploadPath + "/").replaceAll("//","/") + candiId;
 				File tempFile = new File (tempPath);
+				
+				EsConnIO esConn = new EsConnIO();
+				esConn.setInterval(candiId, "5s");
+				
 				if(tempFile.exists()){
 					String[] runFiles = tempFile.list();
 					IndexIO iio = IndexIO.getInstance();
@@ -78,9 +83,8 @@ public class LogRunServlet extends HttpServlet {
 						} 
 					}
 				}
-				
+				esConn.setInterval(candiId, "false");
 				out.print(resultJson.toString());
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
