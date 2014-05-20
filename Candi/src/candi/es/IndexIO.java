@@ -124,7 +124,7 @@ public class IndexIO {
 	 * @param runFile
 	 * @param candiId
 	 */
-	public void saveLogCsv(String metaPath, String runFileName, String candiId){
+	public void saveLogCsv(String metaPath, String runFileName, String candiId, String candiName){
 		FileReader fr = null;
 		BufferedReader br = null;
 		FileWriter fw = null;
@@ -189,11 +189,16 @@ public class IndexIO {
 					stime = stimeBfr.toString();
 
 					json.put("stime", stime);
-					json.put("asp", asp);
+					if("".equals(asp)){
+						json.put("asp", candiName);
+					} else {
+						json.put("asp", asp);
+					}
 					
 					json.put("es_index", candiId);
 					json.put("es_type", es_type);
 					json.put("es_id", es_id);
+					json.put("es_name", candiName);
 					
 				    bw.write(json.toString());
 				    bw.newLine();

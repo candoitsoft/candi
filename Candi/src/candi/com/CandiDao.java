@@ -108,9 +108,7 @@ public class CandiDao {
 		
 		StringBuffer sql = new StringBuffer();
 		String tempPw = "";
-		
 		String[] param = {id};
-		
 		int result = 9;
 		
 		sql.append("SELECT passwd FROM cdi_user WHERE id = ?");
@@ -139,9 +137,7 @@ public class CandiDao {
 		CandiUserObj result = new CandiUserObj();
 		
 		Dao dao = Dao.getInstance();
-		
 		StringBuffer sql = new StringBuffer();
-		
 		String[] param = {id};
 		
 		sql.append("SELECT ");
@@ -180,4 +176,24 @@ public class CandiDao {
 		}
 	}
 	
+	/**
+	 * 사업자 목록을 가져오는 쿼리.
+	 * @return
+	 */
+	public DataEntity[] getOspList(){
+		DataEntity[] result = null;
+		
+		Dao dao = Dao.getInstance();
+		StringBuffer sql = new StringBuffer();
+		String[] param = {"osp"};
+				
+		sql.append("SELECT ");
+		sql.append("id, name ");
+		sql.append("FROM cdi_user ");
+		sql.append("WHERE type = ?");
+		
+		result = dao.getResult(property, sql.toString(), param);
+		
+		return result;
+	}
 }

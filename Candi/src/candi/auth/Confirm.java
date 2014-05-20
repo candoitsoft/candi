@@ -40,13 +40,15 @@ public class Confirm extends HttpServlet {
 				
 				//키바나 대쉬보드 생성.
 				EsConnIO esConn = new EsConnIO();
-				esConn.setKibana(obj.getId());
-				esConn.setMapping(obj.getId());
-				esConn.setMetaMapping(obj.getId());
-
-				try {Thread.sleep(2000);
-				} catch (InterruptedException e) { }
-
+				if(obj.getType().equals("osp")){
+					esConn.setKibana(obj.getId());
+					esConn.setMapping(obj.getId());
+					esConn.setMetaMapping(obj.getId());
+				} else if(obj.getType().equals("org")){
+					esConn.setOrgKibana(obj.getId());
+				}
+				
+				try {Thread.sleep(2000);} catch (InterruptedException e) { }
 				
 				res.sendRedirect(toUrl);
 			} else {

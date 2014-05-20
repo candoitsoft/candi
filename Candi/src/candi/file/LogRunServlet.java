@@ -56,7 +56,7 @@ public class LogRunServlet extends HttpServlet {
 				File tempFile = new File (tempPath);
 				
 				EsConnIO esConn = new EsConnIO();
-				esConn.setInterval(candiId, "5s");
+				esConn.setInterval(candiId, "5s");	//대시보드 화면 리프레시 5초로 셋팅.
 				
 				if(tempFile.exists()){
 					String[] runFiles = tempFile.list();
@@ -70,7 +70,7 @@ public class LogRunServlet extends HttpServlet {
 						}
 						
 						if("csv".equals(ext) || "CSV".equals(ext)){
-							iio.saveLogCsv(tempPath, runFileName, candiId);
+							iio.saveLogCsv(tempPath, runFileName, candiId, userObj.getName());
 							
 						} else if("json".equals(ext) || "JSON".equals(ext)){
 							
@@ -83,7 +83,7 @@ public class LogRunServlet extends HttpServlet {
 						} 
 					}
 				}
-				esConn.setInterval(candiId, "false");
+				esConn.setInterval(candiId, "false");	//대시보드 화면 리프레시 해제.
 				out.print(resultJson.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
