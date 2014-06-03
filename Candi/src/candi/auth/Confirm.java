@@ -27,6 +27,7 @@ public class Confirm extends HttpServlet {
 		CandiDao dao = CandiDao.getInstance(); 
 		CandiUserObj obj = null;
 		int result = 0;
+		EsConnIO esConn = new EsConnIO();
 		if(toUrl != null && cmd != null && cmd.equals("insert")){
 			
 			obj = dao.getUserObj(req);
@@ -38,11 +39,12 @@ public class Confirm extends HttpServlet {
 				session.setAttribute("candiId", obj.getId());
 				session.setAttribute("candiUserObj", obj);
 				
-				//키바나 대쉬보드 생성.
-				EsConnIO esConn = new EsConnIO();
+				//키바나 대쉬보드 및 매핑 생성.
 				if(obj.getType().equals("osp")){
 					esConn.setKibana(obj.getId());
+					esConn.setKibanaPub(obj.getId());
 					esConn.setMapping(obj.getId());
+					esConn.setMapping(obj.getId()+"_prv");
 					esConn.setMetaMapping(obj.getId());
 				} else if(obj.getType().equals("org")){
 					esConn.setOrgKibana(obj.getId());
@@ -86,6 +88,11 @@ public class Confirm extends HttpServlet {
 				obj = dao.getUserObj(id);
 				session.setAttribute("candiId", obj.getId());
 				session.setAttribute("candiUserObj", obj);
+				
+				if(obj.getType().equals("org")){
+					esConn.setOrgKibana(obj.getId());
+				}
+				
 				res.sendRedirect(toUrl);
 			} else if (check == 1) {
 				out.println("<script>");

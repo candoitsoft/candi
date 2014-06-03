@@ -124,7 +124,7 @@ window.onload = function(){
 			붉은색으로 표시된
 			<button type="button" class="btn btn-danger btn-xs">cid</button>
 			<button type="button" class="btn btn-danger btn-xs">title</button>
-			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
+			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 유효한 값이 존재해야 합니다.<br/>
 			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
 			필수 필드 외에
 			<button type="button" class="btn btn-default btn-xs">사용자정의</button>
@@ -256,26 +256,26 @@ window.onload = function(){
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;row&gt;<span id="fieldsXml1">
 	&lt;uci&gt;uci-1&lt;/uci&gt;
-	&lt;cid&gt;cid-1&lt;cid&gt;
-	&lt;title&gt;title-1&lt;title&gt;
-	&lt;album&gt;album-1&lt;album&gt;
-	&lt;artist&gt;artist-1&lt;artist&gt;
-	&lt;genre&gt;genre-1&lt;genre&gt;
-	&lt;rdate&gt;rdate-1&lt;rdate&gt;
-	&lt;ptime&gt;ptime-2&lt;ptime&gt;
+	&lt;cid&gt;cid-1&lt;/cid&gt;
+	&lt;title&gt;title-1&lt;/title&gt;
+	&lt;album&gt;album-1&lt;/album&gt;
+	&lt;artist&gt;artist-1&lt;/artist&gt;
+	&lt;genre&gt;genre-1&lt;/genre&gt;
+	&lt;rdate&gt;rdate-1&lt;/rdate&gt;
+	&lt;ptime&gt;ptime-2&lt;/ptime&gt;
 </span>&lt;/row&gt;
 &lt;row&gt;<span id="fieldsXml2">
 	&lt;uci&gt;uci-2&lt;/uci&gt;
-	&lt;cid&gt;cid-2&lt;cid&gt;
-	&lt;title&gt;title-2&lt;title&gt;
-	&lt;album&gt;album-2&lt;album&gt;
+	&lt;cid&gt;cid-2&lt;/cid&gt;
+	&lt;title&gt;title-2&lt;/title&gt;
+	&lt;album&gt;album-2&lt;/album&gt;
 	&lt;artist&gt;
 		&lt;item&gt;artist-2-1&lt;/item&gt;
 		&lt;item&gt;artist-2-2&lt;/item&gt;
-	&lt;artist&gt;
-	&lt;genre&gt;genre-2&lt;genre&gt;
-	&lt;rdate&gt;rdate-2&lt;rdate&gt;
-	&lt;ptime&gt;ptime-2&lt;ptime&gt;
+	&lt;/artist&gt;
+	&lt;genre&gt;genre-2&lt;/genre&gt;
+	&lt;rdate&gt;rdate-2&lt;/rdate&gt;
+	&lt;ptime&gt;ptime-2&lt;/ptime&gt;
 </span>&lt;/row&gt;
 </pre>
 
@@ -284,36 +284,36 @@ window.onload = function(){
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;row&gt;
 	&lt;uci&gt;i500-USA3017721.1200166076-1&lt;/uci&gt;
-	&lt;cid&gt;10429203&lt;cid&gt;
-	&lt;title&gt;Let It Go&lt;title&gt;
-	&lt;album&gt;프로즌 (Frozen) OST&lt;album&gt;
-	&lt;artist&gt;Idina Menzel(이디나 멘젤)&lt;artist&gt;
-	&lt;genre&gt;OST&lt;genre&gt;
-	&lt;rdate&gt;2013-12-05&lt;rdate&gt;
-	&lt;ptime&gt;000344&lt;ptime&gt;
+	&lt;cid&gt;10429203&lt;/cid&gt;
+	&lt;title&gt;Let It Go&lt;/title&gt;
+	&lt;album&gt;프로즌 (Frozen) OST&lt;/album&gt;
+	&lt;artist&gt;Idina Menzel(이디나 멘젤)&lt;/artist&gt;
+	&lt;genre&gt;OST&lt;/genre&gt;
+	&lt;rdate&gt;2013-12-05&lt;/rdate&gt;
+	&lt;ptime&gt;000344&lt;/ptime&gt;
 &lt;/row&gt;
 &lt;row&gt;
 	&lt;uci&gt;i500-KRA0104042.0009298925-1&lt;/uci&gt;
-	&lt;cid&gt;6121428&lt;cid&gt;
-	&lt;title&gt;잔소리 (With 2AM 슬옹)&lt;title&gt;
-	&lt;album&gt;잔소리&lt;album&gt;
+	&lt;cid&gt;6121428&lt;/cid&gt;
+	&lt;title&gt;잔소리 (With 2AM 슬옹)&lt;/title&gt;
+	&lt;album&gt;잔소리&lt;/album&gt;
 	&lt;artist&gt;
 		&lt;item&gt;아이유(IU)&lt;/item&gt;
 		&lt;item&gt;임슬옹&lt;/item&gt;
-	&lt;artist&gt;
-	&lt;genre&gt;&lt;genre&gt;
-	&lt;rdate&gt;2010-06-03&lt;rdate&gt;
-	&lt;ptime&gt;&lt;ptime&gt;
+	&lt;/artist&gt;
+	&lt;genre&gt;&lt;/genre&gt;
+	&lt;rdate&gt;2010-06-03&lt;/rdate&gt;
+	&lt;ptime&gt;&lt;/ptime&gt;
 &lt;/row&gt;
 &lt;row&gt;
 	&lt;uci&gt;&lt;/uci&gt;
-	&lt;cid&gt;5921418&lt;cid&gt;
-	&lt;title&gt;벚꽃 엔딩&lt;title&gt;
-	&lt;album&gt;&lt;album&gt;
-	&lt;artist&gt;버스커 버스커&lt;artist&gt;
-	&lt;genre&gt;&lt;genre&gt;
-	&lt;rdate&gt;&lt;rdate&gt;
-	&lt;ptime&gt;&lt;ptime&gt;
+	&lt;cid&gt;5921418&lt;/cid&gt;
+	&lt;title&gt;벚꽃 엔딩&lt;/title&gt;
+	&lt;album&gt;&lt;/album&gt;
+	&lt;artist&gt;버스커 버스커&lt;/artist&gt;
+	&lt;genre&gt;&lt;/genre&gt;
+	&lt;rdate&gt;&lt;/rdate&gt;
+	&lt;ptime&gt;&lt;/ptime&gt;
 &lt;/row&gt;
 </pre>	
 	

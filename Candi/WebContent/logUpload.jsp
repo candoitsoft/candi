@@ -108,6 +108,7 @@ window.onload = function(){
 				<button id="btnFldSvcode" type="button" class="btn btn-danger btn-xs">svcode</button>
 				<button id="btnFldStime" type="button" class="btn btn-danger btn-xs">stime</button>
 				<button id="btnFldAsp" type="button" class="btn btn-info btn-xs">asp</button>
+				<button id="btnFldPrv" type="button" class="btn btn-info btn-xs">prv</button>
 			</span>
 		</p>
 		<blockquote>
@@ -121,7 +122,7 @@ window.onload = function(){
 			<button type="button" class="btn btn-danger btn-xs">cid</button>
 			<button type="button" class="btn btn-danger btn-xs">svcode</button>
 			<button type="button" class="btn btn-danger btn-xs">stime</button>
-			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 값이 존재해야 합니다.<br/>
+			필드들은 값에 null(공백)을 허용하지 않습니다. 반드시 유효한 값이 존재해야 합니다.<br/>
 			필드의 값이 존재하지 않는 경우에도 공백값을 넣고 구분자로 구분해야 합니다.<br/>
 			필수 필드 외에
 			<button type="button" class="btn btn-default btn-xs">사용자정의</button>
@@ -174,15 +175,15 @@ window.onload = function(){
 		로그 데이터 외에 헤더, 주석 등의 불필요한 값은 입력하지 않도록 합니다.
 	</blockquote>
 <pre id="preCsv">
-<span id="fieldsCsv1">"uci-1","cid-1","svcode-1","stime-1","asp-1"</span>
-<span id="fieldsCsv2">"uci-2","cid-2","svcode-2","stime-2","asp-2"</span>
+<span id="fieldsCsv1">"uci-1","cid-1","svcode-1","stime-1","asp-1","prv-1"</span>
+<span id="fieldsCsv2">"uci-2","cid-2","svcode-2","stime-2","asp-2","prv-2"</span>
 </pre>
 	
 	<h4>실제 입력 예</h4>
 <pre>
-"i500-JP13072061.1200651160-1","3481070","25026","2014-04-28T01:12:15","(주)카카오"
-"i500-US13013671.1200121916-1","10429203","25012","2014-04-28T17:27:49",""
-"","80062835","25012","2014-04-28T17:34:16",""
+"i500-JP13072061.1200651160-1","3481070","25026","2014-04-28T01:12:15","(주)카카오","N"
+"i500-US13013671.1200121916-1","10429203","25012","2014-04-28T17:27:49","","Y"
+"","80062835","25012","2014-04-28T17:34:16","",""
 </pre>
 
 </div>
@@ -205,22 +206,24 @@ window.onload = function(){
 	"cid" : "cid-1",
 	"svcode" : "svcode-1",
 	"stime" : "stime-1",
-	"asp" : "asp-1"</span>
+	"asp" : "asp-1",
+	"prv" : "prv-1"</span>
 },
 {
 <span id="fieldsJson2">	"uci" : "uci-2",
 	"cid" : "cid-2",
 	"svcode" : "svcode-2",
 	"stime" : "stime-2",
-	"asp" : "asp-2"</span>
+	"asp" : "asp-2",
+	"prv" : "prv-2"</span>
 }
 </pre>
 	
 	<h4>실제 입력 예</h4>
 <pre>
-{"uci":"i500-JP13072061.1200651160-1","cid":"3481070","svcode":"25026","stime":"2014-04-28T01:12:15","asp":"(주)카카오"},
-{"uci":"i500-US13013671.1200121916-1","cid":"10429203","svcode":"25012","stime":"2014-04-28T17:27:49","asp":""},
-{"uci":"","cid":"80062835","svcode":"25012","stime":"2014-04-28T17:34:16","asp":""}
+{"uci":"i500-JP13072061.1200651160-1","cid":"3481070","svcode":"25026","stime":"2014-04-28T01:12:15","asp":"(주)카카오","N"},
+{"uci":"i500-US13013671.1200121916-1","cid":"10429203","svcode":"25012","stime":"2014-04-28T17:27:49","asp":"","Y"},
+{"uci":"","cid":"80062835","svcode":"25012","stime":"2014-04-28T17:34:16","asp":"",""}
 </pre>
 
 </div>
@@ -242,17 +245,19 @@ window.onload = function(){
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;row&gt;<span id="fieldsXml1">
 	&lt;uci&gt;uci-1&lt;/uci&gt;
-	&lt;cid&gt;cid-1&lt;cid&gt;
-	&lt;svcode&gt;svcode-1&lt;svcodee&gt;
-	&lt;stime&gt;stime-1&lt;stime&gt;
-	&lt;asp&gt;asp-1&lt;asp&gt;
+	&lt;cid&gt;cid-1&lt;/cid&gt;
+	&lt;svcode&gt;svcode-1&lt;/svcodee&gt;
+	&lt;stime&gt;stime-1&lt;/stime&gt;
+	&lt;asp&gt;asp-1&lt;/asp&gt;
+	&lt;prv&gt;prv-1&lt;/prv&gt;
 </span>&lt;/row&gt;
 &lt;row&gt;<span id="fieldsXml2">
 	&lt;uci&gt;uci-2&lt;/uci&gt;
-	&lt;cid&gt;cid-2&lt;cid&gt;
-	&lt;svcode&gt;svcode-2&lt;svcodee&gt;
-	&lt;stime&gt;stime-2&lt;stime&gt;
-	&lt;asp&gt;asp-2&lt;asp&gt;
+	&lt;cid&gt;cid-2&lt;/cid&gt;
+	&lt;svcode&gt;svcode-2&lt;/svcodee&gt;
+	&lt;stime&gt;stime-2&lt;/stime&gt;
+	&lt;asp&gt;asp-2&lt;/asp&gt;
+	&lt;prv&gt;prv-2&lt;/prv&gt;
 </span>&lt;/row&gt;
 </pre>
 
@@ -261,28 +266,30 @@ window.onload = function(){
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;row&gt;
 	&lt;uci&gt;i500-JP13072061.1200651160-1&lt;/uci&gt;
-	&lt;cid&gt;3481070&lt;cid&gt;
-	&lt;svcode&gt;25026&lt;svcodee&gt;
-	&lt;stime&gt;2014-04-28T01:12:15&lt;stime&gt;
-	&lt;asp&gt;(주)카카오&lt;asp&gt;
+	&lt;cid&gt;3481070&lt;/cid&gt;
+	&lt;svcode&gt;25026&lt;/svcodee&gt;
+	&lt;stime&gt;2014-04-28T01:12:15&lt;/stime&gt;
+	&lt;asp&gt;(주)카카오&lt;/asp&gt;
+	&lt;prv&gt;N&lt;/prv&gt;
 &lt;/row&gt;
 &lt;row&gt;
 	&lt;uci&gt;i500-US13013671.1200121916-1&lt;/uci&gt;
-	&lt;cid&gt;10429203&lt;cid&gt;
-	&lt;svcode&gt;25012&lt;svcodee&gt;
-	&lt;stime&gt;2014-04-28T17:27:49&lt;stime&gt;
-	&lt;asp&gt;&lt;asp&gt;
+	&lt;cid&gt;10429203&lt;/cid&gt;
+	&lt;svcode&gt;25012&lt;/svcodee&gt;
+	&lt;stime&gt;2014-04-28T17:27:49&lt;/stime&gt;
+	&lt;asp&gt;&lt;/asp&gt;
+	&lt;prv&gt;Y&lt;/prv&gt;
 &lt;/row&gt;
 &lt;row&gt;
 	&lt;uci&gt;&lt;/uci&gt;
-	&lt;cid&gt;80062835&lt;cid&gt;
-	&lt;svcode&gt;25012&lt;svcodee&gt;
-	&lt;stime&gt;2014-04-28T17:34:16&lt;stime&gt;
-	&lt;asp&gt;&lt;asp&gt;
+	&lt;cid&gt;80062835&lt;/cid&gt;
+	&lt;svcode&gt;25012&lt;/svcodee&gt;
+	&lt;stime&gt;2014-04-28T17:34:16&lt;/stime&gt;
+	&lt;asp&gt;&lt;/asp&gt;
+	&lt;prv&gt;&lt;/prv&gt;
 &lt;/row&gt;
-</pre>	
-	
-	
+</pre>
+
 </div>
 <!-- XML 형식 끝 -->
 
@@ -306,6 +313,7 @@ window.onload = function(){
 			<th>svcode</th>
 			<th>stime</th>
 			<th>asp</th>
+			<th>prv</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -315,6 +323,7 @@ window.onload = function(){
 			<td>svcode-1</td>
 			<td>stime-1</td>
 			<td>asp-1</td>
+			<td>prv-1</td>
 		</tr>
 		<tr id="xlBody2">
 			<td>uci-2</td>
@@ -322,6 +331,7 @@ window.onload = function(){
 			<td>svcode-2</td>
 			<td>stime-2</td>
 			<td>asp-2</td>
+			<td>prv-2</td>
 		</tr>
 	</tbody>
 </table>
@@ -335,6 +345,7 @@ window.onload = function(){
 			<th>svcode</th>
 			<th>stime</th>
 			<th>asp</th>
+			<th>prv</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -344,6 +355,7 @@ window.onload = function(){
 			<td>25026</td>
 			<td>2014-04-28T01:12:15</td>
 			<td>(주)카카오</td>
+			<td>N</td>
 		</tr>
 		<tr>
 			<td>i500-US13013671.1200121916-1</td>
@@ -351,12 +363,14 @@ window.onload = function(){
 			<td>25012</td>
 			<td>2014-04-28T17:27:49</td>
 			<td></td>
+			<td>Y</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>80062835</td>
 			<td>25012</td>
 			<td>2014-04-28T17:34:16</td>
+			<td></td>
 			<td></td>
 		</tr>
 	</tbody>
@@ -448,9 +462,7 @@ window.onload = function(){
 			<button type="button" class="btn btn-primary start" onclick="runLog()">로그정보 입력</button>
 		</div>
 		<p></p>
-		
 		<div class="container" id="runFileStat"></div>
-		
 	</div>
 	
 	<p></p>

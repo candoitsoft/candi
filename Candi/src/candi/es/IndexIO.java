@@ -156,12 +156,19 @@ public class IndexIO {
 			while((rLine = br.readLine())!=null){
 				String[] items = rLine.split(",");
 				if(items.length > 4){
-					
 					String uci = items[0].replaceAll("\\\"", "");
 					String cid = items[1].replaceAll("\\\"", "");
 					String svcode = items[2].replaceAll("\\\"", "");
 					String stime = items[3].replaceAll("\\\"", "");
 					String asp = items[4].replaceAll("\\\"", "");
+					String prv = "N";
+					if(items.length > 5){
+						if(items[5].length() > 0){
+							if("Y".equals(items[5].substring(0,1)) || "y".equals(items[5].substring(0,1))){
+								prv = "Y";
+							}
+						}
+					}
 					
 					JSONObject json = appendMeta(cid, candiId);
 					
@@ -195,7 +202,11 @@ public class IndexIO {
 						json.put("asp", asp);
 					}
 					
-					json.put("es_index", candiId);
+					if("Y".equals(prv)){
+						json.put("es_index", candiId+"_prv");
+					} else {
+						json.put("es_index", candiId);
+					}
 					json.put("es_type", es_type);
 					json.put("es_id", es_id);
 					json.put("es_name", candiName);

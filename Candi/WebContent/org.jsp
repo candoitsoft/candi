@@ -75,7 +75,7 @@
 		
 <% for(int os=0; os< ospList.length; os++){ %>
 		<div class="tab-pane fade" id="<%=ospList[os].get("id") %>">			
-			<iframe width="100%" height="2400px" scrolling=no frameborder=0 src="osp_today.jsp#/dashboard/elasticsearch/<%=ospList[os].get("id") %>">
+			<iframe width="100%" height="2400px" scrolling=no frameborder=0 src="osp_today.jsp#/dashboard/elasticsearch/<%=ospList[os].get("id")%>_pub">
 			</iframe>
 		</div>
 <% } %>

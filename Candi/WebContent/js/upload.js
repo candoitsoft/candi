@@ -86,6 +86,11 @@ function setLogPopover(){
 		title : "Service Provider (서비스 공급자)",
 		content : "<h5>2차 서비스 공급자에게 컨텐츠를 제공하는 경우 해당 서비스 공급자를 명시. <br/><br/>예)<code>(주)카카오</code>, <code>(주)네이버뮤직</code></h5>"
 	});
+	$('#btnFldPrv').popover({
+		html:true, trigger:'hover', placement:'bottom',
+		title : "Private (비공개)",
+		content : "<h5>데이터 비공개 여부. <code>Y</code> 또는 <code>N</code> 으로 입력.<br/><br/>미 입력시 <code>N</code> 으로 간주됨.<br/><br/><code>Y</code> 인 로그는 저작권 신탁 단체에서 보는 화면에 나타나지 않음.</h5>"
+	});
 }
 
 /**
