@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="candi.com.CandiUserObj, candi.com.CandiMsg"%>
+<%@ page import="candi.com.CandiUserObj,candi.com.CandiMsg"%>
 <%
-
 	//사용자 로그인 체크하는 로직. 모든 페이지에 반드시 포함할것.
 	String id = (String) session.getAttribute("candiId");
 	CandiUserObj userObj = (CandiUserObj) session.getAttribute("candiUserObj");
@@ -11,11 +10,11 @@
 	} else {
 		
 		if("osp".equals(userObj.getType())){
-			response.sendRedirect("osp.jsp");
+	response.sendRedirect("osp.jsp");
 		} else if("org".equals(userObj.getType())){
-			response.sendRedirect("org.jsp");
+	response.sendRedirect("org.jsp");
 		} else if("gov".equals(userObj.getType())){
-			response.sendRedirect("gov.jsp");
+	response.sendRedirect("gov.jsp");
 		}
 %>
 

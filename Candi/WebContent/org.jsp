@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="candi.com.CandiUserObj, candi.com.CandiMsg, candi.com.CandiDao, jm.net.DataEntity;"%>
+<%@ page import="candi.com.CandiUserObj,candi.com.CandiMsg,candi.com.CandiDao,jm.net.DataEntity;"%>
 <%
 	//사용자 로그인 체크하는 로직. 모든 페이지에 반드시 포함할것.
 	String id = (String) session.getAttribute("candiId");
@@ -9,8 +9,7 @@
 		out.print(CandiMsg.loginError());
 	} else {
 		CandiDao dao = CandiDao.getInstance();
-		DataEntity[] ospList = dao.getOspList(); 
-		
+		DataEntity[] ospList = dao.getOspList();
 %>
 <!DOCTYPE html>
 <html>

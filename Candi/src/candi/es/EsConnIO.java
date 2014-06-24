@@ -265,8 +265,7 @@ public class EsConnIO {
 			e.printStackTrace();
 			// 오류의 경우 getErrorStream 으로 오류 스트림 전달.
 			try {
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						conn.getErrorStream()));
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
 				String errOutput;
 				res = new StringBuffer();
 				while ((errOutput = br.readLine()) != null) {

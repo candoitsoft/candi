@@ -52,7 +52,7 @@ public class UploadAjax extends HttpServlet{
 					
 					JSONArray jsona = new JSONArray();
 					if(result.length == 1){
-						String valueStr = result[0].get("pvalue");
+						String valueStr = (String)result[0].get("pvalue");
 						String[] vals = valueStr.split(",");
 						for(String tvals : vals){
 							jsona.put(tvals);

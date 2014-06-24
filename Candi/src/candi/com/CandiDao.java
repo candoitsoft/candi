@@ -116,7 +116,7 @@ public class CandiDao {
 		DataEntity[] entity = dao.getResult(property, sql.toString(), param);
 		
 		if(entity != null && entity.length == 1){
-			tempPw = entity[0].get("passwd");
+			tempPw = (String)entity[0].get("passwd");
 			if (tempPw.equals(passwd)) {
 				result = 2;
 			} else {
@@ -148,10 +148,10 @@ public class CandiDao {
 		DataEntity[] entity = dao.getResult(property, sql.toString(), param);
 		
 		if(entity != null && entity.length == 1){
-			result.setId(entity[0].get("id"));
-			result.setPasswd(entity[0].get("passwd"));
-			result.setName(entity[0].get("name"));
-			result.setType(entity[0].get("type"));
+			result.setId((String)entity[0].get("id"));
+			result.setPasswd((String)entity[0].get("passwd"));
+			result.setName((String)entity[0].get("name"));
+			result.setType((String)entity[0].get("type"));
 		}
 		
 		return result;
