@@ -29,8 +29,8 @@
 				<div class="form-group col-md-3">
 						<input type="text" class="form-control" id="id" name="id" placeholder="아이디"  required="required" onkeyup="idBtnChg();" maxlength="12" pattern="[a-zA-Z0-9]{4,12}" >
 					<p class="help-block">영문 소문자, 숫자 조합 4~12자.<br/>공백이나 특수문자는 사용하실 수 없습니다.</p>
-				</div  class="form-group col-md-2">
-				<div>
+				</div>
+				<div class="form-group col-md-2">
 				<button type="button" class="btn btn-primary" id="chIdBtn" onclick="checkId();" disabled="disabled" >중복확인</button>
 				</div>
 			</div>
